@@ -48,7 +48,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_bpd83"]
 resource_name = "attack_down"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,7 +76,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_edt7t"]
 resource_name = "attack_left"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -104,7 +104,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1l4re"]
 resource_name = "attack_right"
-length = 0.5
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -133,7 +133,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_te70j"]
 resource_name = "attack_up"
-length = 0.5
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -354,8 +354,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-67, -6)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpvwr"]
-radius = 5.0
-height = 15.0
+radius = 8.0
+height = 24.0
 
 [node name="Player" instance=ExtResource("1_rkbax")]
 collision_layer = 2
@@ -375,8 +375,6 @@ shape = SubResource("CapsuleShape2D_686od")
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
