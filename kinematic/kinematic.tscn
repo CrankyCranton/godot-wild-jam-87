@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwrg8mixvr10l"]
+
+[ext_resource type="Script" uid="uid://bwrhcw1pkb0ht" path="res://kinematic/kinematic.gd" id="1_6t0eu"]
+[ext_resource type="PackedScene" uid="uid://bgrfmbdih2bpq" path="res://collision/hit_box.tscn" id="2_2nuuy"]
+
+[node name="Kinematic" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_6t0eu")
+
+[node name="HitBox" parent="." instance=ExtResource("2_2nuuy")]
+
+[connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]
+[connection signal="hurt" from="HitBox" to="." method="_on_hit_box_hurt"]
+
+[editable path="HitBox"]
