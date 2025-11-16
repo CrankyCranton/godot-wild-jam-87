@@ -1,25 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://d20hr8xt16ukd"]
+[gd_scene load_steps=3 format=3 uid="uid://d20hr8xt16ukd"]
 
 [ext_resource type="Script" uid="uid://n0s1ycq1ijkq" path="res://world/tree.gd" id="1_1q5bg"]
 [ext_resource type="Texture2D" uid="uid://dgelligiwf5m7" path="res://assets/TopDownFantasy-Forest/Decorations/Decorations.png" id="1_tn4rm"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1q5bg"]
-radius = 4.0
-height = 14.0
-
-[node name="Tree" type="CollisionShape2D"]
-shape = SubResource("CapsuleShape2D_1q5bg")
+[node name="Tree" type="Node2D"]
 script = ExtResource("1_1q5bg")
 
-[node name="Tree1" type="Sprite2D" parent="."]
+[node name="Sprite1" type="Sprite2D" parent="."]
 show_behind_parent = true
 texture = ExtResource("1_tn4rm")
 offset = Vector2(0, -38)
 region_enabled = true
 region_rect = Rect2(11, 143, 70, 98)
 
-[node name="Tree2" type="Sprite2D" parent="."]
+[node name="Sprite2" type="Sprite2D" parent="."]
 visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
 show_behind_parent = true
 texture = ExtResource("1_tn4rm")
 offset = Vector2(0, -30)

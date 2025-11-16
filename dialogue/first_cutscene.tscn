@@ -139,7 +139,7 @@ horizontal_alignment = 1
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[i]Roll back the clock before it is too late."
+text = "[i]Roll back the clock before it all fades away."
 fit_content = true
 horizontal_alignment = 1
 

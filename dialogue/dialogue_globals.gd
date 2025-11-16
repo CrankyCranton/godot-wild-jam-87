@@ -9,3 +9,5 @@ enum TreeStates {
 }
 
 var tree_state: TreeStates = TreeStates.NO_TREE
+var spoke_to_organist := false
+var spoke_to_hag := false

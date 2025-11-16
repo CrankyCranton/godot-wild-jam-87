@@ -26,6 +26,7 @@ func interact() -> void:
 	if delay:
 		await get_tree().create_timer(delay, false).timeout
 	await DialogueManager.dialogue_ended
+	label.show()
 	player.can_move = true
 
 

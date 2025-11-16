@@ -1,16 +1,16 @@
 ~ newspost
-News post: Man Gone Missing!\n At 2 AM this morning, a man was reported missing. This is yet another case in a series of...\n<The article drones on>
+News post: [i]Man Gone Missing![/i]\n At 2 AM this morning, a man was reported missing. This is yet another case in a series of disappearances that...\n<The article drones on>
 => END
 
 ~ mother_and_child
 Child: Mama, where did papa go?
 Mother: Papa is... away, dear.
-Child: Is papa... dead?
+Child: Is papa dead?
 Mother: No... Papa is... gone.
 => END
 
 ~ cat
-Cat: Zzzz
+Cat: Zzzz...
 => END
 
 ~ lumberjack
@@ -20,12 +20,41 @@ match DialogueGlobals.tree_state
 		Lumberjack: Nothing? Then don't waist my time!
 	when DialogueGlobals.TreeStates.SAW_TREE
 		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
-		Lumberjack: ...
+		Traveler: ...
 		Lumberjack: You want my AXE!? You can't be serious! This here rod is more precious than my very life!
 		Lumberjack: ... Well, if you need it so badly, I suppose I can let you borrow it...\nBut don't forget to bring it back, hear me!?
-		DialogueGlobals.tree_state = DialogueGlobals.TreeStates.HAS_AXE
-	when DialogueGlobals.TreeStates.HAS_AXE:
+		set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.HAS_AXE
+	when DialogueGlobals.TreeStates.HAS_AXE
 		Lumberjack: Have you finished yet? I don't have all day!
-	when DialogueGlobals.TreeStates.CUT_LUMBERJACKS_TREE:
+	when DialogueGlobals.TreeStates.CUT_LUMBERJACKS_TREE
 		Lumberjack: Oh, think you're so smart cutting down my tree for me?\nFinish up whatever you were going to do before I change my mind about you!
 => END
+
+~ organist
+if DialogueGlobals.spoke_to_organist
+	Organist: Have you spoken to the hag of the Westwoods? No? A wise decision. That woman gives me the chills!
+else
+	Organist: Welcome! Have you come to listen to my beautiful performance?
+	=> organist_option
+=> END
+
+~ organist_option
+- Yes
+	Organist: I'm flattered! My playing is quite magnificent, if I do say so myself!
+	Traveler: ...
+	Organist: A way to turn back time? My dear sir, such things exist only in fairytales; This world is doomed.
+	Organist: But if you wish to pursue such lunacies, you should go see the hag of the Westwoods.
+	set DialogueGlobals.spoke_to_organist = true
+- No
+	Organist: I beg your pardon?
+	=> organist_option
+=> END
+
+~ hag
+if DialogueGlobals.spoke_with_hag
+	The Hag of the Westwoods: Have you chickened out already? The cave north of here, remember that! Ka ka ka!
+else
+	The Hag of the Westwoods: My my, what have we here? I don't often get visitors, my pretty.
+	The Hag of the Westwoods: Ke ke ke! You want to stop time, do you? Go to the cave north of here. There you will find old Father Time, whom you must defeat.
+	The Hag of the Westwoods: But you will never find what you seek. Ka ka ka! ... Oh, and don't forget to bring a light.
+	set DialogueGlobals.spoke_to_hag = true
