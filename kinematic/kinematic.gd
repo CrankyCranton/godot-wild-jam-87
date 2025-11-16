@@ -34,6 +34,7 @@ func _on_hit_box_died() -> void:
 
 
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
-	velocity = source.global_position.direction_to(hit_box.global_position) \
-			* bounce_force * damage
-	freeze(bounce_duration)
+	if can_move:
+		velocity = source.global_position.direction_to(hit_box.global_position) \
+				* bounce_force * damage
+		freeze(bounce_duration)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b86sra2vtitjd"]
+
+[ext_resource type="Script" uid="uid://d1r3jy7dvmvvm" path="res://npc/npc.gd" id="1_2xp5l"]
+
+[node name="NPC" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_2xp5l")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -47.0
+offset_top = -43.0
+offset_right = 47.0
+offset_bottom = -20.0
+text = "E to interact"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

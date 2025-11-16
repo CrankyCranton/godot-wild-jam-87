@@ -1,0 +1,31 @@
+~ newspost
+News post: Man Gone Missing!\n At 2 AM this morning, a man was reported missing. This is yet another case in a series of...\n<The article drones on>
+=> END
+
+~ mother_and_child
+Child: Mama, where did papa go?
+Mother: Papa is... away, dear.
+Child: Is papa... dead?
+Mother: No... Papa is... gone.
+=> END
+
+~ cat
+Cat: Zzzz
+=> END
+
+~ lumberjack
+match DialogueGlobals.tree_state
+	when DialogueGlobals.TreeStates.NO_TREE
+		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
+		Lumberjack: Nothing? Then don't waist my time!
+	when DialogueGlobals.TreeStates.SAW_TREE
+		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
+		Lumberjack: ...
+		Lumberjack: You want my AXE!? You can't be serious! This here rod is more precious than my very life!
+		Lumberjack: ... Well, if you need it so badly, I suppose I can let you borrow it...\nBut don't forget to bring it back, hear me!?
+		DialogueGlobals.tree_state = DialogueGlobals.TreeStates.HAS_AXE
+	when DialogueGlobals.TreeStates.HAS_AXE:
+		Lumberjack: Have you finished yet? I don't have all day!
+	when DialogueGlobals.TreeStates.CUT_LUMBERJACKS_TREE:
+		Lumberjack: Oh, think you're so smart cutting down my tree for me?\nFinish up whatever you were going to do before I change my mind about you!
+=> END

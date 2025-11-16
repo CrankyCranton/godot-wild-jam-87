@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://buvlgv5v12mqc"]
 
-[ext_resource type="Script" uid="uid://d4a3kmp41u2v1" path="res://first_cutscene.gd" id="1_166ln"]
+[ext_resource type="Script" uid="uid://d4a3kmp41u2v1" path="res://dialogue/first_cutscene.gd" id="1_166ln"]
 
 [sub_resource type="Animation" id="Animation_166ln"]
 length = 0.001
