@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://ct3nr8ifl6x4a"]
+[gd_scene load_steps=23 format=4 uid="uid://ct3nr8ifl6x4a"]
 
 [ext_resource type="Script" uid="uid://bahfpwp1b7228" path="res://world/world.gd" id="1_ov2xu"]
 [ext_resource type="Texture2D" uid="uid://cvh050epatbh5" path="res://assets/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_sc4t8"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://hol36rs4o1jh" path="res://assets/sfx/thunder-clap-owb-ky-441x16-20442_edited.wav" id="5_ov2xu"]
 [ext_resource type="AudioStream" uid="uid://dyhljsv5ou8wo" path="res://assets/sfx/Dark_Rainy_Night(ambience).ogg" id="6_mad0u"]
 [ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="7_ocfjn"]
+[ext_resource type="PackedScene" uid="uid://dknitweyidgog" path="res://world/creep_spawner.tscn" id="8_mad0u"]
 [ext_resource type="PackedScene" uid="uid://6sfjfybg236d" path="res://world/tree/choppable_tree.tscn" id="9_4papg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkg7o"]
@@ -567,6 +568,9 @@ sources/2 = SubResource("TileSetAtlasSource_pkg7o")
 [sub_resource type="CircleShape2D" id="CircleShape2D_4papg"]
 radius = 6.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ocfjn"]
+size = Vector2(334, 215)
+
 [sub_resource type="Animation" id="Animation_aqk2v"]
 length = 0.001
 tracks/0/type = "value"
@@ -634,24 +638,6 @@ y_sort_enabled = true
 
 [node name="Player" parent="YSort" instance=ExtResource("2_ai45w")]
 motion_mode = 0
-
-[node name="Enemies" type="Node2D" parent="YSort"]
-y_sort_enabled = true
-
-[node name="Wolf" parent="YSort/Enemies" instance=ExtResource("5_mad0u")]
-position = Vector2(127, 333)
-
-[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource("5_mad0u")]
-position = Vector2(105, 388)
-
-[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource("5_mad0u")]
-position = Vector2(173, 372)
-
-[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource("5_mad0u")]
-position = Vector2(175, 307)
-
-[node name="Wolf5" parent="YSort/Enemies" instance=ExtResource("5_mad0u")]
-position = Vector2(211, 9)
 
 [node name="NPCs" type="Node2D" parent="YSort"]
 
@@ -1429,6 +1415,17 @@ position = Vector2(-914, 33)
 [node name="Tree246" parent="YSort/Trees" instance=ExtResource("4_fyhu2")]
 position = Vector2(-945, 113)
 
+[node name="CreepSpawner" parent="YSort" instance=ExtResource("8_mad0u")]
+position = Vector2(212, 5)
+CREEP = ExtResource("5_mad0u")
+
+[node name="Marker2D" type="Marker2D" parent="YSort/CreepSpawner/SpawnPoints" index="0"]
+position = Vector2(103, 29)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/CreepSpawner"]
+position = Vector2(80, 31.5)
+shape = SubResource("RectangleShape2D_ocfjn")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
@@ -1547,3 +1544,4 @@ horizontal_alignment = 1
 [connection signal="interaction_finished" from="YSort/NPCs/Hag" to="." method="_on_hag_interaction_finished"]
 
 [editable path="YSort/NPCs/TreeInteraction"]
+[editable path="YSort/CreepSpawner"]
