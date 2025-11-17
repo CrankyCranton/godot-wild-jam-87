@@ -381,6 +381,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="HitBox" parent="." index="3" groups=["players"]]
+max_health = 5
 immunity_time = 3.0
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]

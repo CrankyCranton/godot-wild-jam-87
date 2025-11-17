@@ -1,4 +1,4 @@
-extends NPC
+class_name TreeInteraction extends NPC
 
 
 func _on_interaction_finished() -> void:

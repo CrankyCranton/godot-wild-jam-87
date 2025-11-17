@@ -53,6 +53,12 @@ func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 func give_axe() -> void:
 	has_axe = true
 	hurt_box.ignore_list.remove_at(0)
+	hurt_box.damage = 2
+
+
+func increase_max_health(bonus: int) -> void:
+	hit_box.max_health += bonus
+	hit_box.health += bonus
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:

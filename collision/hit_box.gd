@@ -10,13 +10,14 @@ signal immunity_timed_out
 
 @export var max_health := 3:
 	set(value):
-		var difference := value - max_health
+		#var difference := value - max_health
 		max_health = value
 		max_health_changed.emit()
-		if difference > 0:
-			health += difference
-		else:
-			health = health # Call the setter to clamp it.
+		# FIXME Health should increase with max health, but not in the initial assignment.
+		#if difference > 0:
+			#health += difference
+		#else:
+		health = health # Call the setter to clamp it.
 @export var immunity_time := 0.0
 
 var immune := false

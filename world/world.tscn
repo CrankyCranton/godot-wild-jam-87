@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://ct3nr8ifl6x4a"]
+[gd_scene load_steps=28 format=4 uid="uid://ct3nr8ifl6x4a"]
 
 [ext_resource type="Script" uid="uid://bahfpwp1b7228" path="res://world/world.gd" id="1_ov2xu"]
 [ext_resource type="Texture2D" uid="uid://cvh050epatbh5" path="res://assets/TopDownFantasy-Forest/Tiles/Tileset.png" id="1_sc4t8"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://jnbbv32io0wn" path="res://kinematic/enemy/wolf.tscn" id="5_mad0u"]
 [ext_resource type="AudioStream" uid="uid://hol36rs4o1jh" path="res://assets/sfx/thunder-clap-owb-ky-441x16-20442_edited.wav" id="5_ov2xu"]
 [ext_resource type="AudioStream" uid="uid://dyhljsv5ou8wo" path="res://assets/sfx/Dark_Rainy_Night(ambience).ogg" id="6_mad0u"]
+[ext_resource type="PackedScene" uid="uid://bik80y6spsr78" path="res://npc/lumberjack.tscn" id="6_ocfjn"]
+[ext_resource type="PackedScene" uid="uid://ojtskk3b26w4" path="res://npc/candle_pickup.tscn" id="7_dqqhb"]
 [ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="7_ocfjn"]
 [ext_resource type="PackedScene" uid="uid://dknitweyidgog" path="res://world/creep_spawner.tscn" id="8_mad0u"]
 [ext_resource type="PackedScene" uid="uid://6sfjfybg236d" path="res://world/tree/choppable_tree.tscn" id="9_4papg"]
+[ext_resource type="PackedScene" uid="uid://bh8pvsqm2ccfx" path="res://npc/max_health_pickup.tscn" id="15_b2suy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkg7o"]
 texture = ExtResource("1_sc4t8")
@@ -564,9 +567,16 @@ sources/2 = SubResource("TileSetAtlasSource_pkg7o")
 [sub_resource type="CircleShape2D" id="CircleShape2D_gbfbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ov2xu"]
+size = Vector2(20, 103)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4papg"]
 radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mad0u"]
+size = Vector2(28.999998, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqqhb"]
+size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocfjn"]
 size = Vector2(334, 215)
@@ -615,8 +625,7 @@ glow_enabled = true
 glow_bloom = 0.09
 glow_blend_mode = 0
 adjustment_enabled = true
-adjustment_contrast = 0.75
-adjustment_saturation = 0.25
+adjustment_saturation = 0.15
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_ov2xu")
@@ -656,11 +665,8 @@ dialogue = &"cat"
 position = Vector2(61, -256)
 dialogue = &"newspost"
 
-[node name="Lumberjack" parent="YSort/NPCs" instance=ExtResource("3_4papg")]
-position = Vector2(180, 480)
-dialogue = &"lumberjack"
-
 [node name="Organist" parent="YSort/NPCs" instance=ExtResource("3_4papg")]
+unique_name_in_owner = true
 position = Vector2(0, -508)
 dialogue = &"organist"
 
@@ -669,20 +675,43 @@ position = Vector2(-727, 260)
 dialogue = &"hag"
 
 [node name="TreeInteraction" parent="YSort/NPCs" instance=ExtResource("5_fyhu2")]
-position = Vector2(-534, 115)
+unique_name_in_owner = true
+position = Vector2(-515, 109)
 
 [node name="CollisionShape2D" parent="YSort/NPCs/TreeInteraction" index="1"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ov2xu")
+
+[node name="Lumberjack" parent="YSort/NPCs" instance=ExtResource("6_ocfjn")]
+position = Vector2(177, 481)
+
+[node name="CandlePickup" parent="YSort/NPCs" instance=ExtResource("7_dqqhb")]
+unique_name_in_owner = true
+position = Vector2(-24, -529)
+dialogue = &"candle"
+input_enabled = false
 
 [node name="Trees" type="StaticBody2D" parent="YSort"]
 y_sort_enabled = true
 collision_mask = 7
 
-[node name="ChoppableTree" parent="YSort/Trees" instance=ExtResource("9_4papg")]
+[node name="LumberjacksTree" parent="YSort/Trees" instance=ExtResource("9_4papg")]
 position = Vector2(147, 480)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Trees/ChoppableTree"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Trees/LumberjacksTree"]
 shape = SubResource("CircleShape2D_4papg")
+
+[node name="WestTree" parent="YSort/Trees" instance=ExtResource("9_4papg")]
+position = Vector2(-534, 121)
+
+[node name="CollisionShape2D" parent="YSort/Trees/WestTree/HitBox" index="0"]
+position = Vector2(0, -0.5)
+rotation = 0.0
+shape = SubResource("RectangleShape2D_mad0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Trees/WestTree"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_mad0u")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/Trees"]
 polygon = PackedVector2Array(37, -46, 50, -39, 90, -55, 129, -40, 229, -73, 270, -113, 304, -119, 295, -135, 244, -146, 197, -183, 40, -143)
@@ -691,15 +720,13 @@ polygon = PackedVector2Array(37, -46, 50, -39, 90, -55, 129, -40, 229, -73, 270,
 polygon = PackedVector2Array(-283, 43, -15, 53, 27, 20, 79, 21, 147, 58, 172, 43, 246, 102, 291, 102, 290, 166, 188, 193, 164, 182, 137, 211, 39, 316)
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="YSort/Trees"]
-polygon = PackedVector2Array(-283, 21, -209, 33, -187, 9, -148, 20, -102, 3, -77, -19, -64, -112, -119, -117, -108, -152, -152, -208, -184, -189, -222, -217, -214, -258, -189, -314, -195, -352, -167, -413, -169, -440, -142, -420, -98, -447, -86, -574, 88, -566, 99, -536, 156, -559, 159, -594, -521, -870, -1483, -315, -955, 551, 676, 875, 426, 436, 442, 608, 108, 632, 17, 399, -378, 78, -538, 140, -607, 292, -822, 369, -972, 162, -855, -42, -1023, -188, -777, -362, -518, -471, -352, -594, -134, -648, -143, -631, -266, -572, -288, -526, -339, -471, -320, -391, -252, -401, -251, -364, -363, -326, -375, -187)
+polygon = PackedVector2Array(-283, 21, -209, 33, -187, 9, -148, 20, -102, 3, -77, -19, -64, -112, -119, -117, -108, -152, -152, -208, -184, -189, -222, -217, -214, -258, -189, -314, -195, -352, -167, -413, -169, -440, -142, -420, -98, -447, -86, -574, 88, -566, 99, -536, 156, -559, 159, -594, -521, -870, -1483, -315, -955, 551, 676, 875, 426, 436, 442, 608, 108, 632, 17, 399, -378, 78, -538, 140, -607, 292, -822, 369, -972, 162, -855, -42, -1023, -188, -777, -362, -518, -471, -352, -594, -134, -648, -143, -631, -266, -572, -288, -526, -339, -471, -320, -391, -252, -401, -251, -364, -363, -326, -375, -187, -621, 53, -558, 94, -449, 39)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="YSort/Trees"]
 polygon = PackedVector2Array(294, 89, 330, 97, 337, 85, 295, 76)
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="YSort/Trees"]
 polygon = PackedVector2Array(277, 341, 407, 416, 459, 586, 478, 587, 559, -168, 520, -148, 478, -171, 470, -213, 377, -211, 323, -166, 335, -62, 413, -13, 386, 73, 404, 191, 338, 238, 322, 282)
-
-[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="YSort/Trees"]
 
 [node name="Tree" parent="YSort/Trees" instance=ExtResource("4_fyhu2")]
 position = Vector2(-283, -97)
@@ -1415,6 +1442,15 @@ position = Vector2(-914, 33)
 [node name="Tree246" parent="YSort/Trees" instance=ExtResource("4_fyhu2")]
 position = Vector2(-945, 113)
 
+[node name="ChoppableTree" parent="YSort/Trees" instance=ExtResource("9_4papg")]
+position = Vector2(-70, 298)
+
+[node name="CollisionShape2D" parent="YSort/Trees/ChoppableTree/HitBox" index="0"]
+shape = SubResource("RectangleShape2D_dqqhb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Trees/ChoppableTree"]
+shape = SubResource("RectangleShape2D_dqqhb")
+
 [node name="CreepSpawner" parent="YSort" instance=ExtResource("8_mad0u")]
 position = Vector2(212, 5)
 CREEP = ExtResource("5_mad0u")
@@ -1489,11 +1525,6 @@ texture = ExtResource("7_ocfjn")
 texture_scale = 2.0
 metadata/_edit_lock_ = true
 
-[node name="PointLight2D7" type="PointLight2D" parent="."]
-position = Vector2(-23, -531)
-texture = ExtResource("7_ocfjn")
-texture_scale = 2.0
-
 [node name="Label" type="Label" parent="."]
 offset_left = 185.0
 offset_top = -400.0
@@ -1541,7 +1572,17 @@ offset_bottom = 519.0
 text = "Lumberjack's log cabin"
 horizontal_alignment = 1
 
+[node name="MaxHealthPickup" parent="." instance=ExtResource("15_b2suy")]
+position = Vector2(-255, -379)
+
 [connection signal="interaction_finished" from="YSort/NPCs/Hag" to="." method="_on_hag_interaction_finished"]
+[connection signal="gave_axe" from="YSort/NPCs/Lumberjack" to="." method="_on_lumberjack_gave_axe"]
+[connection signal="chopped" from="YSort/Trees/LumberjacksTree" to="." method="_on_lumberjacks_tree_chopped"]
+[connection signal="chopped" from="YSort/Trees/WestTree" to="." method="_on_west_tree_chopped"]
 
 [editable path="YSort/NPCs/TreeInteraction"]
+[editable path="YSort/Trees/WestTree"]
+[editable path="YSort/Trees/WestTree/HitBox"]
+[editable path="YSort/Trees/ChoppableTree"]
+[editable path="YSort/Trees/ChoppableTree/HitBox"]
 [editable path="YSort/CreepSpawner"]

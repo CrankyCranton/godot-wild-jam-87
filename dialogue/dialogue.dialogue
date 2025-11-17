@@ -51,7 +51,7 @@ else
 => END
 
 ~ hag
-if DialogueGlobals.spoke_with_hag
+if DialogueGlobals.spoke_to_hag
 	The Hag of the Westwoods: Have you chickened out already? The cave north of here, remember that! Ka ka ka!
 else
 	The Hag of the Westwoods: My my, what have we here? I don't often get visitors, my pretty.
@@ -61,6 +61,14 @@ else
 => END
 
 ~ tree_interaction
-These trees seem to be weak...
+[i]These trees seem to be weak...[/i]
 set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
+=> END
+
+~ candle
+[i]The candle's flame burns brightly in darkness.[/i]
+=> END
+
+~ max_health_pickup
+[b]Found elixer of strength![/b]\n[i]Max health increased by 3.[/i]
 => END

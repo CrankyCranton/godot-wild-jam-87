@@ -114,6 +114,7 @@ _data = {
 layer = 100
 script = ExtResource("1_4emby")
 next_action = &"interact"
+skip_action = &"interact"
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true

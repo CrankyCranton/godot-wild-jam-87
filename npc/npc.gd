@@ -1,6 +1,7 @@
 class_name NPC extends Area2D
 
 
+signal interaction_started
 signal interaction_finished
 
 const DIALOGUE := preload("res://dialogue/dialogue.dialogue")
@@ -8,6 +9,7 @@ const BALLOON := preload("res://dialogue/balloon.tscn")
 
 @export var dialogue := &""
 @export var force_interaction := false
+@export var input_enabled := true
 @export var delay := 0.0
 
 var player: Player
@@ -16,7 +18,8 @@ var player: Player
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"interact") and player and player.can_move:
+	if event.is_action_pressed(&"interact") and player and player.can_move \
+			and input_enabled:
 		interact()
 
 
@@ -26,6 +29,7 @@ func interact() -> void:
 	player.velocity = Vector2()
 	set_creep_spawn_timers_paused(true)
 	DialogueManager.show_dialogue_balloon_scene(BALLOON, DIALOGUE, dialogue)
+	interaction_started.emit()
 
 	if delay:
 		await get_tree().create_timer(delay, false).timeout
@@ -47,7 +51,7 @@ func _on_body_entered(body: Node2D) -> void:
 	player = body
 	if force_interaction:
 		interact()
-	else:
+	elif input_enabled:
 		label.show()
 
 

@@ -7,5 +7,6 @@
 script = ExtResource("2_upkre")
 dialogue = &"tree_interaction"
 force_interaction = true
+input_enabled = false
 
 [connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]

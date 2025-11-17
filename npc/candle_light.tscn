@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ma6yj16gb3n0"]
+
+[ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="1_eo5o6"]
+
+[node name="CandleLight" type="PointLight2D"]
+texture = ExtResource("1_eo5o6")
+texture_scale = 2.0

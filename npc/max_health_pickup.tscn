@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh8pvsqm2ccfx"]
+
+[ext_resource type="PackedScene" uid="uid://b86sra2vtitjd" path="res://npc/npc.tscn" id="1_ofiqp"]
+[ext_resource type="Script" uid="uid://2imq1y0gyo04" path="res://npc/max_health_pickup.gd" id="2_wiwna"]
+
+[node name="MaxHealthPickup" instance=ExtResource("1_ofiqp")]
+script = ExtResource("2_wiwna")
+bonus = 3
+dialogue = &"max_health_pickup"
+force_interaction = true
+input_enabled = false
+
+[connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]
+[connection signal="interaction_started" from="." to="." method="_on_interaction_started"]
