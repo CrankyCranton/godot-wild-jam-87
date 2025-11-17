@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bik80y6spsr78"]
+
+[ext_resource type="PackedScene" uid="uid://b86sra2vtitjd" path="res://npc/npc.tscn" id="1_2uuxa"]
+[ext_resource type="Script" uid="uid://cxnx0vvqq7xpy" path="res://npc/lumberjack.gd" id="2_h1svp"]
+
+[node name="Lumberjack" instance=ExtResource("1_2uuxa")]
+script = ExtResource("2_h1svp")
+
+[connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]

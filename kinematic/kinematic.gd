@@ -29,12 +29,18 @@ func freeze(duration: float) -> void:
 	can_move = true
 
 
+func bounce(force: Vector2, duration := bounce_duration) -> void:
+	velocity = force
+	await freeze(duration)
+
+
 func _on_hit_box_died() -> void:
 	queue_free()
 
 
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
-	if can_move:
-		velocity = source.global_position.direction_to(hit_box.global_position) \
-				* bounce_force * damage
-		freeze(bounce_duration)
+	bounce(source.global_position.direction_to(hit_box.global_position) * bounce_force * damage)
+
+
+func _on_hit_box_health_changed(health: int) -> void:
+	$Label.text = str(health)

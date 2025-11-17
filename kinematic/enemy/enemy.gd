@@ -10,10 +10,14 @@ var player: Player
 
 func physics_process(_delta: float) -> void:
 	if player:
-		target_velocity = global_position.direction_to(player.global_position) * speed
+		target_velocity = get_move_vector(player.global_position) * speed
 	else:
 		target_velocity = Vector2()
 	target_velocity += soft_collider.get_velocity() * soft_collider_strength
+
+
+func get_move_vector(target: Vector2) -> Vector2:
+	return global_position.direction_to(target)
 
 
 func _on_vision_body_entered(body: Node2D) -> void:

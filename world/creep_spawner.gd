@@ -1,0 +1,1 @@
+class_name CreepSpawner extends Marker2D

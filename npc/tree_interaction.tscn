@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://sdkf6tgw8et3"]
+
+[ext_resource type="PackedScene" uid="uid://b86sra2vtitjd" path="res://npc/npc.tscn" id="1_e7dje"]
+[ext_resource type="Script" uid="uid://doi8jblt7a0sx" path="res://npc/tree_interaction.gd" id="2_upkre"]
+
+[node name="TreeInteraction" instance=ExtResource("1_e7dje")]
+script = ExtResource("2_upkre")
+dialogue = &"tree_interaction"
+force_interaction = true
+
+[connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]

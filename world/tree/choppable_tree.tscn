@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://6sfjfybg236d"]
+
+[ext_resource type="PackedScene" uid="uid://bgrfmbdih2bpq" path="res://collision/hit_box.tscn" id="1_d8fje"]
+[ext_resource type="Script" uid="uid://bjw7jncks5wik" path="res://world/tree/choppable_tree.gd" id="2_t6la7"]
+[ext_resource type="PackedScene" uid="uid://d20hr8xt16ukd" path="res://world/tree/tree.tscn" id="3_6p5uk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p5uk"]
+radius = 8.0
+height = 20.0
+
+[node name="ChoppableTree" type="StaticBody2D"]
+collision_mask = 7
+script = ExtResource("2_t6la7")
+
+[node name="HitBox" parent="." groups=["trees"] instance=ExtResource("1_d8fje")]
+max_health = 6
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_6p5uk")
+
+[node name="Tree" parent="." instance=ExtResource("3_6p5uk")]
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+
+[connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]
+
+[editable path="HitBox"]

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b86sra2vtitjd"]
+[gd_scene load_steps=3 format=3 uid="uid://b86sra2vtitjd"]
 
 [ext_resource type="Script" uid="uid://d1r3jy7dvmvvm" path="res://npc/npc.gd" id="1_2xp5l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2xp5l"]
+radius = 32.0
 
 [node name="NPC" type="Area2D"]
 collision_layer = 0
@@ -16,6 +19,9 @@ offset_right = 47.0
 offset_bottom = -20.0
 text = "E to interact"
 horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2xp5l")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

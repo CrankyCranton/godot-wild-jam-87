@@ -2,11 +2,18 @@ class_name Player extends Kinematic
 
 
 @export var run_speed := 128.0
+@export var dash_length := 32.0
+
+var dash_cooling := false
+var has_axe := false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(
 		&"parameters/playback")
 @onready var attack_sound: AudioStreamPlayer2D = %AttackSound
+@onready var hurt_box: HurtBox = $HurtBox
+@onready var dash_scanner: ShapeCast2D = $DashScanner
+@onready var dash_cooldown: Timer = $DashCooldown
 
 
 func _input(event: InputEvent) -> void:
@@ -14,6 +21,14 @@ func _input(event: InputEvent) -> void:
 		velocity = Vector2()
 		can_move = false
 		playback.travel(&"Attack")
+	if event.is_action_pressed(&"run") and not dash_cooling:
+		dash_cooling = true
+		var direction := Input.get_vector(&"left", &"right", &"up", &"down") * dash_length
+		dash_scanner.target_position = dash_scanner.to_local(global_position + direction)
+		dash_scanner.force_shapecast_update()
+		var percent := dash_scanner.get_closest_collision_safe_fraction()
+		global_position = dash_scanner.to_global(dash_scanner.target_position * percent)
+		dash_cooldown.start()
 
 
 func physics_process(_delta: float) -> void:
@@ -30,6 +45,16 @@ func physics_process(_delta: float) -> void:
 		playback.travel(&"Idle")
 
 
+func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
+	if can_move:
+		super(damage, source)
+
+
+func give_axe() -> void:
+	has_axe = true
+	hurt_box.ignore_list.remove_at(0)
+
+
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack"):
 		can_move = true
@@ -40,3 +65,7 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 		# Couldn't find out how to fix the error with RESET tracks and the playing oneshot property,
 		# so playing the audio here isntead.
 		attack_sound.play()
+
+
+func _on_dash_cooldown_timeout() -> void:
+	dash_cooling = false

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://jnbbv32io0wn"]
+
+[ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_pmxxn"]
+[ext_resource type="Script" uid="uid://dfp7wescer8e0" path="res://kinematic/enemy/wolf.gd" id="2_oi4bs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oi4bs"]
+resource_local_to_scene = true
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1awob"]
+radius = 32.0
+
+[node name="Wolf" instance=ExtResource("1_pmxxn")]
+script = ExtResource("2_oi4bs")
+lunge_speed = 128.0
+max_circle_angle = 90.0
+circle_start_distance = 128
+lunge_duration = 0.5
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.22660196, 0.41995144, 1, 1)
+
+[node name="CollisionShape2D" parent="SoftCollider" index="0"]
+shape = SubResource("CircleShape2D_oi4bs")
+
+[node name="LungeArea" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="LungeCollisionShape" type="CollisionShape2D" parent="LungeArea" index="0"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_1awob")
+
+[connection signal="body_entered" from="LungeArea" to="." method="_on_lunge_area_body_entered"]
+
+[editable path="SoftCollider"]
+[editable path="HitBox"]
+[editable path="HurtBox"]

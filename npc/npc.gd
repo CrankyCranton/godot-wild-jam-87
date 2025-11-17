@@ -1,6 +1,8 @@
 class_name NPC extends Area2D
 
 
+signal interaction_finished
+
 const DIALOGUE := preload("res://dialogue/dialogue.dialogue")
 const BALLOON := preload("res://dialogue/balloon.tscn")
 
@@ -22,12 +24,23 @@ func interact() -> void:
 	label.hide()
 	player.can_move = false
 	player.velocity = Vector2()
+	set_creep_spawn_timers_paused(true)
 	DialogueManager.show_dialogue_balloon_scene(BALLOON, DIALOGUE, dialogue)
+
 	if delay:
 		await get_tree().create_timer(delay, false).timeout
 	await DialogueManager.dialogue_ended
-	label.show()
+
+	set_creep_spawn_timers_paused(false)
+	if not force_interaction:
+		label.show()
 	player.can_move = true
+	interaction_finished.emit()
+
+
+func set_creep_spawn_timers_paused(paused: bool) -> void:
+	for timer: Timer in get_tree().get_nodes_in_group(&"creep_spawn_timers"):
+		timer.paused = paused
 
 
 func _on_body_entered(body: Node2D) -> void:

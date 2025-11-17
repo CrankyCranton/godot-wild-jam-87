@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d20hr8xt16ukd"]
+
+[ext_resource type="Texture2D" uid="uid://dgelligiwf5m7" path="res://assets/TopDownFantasy-Forest/Decorations/Decorations.png" id="1_tn4rm"]
+
+[node name="Tree" type="Sprite2D"]
+show_behind_parent = true
+texture = ExtResource("1_tn4rm")
+offset = Vector2(0, -38)
+region_enabled = true
+region_rect = Rect2(11, 143, 70, 98)

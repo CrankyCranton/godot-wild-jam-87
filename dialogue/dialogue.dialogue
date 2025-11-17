@@ -1,5 +1,5 @@
 ~ newspost
-News post: [i]Man Gone Missing![/i]\n At 2 AM this morning, a man was reported missing. This is yet another case in a series of disappearances that...\n<The article drones on>
+News post: [i]Man Gone Missing![/i]\nAt 2 AM this morning, a man was reported missing. This is yet another case in a series of disappearances that...\n<The article drones on>
 => END
 
 ~ mother_and_child
@@ -16,10 +16,10 @@ Cat: Zzzz...
 ~ lumberjack
 match DialogueGlobals.tree_state
 	when DialogueGlobals.TreeStates.NO_TREE
-		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
+		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? Or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
 		Lumberjack: Nothing? Then don't waist my time!
 	when DialogueGlobals.TreeStates.SAW_TREE
-		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
+		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? Or perhaps a delux night stand? Ask for anything - I specialize in custom orders!
 		Traveler: ...
 		Lumberjack: You want my AXE!? You can't be serious! This here rod is more precious than my very life!
 		Lumberjack: ... Well, if you need it so badly, I suppose I can let you borrow it...\nBut don't forget to bring it back, hear me!?
@@ -58,3 +58,9 @@ else
 	The Hag of the Westwoods: Ke ke ke! You want to stop time, do you? Go to the cave north of here. There you will find old Father Time, whom you must defeat.
 	The Hag of the Westwoods: But you will never find what you seek. Ka ka ka! ... Oh, and don't forget to bring a light.
 	set DialogueGlobals.spoke_to_hag = true
+=> END
+
+~ tree_interaction
+These trees seem to be weak...
+set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
+=> END
