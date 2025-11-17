@@ -21,14 +21,14 @@ func _input(event: InputEvent) -> void:
 		velocity = Vector2()
 		can_move = false
 		playback.travel(&"Attack")
-	if event.is_action_pressed(&"run") and not dash_cooling:
-		dash_cooling = true
-		var direction := Input.get_vector(&"left", &"right", &"up", &"down") * dash_length
-		dash_scanner.target_position = dash_scanner.to_local(global_position + direction)
-		dash_scanner.force_shapecast_update()
-		var percent := dash_scanner.get_closest_collision_safe_fraction()
-		global_position = dash_scanner.to_global(dash_scanner.target_position * percent)
-		dash_cooldown.start()
+	#if event.is_action_pressed(&"run") and not dash_cooling:
+		#dash_cooling = true
+		#var direction := Input.get_vector(&"left", &"right", &"up", &"down") * dash_length
+		#dash_scanner.target_position = dash_scanner.to_local(global_position + direction)
+		#dash_scanner.force_shapecast_update()
+		#var percent := dash_scanner.get_closest_collision_safe_fraction()
+		#global_position = dash_scanner.to_global(dash_scanner.target_position * percent)
+		#dash_cooldown.start()
 
 
 func physics_process(_delta: float) -> void:
