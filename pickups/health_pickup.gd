@@ -5,7 +5,7 @@ class_name HealthPickup extends Area2D
 
 
 func _on_area_entered(area: HitBox) -> void:
-	if area.is_in_group(&"players"):
+	if area.is_in_group(&"player_hit_boxes"):
 		area.heal(healing)
 		queue_free()
 

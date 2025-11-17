@@ -12,7 +12,7 @@ height = 20.0
 collision_mask = 7
 script = ExtResource("2_t6la7")
 
-[node name="HitBox" parent="." groups=["trees"] instance=ExtResource("1_d8fje")]
+[node name="HitBox" parent="." groups=["tree_hit_boxes"] instance=ExtResource("1_d8fje")]
 max_health = 1
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]

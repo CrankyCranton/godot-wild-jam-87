@@ -43,8 +43,9 @@ func interact() -> void:
 
 
 func set_creep_spawn_timers_paused(paused: bool) -> void:
-	for timer: Timer in get_tree().get_nodes_in_group(&"creep_spawn_timers"):
-		timer.paused = paused
+	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
+		creep_spawner.set_paused(paused)
+
 
 
 func _on_body_entered(body: Node2D) -> void:

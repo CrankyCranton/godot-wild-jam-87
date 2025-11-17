@@ -2,13 +2,22 @@ class_name CreepSpawner extends Area2D
 
 
 @export var CREEP: PackedScene
-@export var min_timeout := 60.0
-@export var max_timeout := 180.0
+@export var min_timeout := 30.0
+@export var max_timeout := 60.0
 
 var is_timed_out := false
 
 @onready var timeout: Timer = $Timeout
 @onready var spawn_points: Node2D = $SpawnPoints
+
+
+func set_paused(paused: bool) -> void:
+	timeout.paused = paused
+
+
+func reset() -> void:
+	timeout.stop()
+	timeout.timeout.emit()
 
 
 func _on_timeout_timeout() -> void:

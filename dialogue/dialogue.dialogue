@@ -53,6 +53,7 @@ else
 ~ hag
 if DialogueGlobals.spoke_to_hag
 	The Hag of the Westwoods: Have you chickened out already? The cave north of here, remember that! Ka ka ka!
+	TODO: Remind the player of the light as well.
 else
 	The Hag of the Westwoods: My my, what have we here? I don't often get visitors, my pretty.
 	The Hag of the Westwoods: Ke ke ke! You want to stop time, do you? Go to the cave north of here. There you will find old Father Time, whom you must defeat.

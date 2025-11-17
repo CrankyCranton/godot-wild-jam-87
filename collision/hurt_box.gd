@@ -1,7 +1,7 @@
 class_name HurtBox extends Area2D
 
 
-@export var ignore_list: Array[StringName] = [&"trees"]
+@export var ignore_list: Array[StringName] = [&"tree_hit_boxes"]
 @export var damage := 1
 
 

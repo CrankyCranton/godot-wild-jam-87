@@ -380,7 +380,7 @@ position_smoothing_speed = 4.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="HitBox" parent="." index="3" groups=["players"]]
+[node name="HitBox" parent="." index="3" groups=["player_hit_boxes"]]
 max_health = 5
 immunity_time = 3.0
 
@@ -405,7 +405,7 @@ parameters/Run/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="HurtBox" parent="." index="6" instance=ExtResource("4_cjfse")]
-ignore_list = Array[StringName]([&"trees", &"players"])
+ignore_list = Array[StringName]([&"tree_hit_boxes", &"player_hit_boxes"])
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(8, 0)

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://r8mldlxgmbnl" path="res://world/creep_spawner.gd" id="1_jplto"]
 
-[node name="CreepSpawner" type="Area2D"]
+[node name="CreepSpawner" type="Area2D" groups=["creep_spawners"]]
 y_sort_enabled = true
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_jplto")
 
-[node name="Timeout" type="Timer" parent="." groups=["creep_spawn_timers"]]
+[node name="Timeout" type="Timer" parent="."]
 one_shot = true
 
 [node name="SpawnPoints" type="Node2D" parent="."]

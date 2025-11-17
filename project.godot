@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DialogueGlobals="*res://dialogue/dialogue_globals.gd"
+GameStateService="*res://addons/game_state_saver/game_state_service.gd"
 
 [dialogue_manager]
 
@@ -32,7 +33,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/game_state_saver/plugin.cfg")
 
 [input]
 

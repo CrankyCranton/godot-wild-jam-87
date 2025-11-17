@@ -14,6 +14,8 @@ var has_axe := false
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var dash_scanner: ShapeCast2D = $DashScanner
 @onready var dash_cooldown: Timer = $DashCooldown
+@onready var camera: Camera2D = $Camera2D
+@onready var checkpoint := global_position
 
 
 func _input(event: InputEvent) -> void:
@@ -48,6 +50,19 @@ func physics_process(_delta: float) -> void:
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 	if can_move:
 		super(damage, source)
+
+
+func _on_hit_box_died() -> void:
+	global_position = checkpoint
+	hit_box.health = hit_box.max_health
+	for enemy in get_tree().get_nodes_in_group(&"enemies"):
+		enemy.queue_free()
+	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
+		creep_spawner.reset()
+
+
+func set_camera_smoothed(smoothed: bool) -> void:
+	camera.position_smoothing_enabled = smoothed
 
 
 func give_axe() -> void:
