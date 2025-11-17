@@ -9,6 +9,7 @@ var circle_direcion := randi() % 2 * 2 - 1 # Either -1 or 1
 @export var max_circle_angle := 90.0
 @export var circle_start_distance := 128
 @export var lunge_duration := 1.0
+@export var health_drop_chance := 0.25
 
 
 func _ready() -> void:
@@ -22,6 +23,14 @@ func get_move_vector(target: Vector2) -> Vector2:
 	var distance_scalar := remap(distance / circle_start_distance, 0.0, 1.0, 1.0, 0.0)
 	return global_position.direction_to(target).rotated(
 			max_circle_angle * distance_scalar * circle_direcion)
+
+
+func _on_hit_box_died() -> void:
+	if randf() < health_drop_chance:
+		var health_pickup: HealthPickup = preload("res://pickups/health_pickup.tscn").instantiate()
+		health_pickup.position = position
+		call_deferred(&"add_sibling", health_pickup)
+	queue_free()
 
 
 func _on_lunge_area_body_entered(body: Node2D) -> void:

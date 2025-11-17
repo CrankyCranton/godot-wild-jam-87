@@ -10,9 +10,13 @@ signal immunity_timed_out
 
 @export var max_health := 3:
 	set(value):
+		var difference := value - max_health
 		max_health = value
 		max_health_changed.emit()
-		health = mini(health, max_health)
+		if difference > 0:
+			health += difference
+		else:
+			health = health # Call the setter to clamp it.
 @export var immunity_time := 0.0
 
 var immune := false
@@ -20,7 +24,7 @@ var immune := false
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var health := max_health:
 	set(value):
-		health = value
+		health = mini(value, max_health)
 		health_changed.emit(health)
 
 
@@ -46,7 +50,7 @@ func take_damage(damage: int, source: HurtBox) -> void:
 
 
 func heal(healing: int) -> void:
-	health += healing
+	health = mini(health + healing, max_health)
 	healed.emit(healing)
 
 

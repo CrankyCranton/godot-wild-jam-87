@@ -16,9 +16,10 @@ lunge_speed = 128.0
 max_circle_angle = 90.0
 circle_start_distance = 128
 lunge_duration = 0.5
+health_drop_chance = 0.25
 
 [node name="Sprite2D" parent="." index="0"]
-modulate = Color(0.22660196, 0.41995144, 1, 1)
+modulate = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_oi4bs")
@@ -30,6 +31,7 @@ monitorable = false
 
 [node name="LungeCollisionShape" type="CollisionShape2D" parent="LungeArea" index="0"]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CircleShape2D_1awob")
 
 [connection signal="body_entered" from="LungeArea" to="." method="_on_lunge_area_body_entered"]
