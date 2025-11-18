@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnel1aqrtpr2f"]
+
+[ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_u8npj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsob8"]
+resource_local_to_scene = true
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8npj"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsob8"]
+radius = 4.0
+height = 16.0
+
+[node name="Bat" instance=ExtResource("1_u8npj")]
+collision_mask = 1
+speed = 256.0
+traction = 0.5
+bounce_force = 512.0
+reset_velocity_after_bounce = true
+
+[node name="CollisionShape2D" parent="SoftCollider" index="0"]
+visible = true
+shape = SubResource("CircleShape2D_nsob8")
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CapsuleShape2D_u8npj")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_nsob8")
+
+[editable path="SoftCollider"]
+[editable path="HitBox"]
+[editable path="HurtBox"]

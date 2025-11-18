@@ -1,10 +1,13 @@
 class_name Kinematic extends CharacterBody2D
 
 
+signal died
+
 @export var speed := 64.0
 @export var traction := 14.0
 @export var bounce_force := 256.0
 @export var bounce_duration := 0.1
+@export var reset_velocity_after_bounce := false
 
 var can_move := true
 var target_velocity := Vector2()
@@ -32,15 +35,22 @@ func freeze(duration: float) -> void:
 func bounce(force: Vector2, duration := bounce_duration) -> void:
 	velocity = force
 	await freeze(duration)
+	if reset_velocity_after_bounce:
+		velocity = Vector2()
+
+
+func die() -> void:
+	queue_free()
 
 
 func _on_hit_box_died() -> void:
-	queue_free()
+	die()
+	died.emit()
 
 
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 	bounce(source.global_position.direction_to(hit_box.global_position) * bounce_force * damage)
 
 
-func _on_hit_box_health_changed(health: int) -> void:
+func _on_hit_box_health_changed(health: float) -> void:
 	$Label.text = str(health)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cydo1skprm6dj"]
+
+[ext_resource type="Script" uid="uid://cdelwi2qs2356" path="res://ui/hud.gd" id="1_rbyyf"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rbyyf")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_right = 80.0
+offset_bottom = 16.0

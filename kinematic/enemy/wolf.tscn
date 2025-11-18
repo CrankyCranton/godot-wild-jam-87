@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://jnbbv32io0wn"]
+[gd_scene load_steps=7 format=3 uid="uid://jnbbv32io0wn"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_pmxxn"]
 [ext_resource type="Script" uid="uid://dfp7wescer8e0" path="res://kinematic/enemy/wolf.gd" id="2_oi4bs"]
@@ -10,6 +10,10 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s43e"]
 radius = 256.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oi4bs"]
+radius = 3.0
+height = 10.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_1awob"]
 radius = 32.0
 
@@ -19,7 +23,7 @@ lunge_speed = 128.0
 max_circle_angle = 90.0
 circle_start_distance = 128
 lunge_duration = 0.5
-health_drop_chance = 0.25
+health_drop_chance = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1, 0, 0, 1)
@@ -29,6 +33,9 @@ shape = SubResource("CircleShape2D_oi4bs")
 
 [node name="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource("CircleShape2D_4s43e")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_oi4bs")
 
 [node name="LungeArea" type="Area2D" parent="." index="6"]
 collision_layer = 0

@@ -3,5 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="1_eo5o6"]
 
 [node name="CandleLight" type="PointLight2D"]
+texture_filter = 2
 texture = ExtResource("1_eo5o6")
 texture_scale = 2.0

@@ -6,6 +6,7 @@ class_name Player extends Kinematic
 
 var dash_cooling := false
 var has_axe := false
+var has_candle := false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(
@@ -15,6 +16,7 @@ var has_axe := false
 @onready var dash_scanner: ShapeCast2D = $DashScanner
 @onready var dash_cooldown: Timer = $DashCooldown
 @onready var camera: Camera2D = $Camera2D
+@onready var near_sight: PointLight2D = $NearSight
 @onready var checkpoint := global_position
 
 
@@ -52,13 +54,18 @@ func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 		super(damage, source)
 
 
-func _on_hit_box_died() -> void:
+func die() -> void:
 	global_position = checkpoint
 	hit_box.health = hit_box.max_health
 	for enemy in get_tree().get_nodes_in_group(&"enemies"):
-		enemy.queue_free()
+		if not enemy is FatherTime:
+			enemy.queue_free()
 	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.reset()
+
+
+func set_near_sight_active(active: bool) -> void:
+	near_sight.visible = active
 
 
 func set_camera_smoothed(smoothed: bool) -> void:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://bb7ajiyeci45q"]
+[gd_scene load_steps=58 format=3 uid="uid://bb7ajiyeci45q"]
 
 [ext_resource type="Script" uid="uid://c61u11lrlmyap" path="res://kinematic/player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_rkbax"]
 [ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/hurt_box.tscn" id="4_cjfse"]
 [ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="4_wpvwr"]
 [ext_resource type="AudioStream" uid="uid://brmpfebnokuht" path="res://assets/sfx/swipe.wav" id="5_cjfse"]
+[ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="6_5g3bl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_686od"]
 radius = 4.0
@@ -381,8 +382,8 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="HitBox" parent="." index="3" groups=["player_hit_boxes"]]
-max_health = 5
-immunity_time = 3.0
+max_health = 5.0
+immunity_time = 1.0
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 rotation = 1.5707964
@@ -425,6 +426,11 @@ target_position = Vector2(0, 0)
 [node name="DashCooldown" type="Timer" parent="." index="8"]
 wait_time = 0.25
 one_shot = true
+
+[node name="NearSight" type="PointLight2D" parent="." index="10"]
+visible = false
+energy = 0.2
+texture = ExtResource("6_5g3bl")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

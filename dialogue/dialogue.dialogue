@@ -1,5 +1,5 @@
 ~ newspost
-News post: [i]Man Gone Missing![/i]\nAt 2 AM this morning, a man was reported missing. This is yet another case in a series of disappearances that...\n<The article drones on>
+News post: [i]Man Gone Missing![/i]\nAt 2 AM this morning, a man was reported missing. This is yet another case in a series of disappearances that...\n[i]The article drones on.[/i]
 => END
 
 ~ mother_and_child
@@ -7,6 +7,7 @@ Child: Mama, where did papa go?
 Mother: Papa is... away, dear.
 Child: Is papa dead?
 Mother: No... Papa is... gone.
+set DialogueGlobals.spoke_to_mother_and_child = true
 => END
 
 ~ cat
@@ -67,9 +68,13 @@ set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
 => END
 
 ~ candle
-[i]The candle's flame burns brightly in darkness.[/i]
+[i]You take the candle. Its flame burns brightly in darkness.[/i]
 => END
 
 ~ max_health_pickup
 [b]Found elixer of strength![/b]\n[i]Max health increased by 3.[/i]
+=> END
+
+~ cave_enterance_dialogue
+[i]It looks awefully dark in there...[/i]
 => END

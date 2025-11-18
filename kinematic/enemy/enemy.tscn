@@ -15,11 +15,11 @@ resource_local_to_scene = true
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqkxg"]
-radius = 128.0
+radius = 256.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vec2w"]
 radius = 4.0
-height = 14.0
+height = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y43nc"]
 radius = 2.0

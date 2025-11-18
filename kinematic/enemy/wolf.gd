@@ -9,7 +9,7 @@ var circle_direcion := randi() % 2 * 2 - 1 # Either -1 or 1
 @export var max_circle_angle := 90.0
 @export var circle_start_distance := 128
 @export var lunge_duration := 1.0
-@export var health_drop_chance := 0.25
+@export var health_drop_chance := 0.5
 
 
 func _ready() -> void:
@@ -25,7 +25,7 @@ func get_move_vector(target: Vector2) -> Vector2:
 			max_circle_angle * distance_scalar * circle_direcion)
 
 
-func _on_hit_box_died() -> void:
+func die() -> void:
 	if randf() < health_drop_chance:
 		var health_pickup: HealthPickup = preload("res://pickups/health_pickup.tscn").instantiate()
 		health_pickup.position = position

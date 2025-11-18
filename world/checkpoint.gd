@@ -1,3 +1,4 @@
+## DEPRECATED Use NPC.checkpoint instead.
 class_name Checkpoint extends Area2D
 
 

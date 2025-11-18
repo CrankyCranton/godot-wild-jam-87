@@ -11,8 +11,10 @@ const BALLOON := preload("res://dialogue/balloon.tscn")
 @export var force_interaction := false
 @export var input_enabled := true
 @export var delay := 0.0
+@export var checkpoint: Node2D
 
 var player: Player
+var interacting := false
 
 @onready var label: Label = $Label
 
@@ -24,28 +26,31 @@ func _input(event: InputEvent) -> void:
 
 
 func interact() -> void:
+	interacting = true
+	if checkpoint:
+		player.checkpoint = checkpoint.global_position
 	label.hide()
 	player.can_move = false
 	player.velocity = Vector2()
 	set_creep_spawn_timers_paused(true)
-	DialogueManager.show_dialogue_balloon_scene(BALLOON, DIALOGUE, dialogue)
-	interaction_started.emit()
 
 	if delay:
 		await get_tree().create_timer(delay, false).timeout
+	DialogueManager.show_dialogue_balloon_scene(BALLOON, DIALOGUE, dialogue)
+	interaction_started.emit()
 	await DialogueManager.dialogue_ended
 
 	set_creep_spawn_timers_paused(false)
 	if not force_interaction:
 		label.show()
 	player.can_move = true
+	interacting = false
 	interaction_finished.emit()
 
 
 func set_creep_spawn_timers_paused(paused: bool) -> void:
 	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.set_paused(paused)
-
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -57,5 +62,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(_body: Node2D) -> void:
+	if interacting:
+		await interaction_finished
+		if get_overlapping_bodies().size() > 0:
+			return
 	player = null
 	label.hide()

@@ -2,13 +2,13 @@ class_name HitBox extends Area2D
 
 
 signal died
-signal health_changed(health: int)
+signal health_changed(health: float)
 signal max_health_changed(max_health: int)
 signal hurt(damage: int, source: HurtBox)
 signal healed(healing: int)
 signal immunity_timed_out
 
-@export var max_health := 3:
+@export var max_health := 3.0:
 	set(value):
 		#var difference := value - max_health
 		max_health = value
@@ -25,7 +25,7 @@ var immune := false
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var health := max_health:
 	set(value):
-		health = mini(value, max_health)
+		health = minf(value, max_health)
 		health_changed.emit(health)
 
 
@@ -51,7 +51,7 @@ func take_damage(damage: int, source: HurtBox) -> void:
 
 
 func heal(healing: int) -> void:
-	health = mini(health + healing, max_health)
+	health = minf(health + healing, max_health)
 	healed.emit(healing)
 
 
