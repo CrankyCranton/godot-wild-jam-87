@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if running and not (stunned or frozen) and velocity != Vector2():
-		wind.volume_linear = lerpf(wind.volume_linear, remap(velocity.length(),
+		wind.volume_linear = lerpf(wind.volume_linear, remap(maxf(velocity.length(), speed),
 				speed, run_speed, 0.0, 1.5), delta * 2.0)
 	else:
 		wind.volume_linear = lerpf(wind.volume_linear, 0.0, delta)
