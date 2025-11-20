@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnel1aqrtpr2f"]
+
+[ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_gk2ae"]
+[ext_resource type="AudioStream" uid="uid://dj8r0hrwjc8ky" path="res://assets/sfx/bat/bat-chirping-type-2-355965.mp3" id="2_prvmr"]
+[ext_resource type="AudioStream" uid="uid://cugl6gp4xoh80" path="res://assets/sfx/bat/punch-and-hits-310521_edited.wav" id="3_0s3q5"]
+[ext_resource type="AudioStream" uid="uid://chj1r5o61s1ap" path="res://assets/sfx/bat/poof-80161.wav" id="3_prvmr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsob8"]
+resource_local_to_scene = true
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8npj"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsob8"]
+radius = 4.0
+height = 16.0
+
+[node name="Bat" instance=ExtResource("1_gk2ae")]
+collision_mask = 1
+speed = 256.0
+traction = 0.5
+bounce_force = 512.0
+reset_velocity_after_bounce = true
+
+[node name="CollisionShape2D" parent="SoftCollider" index="0"]
+visible = true
+shape = SubResource("CircleShape2D_nsob8")
+
+[node name="HitBox" parent="." index="4"]
+collision_layer = 544
+max_health = 2.0
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CapsuleShape2D_u8npj")
+
+[node name="HitSound" parent="HitBox" index="1"]
+stream = ExtResource("3_0s3q5")
+
+[node name="DeathSound" parent="HitBox" index="2"]
+stream = ExtResource("3_prvmr")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_nsob8")
+
+[node name="WarningSound" parent="." index="6"]
+stream = ExtResource("2_prvmr")
+
+[editable path="SoftCollider"]
+[editable path="HitBox"]
+[editable path="HurtBox"]

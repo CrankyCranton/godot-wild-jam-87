@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://jnbbv32io0wn"]
+
+[ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_pmxxn"]
+[ext_resource type="Script" uid="uid://dfp7wescer8e0" path="res://kinematic/enemy/wolf/wolf.gd" id="2_oi4bs"]
+[ext_resource type="AudioStream" uid="uid://qva0huruqy8s" path="res://assets/sfx/wolf/scary-wolf-growling-224086_edited.wav" id="3_1awob"]
+[ext_resource type="AudioStream" uid="uid://du13c6gd7yglc" path="res://assets/sfx/wolf/punch-03-352040_edited.wav" id="3_yhs0n"]
+[ext_resource type="AudioStream" uid="uid://biwc1cv107pt5" path="res://assets/sfx/wolf/puppy-crying-60401_edited.wav" id="4_uinjt"]
+[ext_resource type="AudioStream" uid="uid://3qgewi6qoi7b" path="res://assets/sfx/wolf/scary-wolf-growling-224086_snap.wav" id="6_uinjt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oi4bs"]
+resource_local_to_scene = true
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s43e"]
+radius = 256.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ft4el"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("3_yhs0n")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yhs0n"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("4_uinjt")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oi4bs"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1awob"]
+radius = 32.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uinjt"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("6_uinjt")
+
+[node name="Wolf" instance=ExtResource("1_pmxxn")]
+script = ExtResource("2_oi4bs")
+lunge_speed = 128.0
+max_circle_angle = 90.0
+circle_start_distance = 128
+lunge_duration = 0.5
+health_drop_chance = 0.4
+min_warn_pitch = 1.0
+max_warn_pitch = 1.0
+max_warn_delay = 0.0
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" parent="SoftCollider" index="0"]
+shape = SubResource("CircleShape2D_oi4bs")
+
+[node name="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_4s43e")
+
+[node name="HitSound" parent="HitBox" index="1"]
+stream = SubResource("AudioStreamRandomizer_ft4el")
+volume_db = 5.0
+
+[node name="DeathSound" parent="HitBox" index="2"]
+stream = SubResource("AudioStreamRandomizer_yhs0n")
+volume_db = 20.0
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_oi4bs")
+
+[node name="LungeArea" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="LungeCollisionShape" type="CollisionShape2D" parent="LungeArea" index="0"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_1awob")
+
+[node name="WarningSound" parent="." index="7"]
+stream = ExtResource("3_1awob")
+
+[node name="LungeSound" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = SubResource("AudioStreamRandomizer_uinjt")
+volume_db = -5.0
+
+[connection signal="body_entered" from="LungeArea" to="." method="_on_lunge_area_body_entered"]
+
+[editable path="SoftCollider"]
+[editable path="HitBox"]
+[editable path="HurtBox"]

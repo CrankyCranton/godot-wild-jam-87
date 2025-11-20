@@ -1,11 +1,15 @@
-[gd_scene load_steps=58 format=3 uid="uid://bb7ajiyeci45q"]
+[gd_scene load_steps=67 format=3 uid="uid://bb7ajiyeci45q"]
 
 [ext_resource type="Script" uid="uid://c61u11lrlmyap" path="res://kinematic/player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_rkbax"]
-[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/hurt_box.tscn" id="4_cjfse"]
+[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="4_cjfse"]
+[ext_resource type="AudioStream" uid="uid://y21dd2g062pb" path="res://assets/sfx/player/grunts-33249_edited.wav" id="4_np7mq"]
 [ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="4_wpvwr"]
-[ext_resource type="AudioStream" uid="uid://brmpfebnokuht" path="res://assets/sfx/swipe.wav" id="5_cjfse"]
+[ext_resource type="AudioStream" uid="uid://d2x870k5i6cfj" path="res://assets/sfx/player/male-death-sound-128357.mp3" id="5_7mg16"]
+[ext_resource type="AudioStream" uid="uid://b2vrajv1ov1do" path="res://assets/sfx/player/sword-sound-260274_edited.wav" id="5_tdhos"]
 [ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="6_5g3bl"]
+[ext_resource type="AudioStream" uid="uid://x6moqskscvty" path="res://assets/sfx/player/magic-charge-mana-2-186628.mp3" id="7_tdhos"]
+[ext_resource type="AudioStream" uid="uid://dh5hbssp2k3g" path="res://assets/sfx/ambience/wind-artificial-18750.mp3" id="10_7mg16"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_686od"]
 radius = 4.0
@@ -42,9 +46,25 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_03pd6"]
+resource_name = "death_down"
+
+[sub_resource type="Animation" id="Animation_4nm3t"]
+resource_name = "death_left"
+
+[sub_resource type="Animation" id="Animation_jdm35"]
+resource_name = "death_right"
+
+[sub_resource type="Animation" id="Animation_rcg30"]
+resource_name = "death_up"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rcg30"]
 _data = {
-&"RESET": SubResource("Animation_hphhd")
+&"RESET": SubResource("Animation_hphhd"),
+&"death_down": SubResource("Animation_03pd6"),
+&"death_left": SubResource("Animation_4nm3t"),
+&"death_right": SubResource("Animation_jdm35"),
+&"death_up": SubResource("Animation_rcg30")
 }
 
 [sub_resource type="Animation" id="Animation_bpd83"]
@@ -358,12 +378,16 @@ graph_offset = Vector2(-67, -6)
 radius = 8.0
 height = 24.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7mg16"]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("4_np7mq")
+
 [node name="Player" instance=ExtResource("1_rkbax")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oul6g")
 run_speed = 256.0
-dash_length = 32.0
 speed = 96.0
 
 [node name="Icon" type="Sprite2D" parent="." index="0"]
@@ -382,8 +406,10 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="HitBox" parent="." index="3" groups=["player_hit_boxes"]]
-max_health = 5.0
+collision_layer = 16
 immunity_time = 1.0
+max_health = 5.0
+metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 rotation = 1.5707964
@@ -406,7 +432,7 @@ parameters/Run/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="HurtBox" parent="." index="6" instance=ExtResource("4_cjfse")]
-ignore_list = Array[StringName]([&"tree_hit_boxes", &"player_hit_boxes"])
+collision_mask = 928
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(8, 0)
@@ -415,26 +441,45 @@ disabled = true
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="HurtBox" index="1"]
 unique_name_in_owner = true
-stream = ExtResource("5_cjfse")
+stream = ExtResource("5_tdhos")
+volume_db = 5.0
 
-[node name="DashScanner" type="ShapeCast2D" parent="." index="7"]
-rotation = -1.5707964
-enabled = false
-shape = SubResource("CapsuleShape2D_686od")
-target_position = Vector2(0, 0)
-
-[node name="DashCooldown" type="Timer" parent="." index="8"]
-wait_time = 0.25
-one_shot = true
-
-[node name="NearSight" type="PointLight2D" parent="." index="10"]
+[node name="NearSight" type="PointLight2D" parent="." index="7"]
 visible = false
 energy = 0.2
 texture = ExtResource("6_5g3bl")
 
+[node name="HUD" type="CanvasLayer" parent="." index="8"]
+
+[node name="HealthBar" type="TextureRect" parent="HUD" index="0"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_wpvwr")
+stretch_mode = 1
+
+[node name="HealSound" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("7_tdhos")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("5_7mg16")
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="." index="11"]
+stream = SubResource("AudioStreamRandomizer_7mg16")
+
+[node name="Wind" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource("10_7mg16")
+volume_db = -80.0
+pitch_scale = 2.0
+autoplay = true
+
+[connection signal="healed" from="HitBox" to="." method="_on_hit_box_healed"]
+[connection signal="health_changed" from="HitBox" to="." method="_on_hit_box_health_changed"]
+[connection signal="max_health_changed" from="HitBox" to="." method="_on_hit_box_max_health_changed"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
-[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
 [editable path="HitBox"]
 [editable path="HurtBox"]

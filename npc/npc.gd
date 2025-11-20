@@ -20,8 +20,8 @@ var interacting := false
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"interact") and player and player.can_move \
-			and input_enabled:
+	if event.is_action_pressed(&"interact") and player \
+			and input_enabled and not player.frozen:
 		interact()
 
 
@@ -30,7 +30,7 @@ func interact() -> void:
 	if checkpoint:
 		player.checkpoint = checkpoint.global_position
 	label.hide()
-	player.can_move = false
+	player.frozen = true
 	player.velocity = Vector2()
 	set_creep_spawn_timers_paused(true)
 
@@ -43,7 +43,7 @@ func interact() -> void:
 	set_creep_spawn_timers_paused(false)
 	if not force_interaction:
 		label.show()
-	player.can_move = true
+	player.frozen = false
 	interacting = false
 	interaction_finished.emit()
 

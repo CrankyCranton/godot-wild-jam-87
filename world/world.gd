@@ -15,7 +15,16 @@ class_name World extends Node2D
 @onready var close_zone_collision: CollisionShape2D = %CloseZoneCollision
 @onready var lumberjack_region: Node2D = %LumberjackRegion
 @onready var father_time: FatherTime = %FatherTime
+@onready var wind: AudioStreamPlayer = $Ambience
 @onready var default_darkness := darkness.color
+
+
+#func _process(delta: float) -> void:
+	#if player.running:
+		#wind.pitch_scale = lerpf(wind.pitch_scale, remap(player.velocity.length(),
+				#player.speed, player.run_speed, 1.0, 2.0), delta * 2.0)
+	#else:
+		#wind.pitch_scale = lerpf(wind.pitch_scale, 1.0, delta)
 
 
 func _on_hag_interaction_finished() -> void:
@@ -69,7 +78,7 @@ func _on_muffle_zone_body_exited(_body: Node2D) -> void:
 
 func _on_cave_zone_body_entered(body: Player) -> void:
 	body.set_near_sight_active(true)
-	darkness.color = Color(0.251, 0.125, 0.0, 1.0) if body.has_candle else Color.BLACK
+	darkness.color = Color(0.15, 0.075, 0.0, 1.0) if body.has_candle else Color.BLACK
 
 
 func _on_cave_zone_body_exited(body: Player) -> void:

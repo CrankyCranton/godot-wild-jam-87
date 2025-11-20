@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://6sfjfybg236d"]
+
+[ext_resource type="PackedScene" uid="uid://bgrfmbdih2bpq" path="res://collision/boxes/hit_box/hit_box.tscn" id="1_d8fje"]
+[ext_resource type="Script" uid="uid://bjw7jncks5wik" path="res://world/tree/choppable_tree/choppable_tree.gd" id="2_t6la7"]
+[ext_resource type="PackedScene" uid="uid://d20hr8xt16ukd" path="res://world/tree/tree.tscn" id="3_6p5uk"]
+[ext_resource type="AudioStream" uid="uid://bcaauj5dcepof" path="res://assets/sfx/tree/axe-chop-sequence-v1-mixed-54629_edited.wav" id="3_q4dtm"]
+[ext_resource type="AudioStream" uid="uid://cbjbnoula1o48" path="res://assets/sfx/tree/timber-tree-falling-1-40384_edited.wav" id="4_yw3ai"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p5uk"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4dtm"]
+radius = 6.0
+
+[node name="ChoppableTree" type="StaticBody2D"]
+collision_mask = 7
+script = ExtResource("2_t6la7")
+
+[node name="HitBox" parent="." groups=["tree_hit_boxes"] instance=ExtResource("1_d8fje")]
+collision_layer = 64
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_6p5uk")
+
+[node name="HitSound" parent="HitBox" index="1"]
+stream = ExtResource("3_q4dtm")
+volume_db = 10.0
+
+[node name="DeathSound" parent="HitBox" index="2"]
+stream = ExtResource("4_yw3ai")
+volume_db = 10.0
+
+[node name="Tree" parent="." instance=ExtResource("3_6p5uk")]
+modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q4dtm")
+
+[connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]
+[connection signal="finished" from="HitBox/DeathSound" to="." method="_on_death_sound_finished"]
+
+[editable path="HitBox"]

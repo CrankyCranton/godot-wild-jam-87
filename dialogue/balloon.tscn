@@ -113,8 +113,8 @@ _data = {
 [node name="ExampleBalloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_4emby")
-next_action = &"interact"
-skip_action = &"interact"
+next_action = &"dialogue_advance"
+skip_action = &"dialogue_advance"
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true

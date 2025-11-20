@@ -1,44 +1,46 @@
 class_name Player extends Kinematic
 
 
-@export var run_speed := 128.0
-@export var dash_length := 32.0
+const TREE_LAYER := 7
 
-var dash_cooling := false
+@export var run_speed := 128.0
+
 var has_axe := false
 var has_candle := false
 var attacking := false
+var running := false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(
 		&"parameters/playback")
 @onready var attack_sound: AudioStreamPlayer2D = %AttackSound
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var dash_scanner: ShapeCast2D = $DashScanner
-@onready var dash_cooldown: Timer = $DashCooldown
 @onready var camera: Camera2D = $Camera2D
 @onready var near_sight: PointLight2D = $NearSight
+@onready var heal_sound: AudioStreamPlayer = $HealSound
+@onready var health_bar: TextureRect = %HealthBar
+@onready var death_sound: AudioStreamPlayer = $DeathSound
+@onready var hurt_sound: AudioStreamPlayer = $HurtSound
+@onready var wind: AudioStreamPlayer = $Wind
 @onready var checkpoint := global_position
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"attack") and can_move:
-		#velocity = Vector2()
-		attacking = true
-		#can_move = false
+	if event.is_action_pressed(&"attack") and not frozen:
 		playback.travel(&"Attack")
-	#if event.is_action_pressed(&"run") and not dash_cooling:
-		#dash_cooling = true
-		#var direction := Input.get_vector(&"left", &"right", &"up", &"down") * dash_length
-		#dash_scanner.target_position = dash_scanner.to_local(global_position + direction)
-		#dash_scanner.force_shapecast_update()
-		#var percent := dash_scanner.get_closest_collision_safe_fraction()
-		#global_position = dash_scanner.to_global(dash_scanner.target_position * percent)
-		#dash_cooldown.start()
+		attacking = true
+
+
+func _process(delta: float) -> void:
+	if running and not (stunned or frozen) and velocity != Vector2():
+		wind.volume_linear = lerpf(wind.volume_linear, remap(velocity.length(),
+				speed, run_speed, 0.0, 1.5), delta * 2.0)
+	else:
+		wind.volume_linear = lerpf(wind.volume_linear, 0.0, delta)
 
 
 func physics_process(_delta: float) -> void:
-	var running := Input.is_action_pressed(&"run")
+	running = Input.is_action_pressed(&"run")
 	var input := Input.get_vector(&"left", &"right", &"up", &"down")
 	target_velocity = input * (run_speed if running else speed)
 	if not attacking:
@@ -52,19 +54,29 @@ func physics_process(_delta: float) -> void:
 			playback.travel(&"Idle")
 
 
-func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
-	if can_move:
-		super(damage, source)
-
-
 func die() -> void:
-	global_position = checkpoint
-	hit_box.health = hit_box.max_health
+	velocity = Vector2()
+	death_sound.play()
 	for enemy in get_tree().get_nodes_in_group(&"enemies"):
 		if not enemy is FatherTime:
 			enemy.queue_free()
 	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.reset()
+
+	hit_box.health = hit_box.max_health
+	set_camera_smoothed(false)
+	global_position = checkpoint
+	await RenderingServer.frame_post_draw
+	set_camera_smoothed(true)
+	dead = false
+	hit_box.immune = false
+	frozen = false
+
+
+func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
+	if hit_box.health > 0:
+		hurt_sound.play()
+	super(damage, source)
 
 
 func set_near_sight_active(active: bool) -> void:
@@ -77,8 +89,7 @@ func set_camera_smoothed(smoothed: bool) -> void:
 
 func give_axe() -> void:
 	has_axe = true
-	hurt_box.ignore_list.remove_at(0)
-	hurt_box.damage = 2
+	hurt_box.set_collision_mask_value(TREE_LAYER, true)
 
 
 func increase_max_health(bonus: int) -> void:
@@ -88,7 +99,6 @@ func increase_max_health(bonus: int) -> void:
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack"):
-		can_move = true
 		attacking = false
 
 
@@ -99,5 +109,20 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 		attack_sound.play()
 
 
-func _on_dash_cooldown_timeout() -> void:
-	dash_cooling = false
+func _on_hit_box_healed(_healing: int) -> void:
+	heal_sound.play()
+
+
+func _on_hurt_box_hurt(target: HitBox) -> void:
+	if target.get_collision_layer_value(TREE_LAYER):
+		attack_sound.stop()
+
+
+func _on_hit_box_health_changed(health: float) -> void:
+	if not is_node_ready():
+		await ready
+	health_bar.size.x = health_bar.texture.get_width() * health
+
+
+func _on_hit_box_max_health_changed(_max_health: int) -> void:
+	pass # Replace with function body.

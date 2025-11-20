@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b5vj4teu3fvlo"]
+[gd_scene load_steps=13 format=3 uid="uid://b5vj4teu3fvlo"]
 
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_es5ms"]
 [ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="2_5w0hr"]
 [ext_resource type="Script" uid="uid://bgae1fgnkvo8c" path="res://kinematic/enemy/enemy.gd" id="2_vqldv"]
-[ext_resource type="PackedScene" uid="uid://cago0a3f2aa63" path="res://collision/soft_collider.tscn" id="4_jqkxg"]
-[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/hurt_box.tscn" id="5_xyspp"]
+[ext_resource type="PackedScene" uid="uid://cago0a3f2aa63" path="res://collision/soft_collider/soft_collider.tscn" id="4_jqkxg"]
+[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="5_xyspp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xyspp"]
 radius = 4.0
@@ -25,12 +25,25 @@ height = 16.0
 radius = 2.0
 height = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyspp"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vec2w"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="Enemy" groups=["enemies"] instance=ExtResource("1_es5ms")]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("2_vqldv")
 soft_collider_strength = 16.0
+min_warn_pitch = null
+max_warn_pitch = null
+max_warn_delay = null
+speed = null
+traction = null
+bounce_force = null
 bounce_duration = 0.2
+reset_velocity_after_bounce = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.125, 0.125)
@@ -57,20 +70,41 @@ visible = false
 shape = SubResource("CircleShape2D_jqkxg")
 
 [node name="HitBox" parent="." index="4" groups=["enemy_hit_boxes"]]
+collision_layer = 32
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_vec2w")
 
 [node name="HurtBox" parent="." index="5" instance=ExtResource("5_xyspp")]
-ignore_list = Array[StringName]([&"tree_hit_boxes", &"enemy_hit_boxes"])
+collision_mask = 16
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_y43nc")
 
+[node name="WarningSound" type="AudioStreamPlayer2D" parent="." index="6"]
+max_distance = 512.0
+
+[node name="WarningSoundCooldown" type="Timer" parent="." index="7"]
+wait_time = 10.0
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="." index="8"]
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = -18.0
+theme_override_styles/background = SubResource("StyleBoxFlat_xyspp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vec2w")
+value = 75.0
+show_percentage = false
+
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="." method="_on_vision_body_exited"]
+[connection signal="health_changed" from="HitBox" to="." method="_on_hit_box_health_changed"]
+[connection signal="max_health_changed" from="HitBox" to="." method="_on_hit_box_max_health_changed"]
+[connection signal="timeout" from="WarningSoundCooldown" to="." method="_on_warning_sound_cooldown_timeout"]
 
 [editable path="SoftCollider"]
 [editable path="HitBox"]
