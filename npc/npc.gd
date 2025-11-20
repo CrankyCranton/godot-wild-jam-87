@@ -26,6 +26,7 @@ func _input(event: InputEvent) -> void:
 
 
 func interact() -> void:
+	player.hit_box.set_immune()
 	interacting = true
 	if checkpoint:
 		player.checkpoint = checkpoint.global_position
@@ -46,6 +47,7 @@ func interact() -> void:
 	player.frozen = false
 	interacting = false
 	interaction_finished.emit()
+	player.hit_box.immune = false
 
 
 func set_creep_spawn_timers_paused(paused: bool) -> void:

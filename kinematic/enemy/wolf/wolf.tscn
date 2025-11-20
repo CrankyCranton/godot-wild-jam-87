@@ -71,6 +71,7 @@ monitorable = false
 
 [node name="LungeCollisionShape" type="CollisionShape2D" parent="LungeArea" index="0"]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CircleShape2D_1awob")
 
 [node name="WarningSound" parent="." index="7"]

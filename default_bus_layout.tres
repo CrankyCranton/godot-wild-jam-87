@@ -1,4 +1,8 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://inhxhi6wxajj"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://inhxhi6wxajj"]
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_j3pel"]
+resource_name = "PitchShift"
+pitch_scale = 0.8
 
 [sub_resource type="AudioEffectFilter" id="AudioEffectFilter_j3pel"]
 resource_name = "Filter"
@@ -13,6 +17,8 @@ volume_db = -10.0
 resource_name = "Reverb"
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectPitchShift_j3pel")
+bus/0/effect/0/enabled = false
 bus/1/name = &"Muffled"
 bus/1/solo = false
 bus/1/mute = false

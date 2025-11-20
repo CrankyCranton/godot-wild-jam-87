@@ -1,8 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://so1klwc5erkl"]
+[gd_scene load_steps=42 format=3 uid="uid://so1klwc5erkl"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_odpli"]
 [ext_resource type="Script" uid="uid://cboym4226vrwo" path="res://kinematic/enemy/father_time/father_time.gd" id="2_m5mja"]
-[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="3_0ahud"]
 [ext_resource type="AudioStream" uid="uid://du13c6gd7yglc" path="res://assets/sfx/wolf/punch-03-352040_edited.wav" id="3_01tis"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
@@ -21,296 +20,30 @@ height = 48.0
 radius = 4.0
 height = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0ahud"]
-radius = 48.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ahud"]
-size = Vector2(40, 32)
-
 [sub_resource type="Animation" id="Animation_m6mhi"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtBox2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5707964]
-}
-
-[sub_resource type="Animation" id="Animation_0kj44"]
-resource_name = "attack_down"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 1.8000001),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtBox2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5707964]
-}
-
-[sub_resource type="Animation" id="Animation_28sqk"]
-resource_name = "attack_left"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.1415927]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5000001, 1.8000001),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_28fp3"]
-resource_name = "attack_right"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtBox2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(3),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_rabii"]
-resource_name = "attack_up"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 1.8000001),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HurtBox2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5707964]
-}
 
 [sub_resource type="Animation" id="Animation_r584t"]
 resource_name = "die_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_qbey8"]
 resource_name = "die_left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_otp8h"]
 resource_name = "die_right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_766mw"]
 resource_name = "die_up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_jjn41"]
 resource_name = "spawn_enemies"
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -321,150 +54,26 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_m5mja"]
 resource_name = "start"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_omase"]
 resource_name = "walk_down"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_0ahud"]
 resource_name = "walk_left"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_qfala"]
 resource_name = "walk_right"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_ce8sj"]
 resource_name = "walk_up"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackZone/AttackCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox2/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jjn41"]
 _data = {
 &"RESET": SubResource("Animation_m6mhi"),
-&"attack_down": SubResource("Animation_0kj44"),
-&"attack_left": SubResource("Animation_28sqk"),
-&"attack_right": SubResource("Animation_28fp3"),
-&"attack_up": SubResource("Animation_rabii"),
 &"die_down": SubResource("Animation_r584t"),
 &"die_left": SubResource("Animation_qbey8"),
 &"die_right": SubResource("Animation_otp8h"),
@@ -476,29 +85,6 @@ _data = {
 &"walk_right": SubResource("Animation_qfala"),
 &"walk_up": SubResource("Animation_ce8sj")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28fp3"]
-animation = &"attack_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28sqk"]
-animation = &"attack_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0kj44"]
-animation = &"attack_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jjn41"]
-animation = &"attack_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_m6mhi"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_28fp3")
-blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_28sqk")
-blend_point_1/pos = Vector2(0, -1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_0kj44")
-blend_point_2/pos = Vector2(0.90000004, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_jjn41")
-blend_point_3/pos = Vector2(-0.90000004, 0)
-blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbey8"]
 animation = &"die_down"
@@ -555,10 +141,6 @@ animation = &"start"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ahud"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qfala"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rabii"]
 switch_mode = 2
 advance_mode = 2
@@ -573,17 +155,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m5mja"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ce8sj"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_omase"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lqnbh"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28fp3"]
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m5mja"]
-states/Attack/node = SubResource("AnimationNodeBlendSpace2D_m6mhi")
-states/Attack/position = Vector2(538, 170)
 states/Die/node = SubResource("AnimationNodeBlendSpace2D_m5mja")
 states/Die/position = Vector2(700, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_c0ukd")
@@ -592,20 +168,23 @@ states/spawn_enemies/node = SubResource("AnimationNodeAnimation_0ahud")
 states/spawn_enemies/position = Vector2(538, 24)
 states/start/node = SubResource("AnimationNodeAnimation_m5mja")
 states/start/position = Vector2(346, 100)
-transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_0ahud"), "start", "Walk", SubResource("AnimationNodeStateMachineTransition_qfala"), "Die", "End", SubResource("AnimationNodeStateMachineTransition_rabii"), "Walk", "spawn_enemies", SubResource("AnimationNodeStateMachineTransition_28sqk"), "spawn_enemies", "Die", SubResource("AnimationNodeStateMachineTransition_0kj44"), "spawn_enemies", "Walk", SubResource("AnimationNodeStateMachineTransition_jjn41"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_m5mja"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_ce8sj"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_omase"), "Attack", "Die", SubResource("AnimationNodeStateMachineTransition_28fp3")]
-graph_offset = Vector2(-99, 1.9514564)
+transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_0ahud"), "Die", "End", SubResource("AnimationNodeStateMachineTransition_rabii"), "Walk", "spawn_enemies", SubResource("AnimationNodeStateMachineTransition_28sqk"), "spawn_enemies", "Die", SubResource("AnimationNodeStateMachineTransition_0kj44"), "spawn_enemies", "Walk", SubResource("AnimationNodeStateMachineTransition_jjn41"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_m5mja"), "start", "spawn_enemies", SubResource("AnimationNodeStateMachineTransition_lqnbh")]
+graph_offset = Vector2(-47, -30.048544)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqnbh"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01tis"]
+bg_color = Color(0, 1, 0, 1)
 
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 script = ExtResource("2_m5mja")
 soft_collider_strength = 0.0
-min_warn_pitch = 0.75
-max_warn_pitch = 1.25
-max_warn_delay = 1.0
-speed = 64.0
-traction = 14.0
-bounce_force = 128.0
+max_warn_delay = 0.0
+health_drop_chance = 0.0
+speed = 32.0
+bounce_force = 0.0
 bounce_duration = 0.1
-reset_velocity_after_bounce = false
 metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength"]
 
 [node name="Sprite2D" parent="." index="0"]
@@ -615,7 +194,6 @@ scale = Vector2(0.25, 0.25)
 shape = SubResource("CapsuleShape2D_odpli")
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
-visible = true
 shape = SubResource("CircleShape2D_m5mja")
 
 [node name="Vision" parent="." index="3"]
@@ -629,7 +207,7 @@ disabled = true
 
 [node name="HitBox" parent="." index="4"]
 collision_layer = 160
-max_health = 20.0
+max_health = 50.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
@@ -641,25 +219,28 @@ stream = ExtResource("3_01tis")
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CapsuleShape2D_lqnbh")
 
-[node name="AttackZone" type="Area2D" parent="." index="7"]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+[node name="Enemies" type="Node" parent="." index="7"]
 
-[node name="AttackCollision" type="CollisionShape2D" parent="AttackZone" index="0"]
-shape = SubResource("CircleShape2D_0ahud")
-disabled = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+libraries = {
+&"": SubResource("AnimationLibrary_jjn41")
+}
 
-[node name="HurtBox2" parent="." index="8" instance=ExtResource("3_0ahud")]
-rotation = 1.5707964
-collision_mask = 16
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+active = false
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_m5mja")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Die/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
 
-[node name="CollisionShape2D" parent="HurtBox2" index="0"]
-position = Vector2(36, 1.446464e-06)
-shape = SubResource("RectangleShape2D_0ahud")
-disabled = true
+[node name="SpawnTimer" type="Timer" parent="." index="10"]
+wait_time = 10.0
 
-[node name="WolfSpawnPoints" type="Node2D" parent="." index="9"]
+[node name="HealthBar" parent="." index="12"]
+visible = false
+
+[node name="WolfSpawnPoints" type="Node2D" parent="." index="13"]
 
 [node name="Marker2D" type="Marker2D" parent="WolfSpawnPoints" index="0"]
 position = Vector2(0, 24)
@@ -670,7 +251,7 @@ position = Vector2(-24, -16)
 [node name="Marker2D3" type="Marker2D" parent="WolfSpawnPoints" index="2"]
 position = Vector2(24, -16)
 
-[node name="BatSpawnPoints" type="Node2D" parent="." index="10"]
+[node name="BatSpawnPoints" type="Node2D" parent="." index="14"]
 
 [node name="Marker2D" type="Marker2D" parent="BatSpawnPoints" index="0"]
 position = Vector2(-24, 0)
@@ -684,30 +265,38 @@ position = Vector2(0, -24)
 [node name="Marker2D4" type="Marker2D" parent="BatSpawnPoints" index="3"]
 position = Vector2(0, 24)
 
-[node name="Enemies" type="Node" parent="." index="11"]
+[node name="OrbSpawnPoint" type="Marker2D" parent="." index="15"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
-libraries = {
-&"": SubResource("AnimationLibrary_jjn41")
-}
+[node name="HUD" type="CanvasLayer" parent="." index="16"]
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="13"]
-active = false
-tree_root = SubResource("AnimationNodeStateMachine_m5mja")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Attack/blend_position = Vector2(0, 0)
-parameters/Die/blend_position = Vector2(0, 0)
-parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
+[node name="MarginContainer" type="MarginContainer" parent="HUD" index="0"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="SpawnTimer" type="Timer" parent="." index="14"]
-wait_time = 10.0
-autostart = true
+[node name="BossHealthBar" type="ProgressBar" parent="HUD/MarginContainer" index="0"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_lqnbh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_01tis")
+show_percentage = false
 
-[connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 
 [editable path="SoftCollider"]
 [editable path="HitBox"]
 [editable path="HurtBox"]
-[editable path="HurtBox2"]

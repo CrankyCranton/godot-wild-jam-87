@@ -36,7 +36,6 @@ reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance", &"max_warn_delay"]
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
-visible = true
 shape = SubResource("CircleShape2D_nsob8")
 
 [node name="HitBox" parent="." index="4"]
@@ -51,6 +50,7 @@ stream = ExtResource("3_0s3q5")
 
 [node name="DeathSound" parent="HitBox" index="2"]
 stream = ExtResource("3_prvmr")
+volume_db = 5.0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CapsuleShape2D_nsob8")

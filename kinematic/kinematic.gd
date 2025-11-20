@@ -35,10 +35,11 @@ func physics_process(_delta: float) -> void:
 func bounce(force: Vector2, duration := bounce_duration) -> void:
 	velocity = force
 	stunned = true
-	await get_tree().create_timer(duration, false).timeout
-	stunned = false
-	if reset_velocity_after_bounce:
-		velocity = Vector2()
+	if duration:
+		await get_tree().create_timer(duration, false).timeout
+		stunned = false
+		if reset_velocity_after_bounce:
+			velocity = Vector2()
 
 
 func die() -> void:
@@ -53,7 +54,8 @@ func _on_hit_box_died() -> void:
 
 
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
-	bounce(source.global_position.direction_to(hit_box.global_position) * bounce_force * damage)
+	bounce(source.global_position.direction_to(hit_box.global_position) * bounce_force * damage,
+			0.0 if stunned else bounce_duration)
 
 
 func _on_death_sound_finished() -> void:

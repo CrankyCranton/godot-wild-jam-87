@@ -10,12 +10,15 @@ signal exited
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func enter(player: Node2D) -> void:
+func enter(player: Player) -> void:
 	player.global_position = spawn_position.global_position
+	const GRACE_TIME := 1.0
+	player.hit_box.set_immune(GRACE_TIME)
 	entered.emit()
 
 
 func _on_body_entered(body: Player) -> void:
+	body.hit_box.set_immune()
 	body.frozen = true
 	body.velocity = Vector2()
 	animation_player.play(&"fade_in")

@@ -16,6 +16,11 @@ var can_warn := true
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
+func _ready() -> void:
+	await get_tree().create_timer(0.5, false).timeout
+	hurt_box_shape.set_deferred(&"disabled", false)
+
+
 func physics_process(_delta: float) -> void:
 	if player:
 		target_velocity = get_move_vector(player.global_position) * speed

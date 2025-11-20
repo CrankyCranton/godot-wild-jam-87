@@ -1,5 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4vnct1ou07lg"]
+[gd_scene load_steps=4 format=3 uid="uid://c4vnct1ou07lg"]
 
-[ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="1_3u2b7"]
+[ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="2_ls3a2"]
+[ext_resource type="Script" uid="uid://vnxexuacwqat" path="res://kinematic/enemy/father_time/time_orb/time_orb.gd" id="2_rdhi4"]
 
-[node name="TimeOrb" instance=ExtResource("1_3u2b7")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_3u2b7"]
+radius = 16.0
+
+[node name="TimeOrb" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("2_rdhi4")
+slowing = 6.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.2509804)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ls3a2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3u2b7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -16, 32, 32)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

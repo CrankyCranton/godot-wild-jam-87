@@ -2,6 +2,7 @@ class_name FatherTime extends Enemy
 
 
 const HEALTH_DRAIN := 0.1
+const RAMPAGE_HP := 30
 
 @onready var enemies: Node = $Enemies
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -10,11 +11,9 @@ const HEALTH_DRAIN := 0.1
 @onready var wolf_spawn_points: Node = $WolfSpawnPoints
 @onready var bat_spawn_points: Node = $BatSpawnPoints
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var orb_spawn_point: Marker2D = $OrbSpawnPoint
+@onready var boss_health_bar: ProgressBar = %BossHealthBar
 @onready var starting_position := global_position
-
-
-func _ready() -> void:
-	set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -23,9 +22,31 @@ func _process(_delta: float) -> void:
 	animation_tree.set(&"parameters/Die/blend_position", target_velocity.normalized())
 
 
+func _on_hit_box_health_changed(health: float) -> void:
+	if not is_node_ready():
+		await ready
+	boss_health_bar.value = health
+	if health <= RAMPAGE_HP:
+		spawn_timer.wait_time /= 2.0
+
+
+func _on_hit_box_max_health_changed(max_health: int) -> void:
+	if not is_node_ready():
+		await ready
+	boss_health_bar.max_value = max_health
+
+
+@warning_ignore("shadowed_variable_base_class")
+func start(player: Player) -> void:
+	boss_health_bar.show()
+	spawn_timer.start()
+	self.player = player
+	animation_tree.active = true
+
+
 func reset() -> void:
+	boss_health_bar.hide()
 	spawn_timer.stop()
-	set_process(false)
 	global_position = starting_position
 	hit_box.health = hit_box.max_health
 	animation_tree.active = false
@@ -33,24 +54,15 @@ func reset() -> void:
 		enemy.queue_free()
 
 
-func get_move_vector(target: Vector2) -> Vector2:
-	return super(target)
-
-
-@warning_ignore("shadowed_variable_base_class")
-func start(player: Player) -> void:
-	spawn_timer.start()
-	set_process(true)
-	self.player = player
-	animation_tree.active = true
-
-
 func spawn_random() -> void:
-	var BAT_CHANCE := 0.5
-	if randf() <= BAT_CHANCE:
-		spawn(preload("res://kinematic/enemy/bat/bat.tscn"), bat_spawn_points)
-	else:
-		spawn(preload("res://kinematic/enemy/wolf/wolf.tscn"), wolf_spawn_points)
+	var bag := ["bat", "wolf", "orb"]
+	match bag.pick_random():
+		"bat":
+			spawn(preload("res://kinematic/enemy/bat/bat.tscn"), bat_spawn_points)
+		"wolf":
+			spawn(preload("res://kinematic/enemy/wolf/wolf.tscn"), wolf_spawn_points)
+		"orb":
+			spawn_orbs(6)
 
 
 func spawn(ENEMY: PackedScene, spawn_points: Node) -> void:
@@ -60,20 +72,26 @@ func spawn(ENEMY: PackedScene, spawn_points: Node) -> void:
 		enemies.add_child(enemy)
 
 
-func attack() -> void:
-	stunned = true
-	velocity = Vector2()
-	playback.travel(&"Attack")
-
-
-func _on_attack_zone_body_entered(_body: Node2D) -> void:
-	attack()
-
-
-func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	if anim_name.contains("attack"):
-		stunned = false
+func spawn_orbs(orb_count: int) -> void:
+	const TIME_ORB := preload("res://kinematic/enemy/father_time/time_orb/time_orb.tscn")
+	var offset := randf() * TAU
+	for i in range(1, orb_count + 1):
+		var time_orb: TimeOrb = TIME_ORB.instantiate()
+		time_orb.global_position = orb_spawn_point.global_position
+		time_orb.direction = Vector2.RIGHT.rotated((float(i) / orb_count * TAU) + offset)
+		enemies.add_child(time_orb)
 
 
 func _on_spawn_timer_timeout() -> void:
 	playback.travel(&"spawn_enemies")
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name == &"spawn_enemies":
+		stunned = false
+
+
+func _on_animation_tree_animation_started(anim_name: StringName) -> void:
+	if anim_name == &"spawn_enemies":
+		stunned = true
+		velocity = Vector2()

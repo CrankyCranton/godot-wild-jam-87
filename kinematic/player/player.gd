@@ -3,7 +3,7 @@ class_name Player extends Kinematic
 
 const TREE_LAYER := 7
 
-@export var run_speed := 128.0
+@export var run_speed := 2.0
 
 var has_axe := false
 var has_candle := false
@@ -33,8 +33,8 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if running and not (stunned or frozen) and velocity != Vector2():
-		wind.volume_linear = lerpf(wind.volume_linear, remap(maxf(velocity.length(), speed),
-				speed, run_speed, 0.0, 1.5), delta * 2.0)
+		wind.volume_linear = lerpf(wind.volume_linear, remap(clampf(velocity.length(), speed, speed * run_speed),
+				speed, speed * run_speed, 0.0, 1.5), delta * 2.0)
 	else:
 		wind.volume_linear = lerpf(wind.volume_linear, 0.0, delta)
 
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 func physics_process(_delta: float) -> void:
 	running = Input.is_action_pressed(&"run")
 	var input := Input.get_vector(&"left", &"right", &"up", &"down")
-	target_velocity = input * (run_speed if running else speed)
+	target_velocity = input * (speed * run_speed if running else speed)
 	if not attacking:
 		if input != Vector2():
 			playback.travel(&"Run" if running else &"Walk")
@@ -55,19 +55,22 @@ func physics_process(_delta: float) -> void:
 
 
 func die() -> void:
-	velocity = Vector2()
-	death_sound.play()
 	for enemy in get_tree().get_nodes_in_group(&"enemies"):
 		if not enemy is FatherTime:
 			enemy.queue_free()
 	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.reset()
 
+	velocity = Vector2()
 	hit_box.health = hit_box.max_health
+	death_sound.play()
+	died.emit()
+
 	set_camera_smoothed(false)
 	global_position = checkpoint
 	await RenderingServer.frame_post_draw
 	set_camera_smoothed(true)
+
 	dead = false
 	hit_box.immune = false
 	frozen = false
