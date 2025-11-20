@@ -36,14 +36,9 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource("2_vqldv")
 soft_collider_strength = 16.0
-min_warn_pitch = null
-max_warn_pitch = null
-max_warn_delay = null
-speed = null
-traction = null
-bounce_force = null
+max_warn_delay = 1.0
+health_drop_chance = 0.4
 bounce_duration = 0.2
-reset_velocity_after_bounce = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.125, 0.125)

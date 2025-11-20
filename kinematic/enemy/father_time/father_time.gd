@@ -17,8 +17,7 @@ func _ready() -> void:
 	set_process(false)
 
 
-func _process(delta: float) -> void:
-	player.hit_box.health -= HEALTH_DRAIN * delta
+func _process(_delta: float) -> void:
 	animation_tree.set(&"parameters/Walk/blend_position", target_velocity.normalized())
 	animation_tree.set(&"parameters/Attack/blend_position", target_velocity.normalized())
 	animation_tree.set(&"parameters/Die/blend_position", target_velocity.normalized())

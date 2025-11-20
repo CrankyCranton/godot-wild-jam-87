@@ -559,17 +559,9 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ce8sj"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_omase"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rabii"]
 switch_mode = 2
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28fp3"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28sqk"]
 
@@ -580,6 +572,14 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m5mja"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ce8sj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_omase"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28fp3"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m5mja"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_m6mhi")
@@ -592,15 +592,20 @@ states/spawn_enemies/node = SubResource("AnimationNodeAnimation_0ahud")
 states/spawn_enemies/position = Vector2(538, 24)
 states/start/node = SubResource("AnimationNodeAnimation_m5mja")
 states/start/position = Vector2(346, 100)
-transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_0ahud"), "start", "Walk", SubResource("AnimationNodeStateMachineTransition_qfala"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_ce8sj"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_omase"), "Die", "End", SubResource("AnimationNodeStateMachineTransition_rabii"), "Attack", "Die", SubResource("AnimationNodeStateMachineTransition_28fp3"), "Walk", "spawn_enemies", SubResource("AnimationNodeStateMachineTransition_28sqk"), "spawn_enemies", "Die", SubResource("AnimationNodeStateMachineTransition_0kj44"), "spawn_enemies", "Walk", SubResource("AnimationNodeStateMachineTransition_jjn41"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_m5mja")]
+transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_0ahud"), "start", "Walk", SubResource("AnimationNodeStateMachineTransition_qfala"), "Die", "End", SubResource("AnimationNodeStateMachineTransition_rabii"), "Walk", "spawn_enemies", SubResource("AnimationNodeStateMachineTransition_28sqk"), "spawn_enemies", "Die", SubResource("AnimationNodeStateMachineTransition_0kj44"), "spawn_enemies", "Walk", SubResource("AnimationNodeStateMachineTransition_jjn41"), "Walk", "Die", SubResource("AnimationNodeStateMachineTransition_m5mja"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_ce8sj"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_omase"), "Attack", "Die", SubResource("AnimationNodeStateMachineTransition_28fp3")]
 graph_offset = Vector2(-99, 1.9514564)
 
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 script = ExtResource("2_m5mja")
 soft_collider_strength = 0.0
+min_warn_pitch = 0.75
+max_warn_pitch = 1.25
+max_warn_delay = 1.0
 speed = 64.0
+traction = 14.0
 bounce_force = 128.0
 bounce_duration = 0.1
+reset_velocity_after_bounce = false
 metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength"]
 
 [node name="Sprite2D" parent="." index="0"]
@@ -624,7 +629,7 @@ disabled = true
 
 [node name="HitBox" parent="." index="4"]
 collision_layer = 160
-max_health = 100.0
+max_health = 20.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
@@ -654,9 +659,30 @@ position = Vector2(36, 1.446464e-06)
 shape = SubResource("RectangleShape2D_0ahud")
 disabled = true
 
-[node name="WolfSpawnPoints" type="Node" parent="." index="9"]
+[node name="WolfSpawnPoints" type="Node2D" parent="." index="9"]
 
-[node name="BatSpawnPoints" type="Node" parent="." index="10"]
+[node name="Marker2D" type="Marker2D" parent="WolfSpawnPoints" index="0"]
+position = Vector2(0, 24)
+
+[node name="Marker2D2" type="Marker2D" parent="WolfSpawnPoints" index="1"]
+position = Vector2(-24, -16)
+
+[node name="Marker2D3" type="Marker2D" parent="WolfSpawnPoints" index="2"]
+position = Vector2(24, -16)
+
+[node name="BatSpawnPoints" type="Node2D" parent="." index="10"]
+
+[node name="Marker2D" type="Marker2D" parent="BatSpawnPoints" index="0"]
+position = Vector2(-24, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="BatSpawnPoints" index="1"]
+position = Vector2(24, 0)
+
+[node name="Marker2D3" type="Marker2D" parent="BatSpawnPoints" index="2"]
+position = Vector2(0, -24)
+
+[node name="Marker2D4" type="Marker2D" parent="BatSpawnPoints" index="3"]
+position = Vector2(0, 24)
 
 [node name="Enemies" type="Node" parent="." index="11"]
 

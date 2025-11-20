@@ -2,9 +2,8 @@ class_name Enemy extends Kinematic
 
 
 @export var soft_collider_strength := 32.0
-@export var min_warn_pitch := 0.75
-@export var max_warn_pitch := 1.25
 @export var max_warn_delay := 1.0
+@export var health_drop_chance := 0.4
 
 var player: Player
 var can_warn := true
@@ -32,12 +31,16 @@ func get_move_vector(target: Vector2) -> Vector2:
 func die() -> void:
 	collision_shape.set_deferred(&"disabled", true)
 	hurt_box_shape.set_deferred(&"disabled", true)
+	if randf() < health_drop_chance:
+		var health_pickup: HealthPickup = preload(
+				"res://pickups/health_pickup/health_pickup.tscn").instantiate()
+		health_pickup.position = position
+		call_deferred(&"add_sibling", health_pickup)
 
 
 func play_warning_sound() -> void:
 	can_warn = false
 	await get_tree().create_timer(max_warn_delay * randf(), false).timeout
-	warning_sound.pitch_scale = randf_range(min_warn_pitch, max_warn_pitch)
 	warning_sound.play()
 	warning_sound_cooldown.start()
 

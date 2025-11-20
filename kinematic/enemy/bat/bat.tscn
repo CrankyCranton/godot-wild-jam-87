@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnel1aqrtpr2f"]
+[gd_scene load_steps=10 format=3 uid="uid://bnel1aqrtpr2f"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_gk2ae"]
+[ext_resource type="Script" uid="uid://cvuxvpvd8yy61" path="res://kinematic/enemy/bat/bat.gd" id="2_0s3q5"]
 [ext_resource type="AudioStream" uid="uid://dj8r0hrwjc8ky" path="res://assets/sfx/bat/bat-chirping-type-2-355965.mp3" id="2_prvmr"]
 [ext_resource type="AudioStream" uid="uid://cugl6gp4xoh80" path="res://assets/sfx/bat/punch-and-hits-310521_edited.wav" id="3_0s3q5"]
 [ext_resource type="AudioStream" uid="uid://chj1r5o61s1ap" path="res://assets/sfx/bat/poof-80161.wav" id="3_prvmr"]
@@ -17,12 +18,22 @@ height = 24.0
 radius = 4.0
 height = 16.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_prvmr"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("2_prvmr")
+
 [node name="Bat" instance=ExtResource("1_gk2ae")]
 collision_mask = 1
-speed = 256.0
-traction = 0.5
+script = ExtResource("2_0s3q5")
+player_priority = 0.5
+max_warn_delay = 1.0
+health_drop_chance = 0.2
+speed = 192.0
+traction = 2.5
 bounce_force = 512.0
 reset_velocity_after_bounce = true
+metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance", &"max_warn_delay"]
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 visible = true
@@ -45,7 +56,12 @@ stream = ExtResource("3_prvmr")
 shape = SubResource("CapsuleShape2D_nsob8")
 
 [node name="WarningSound" parent="." index="6"]
-stream = ExtResource("2_prvmr")
+stream = SubResource("AudioStreamRandomizer_prvmr")
+
+[node name="DirectionChangeTimer" type="Timer" parent="." index="9"]
+wait_time = 0.35
+
+[connection signal="timeout" from="DirectionChangeTimer" to="." method="_on_direction_change_timer_timeout"]
 
 [editable path="SoftCollider"]
 [editable path="HitBox"]

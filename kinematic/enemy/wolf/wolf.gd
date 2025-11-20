@@ -5,7 +5,6 @@ class_name Wolf extends Enemy
 @export var max_circle_angle := 90.0
 @export var circle_start_distance := 128
 @export var lunge_duration := 1.0
-@export var health_drop_chance := 0.4
 
 var circle_direcion := randi() % 2 * 2 - 1 # Either -1 or 1
 
@@ -29,11 +28,6 @@ func get_move_vector(target: Vector2) -> Vector2:
 func die() -> void:
 	super()
 	lunge_collision_shape.set_deferred(&"disabled", true)
-	if randf() < health_drop_chance:
-		var health_pickup: HealthPickup = preload(
-				"res://pickups/health_pickup/health_pickup.tscn").instantiate()
-		health_pickup.position = position
-		call_deferred(&"add_sibling", health_pickup)
 
 
 func _on_lunge_area_body_entered(body: Node2D) -> void:
