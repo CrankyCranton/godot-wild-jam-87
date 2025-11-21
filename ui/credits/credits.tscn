@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://d8k734q4jrtr"]
+
+[ext_resource type="Script" uid="uid://c2o07aoct6nl6" path="res://ui/credits/credits.gd" id="1_2n5wy"]
+[ext_resource type="AudioStream" uid="uid://08jruo1f2n62" path="res://assets/music/bach-toccata-and-fugue-in-d-minor-bwv-565-250589.mp3" id="1_ydyd3"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_2n5wy"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_nnsry"]
+events = [SubResource("InputEventAction_2n5wy")]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2n5wy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ydyd3")
+volume_db = -5.0
+autoplay = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]<Credits go here>[/center]"
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_nnsry")
+shortcut_in_tooltip = false
+text = "Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="meta_clicked" from="VBoxContainer/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

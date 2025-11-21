@@ -1,8 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://so1klwc5erkl"]
+[gd_scene load_steps=44 format=3 uid="uid://so1klwc5erkl"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_odpli"]
 [ext_resource type="Script" uid="uid://cboym4226vrwo" path="res://kinematic/enemy/father_time/father_time.gd" id="2_m5mja"]
 [ext_resource type="AudioStream" uid="uid://du13c6gd7yglc" path="res://assets/sfx/wolf/punch-03-352040_edited.wav" id="3_01tis"]
+[ext_resource type="AudioStream" uid="uid://cdv6c4edt4kh8" path="res://assets/sfx/father_time/scream-85294.mp3" id="4_01tis"]
+[ext_resource type="AudioStream" uid="uid://ba4eeoievn7ux" path="res://assets/sfx/father_time/male-exertion-grunts-02-352731.mp3" id="5_io65o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
 radius = 8.0
@@ -37,6 +39,7 @@ resource_name = "die_up"
 
 [sub_resource type="Animation" id="Animation_jjn41"]
 resource_name = "spawn_enemies"
+length = 1.5
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,11 +47,25 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(1.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"spawn_random"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpawnWarn")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -208,7 +225,7 @@ disabled = true
 
 [node name="HitBox" parent="." index="4"]
 collision_layer = 160
-max_health = 30.0
+max_health = 40.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
@@ -216,6 +233,14 @@ shape = SubResource("CapsuleShape2D_0ahud")
 
 [node name="HitSound" parent="HitBox" index="1"]
 stream = ExtResource("3_01tis")
+area_mask = 0
+
+[node name="DeathSound" parent="HitBox" index="2"]
+stream = ExtResource("4_01tis")
+volume_db = 13.0
+pitch_scale = 0.7
+bus = &"Echoes"
+area_mask = 0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CapsuleShape2D_lqnbh")
@@ -293,6 +318,12 @@ size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_lqnbh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01tis")
 show_percentage = false
+
+[node name="SpawnWarn" type="AudioStreamPlayer2D" parent="." index="17"]
+stream = ExtResource("5_io65o")
+pitch_scale = 0.75
+bus = &"Echoes"
+area_mask = 0
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

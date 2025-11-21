@@ -2,7 +2,7 @@ class_name FatherTime extends Enemy
 
 
 const HEALTH_DRAIN := 0.1
-const RAMPAGE_HP := 10
+const RAMPAGE_HP := 14
 
 var active := false
 
@@ -43,6 +43,12 @@ func die() -> void:
 	active = false
 	spawn_timer.stop()
 	playback.travel(&"Die")
+	for creep_spawner in get_tree().get_nodes_in_group(&"creep_spawners"):
+		creep_spawner.queue_free()
+	for enemy in enemies.get_children():
+		if enemy is Enemy:
+			enemy.hit_box.health = 0.0
+			enemy._on_hit_box_died()
 	super()
 
 

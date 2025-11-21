@@ -15,15 +15,11 @@ class_name World extends Node2D
 @onready var lumberjack_region: Node2D = %LumberjackRegion
 @onready var father_time: FatherTime = %FatherTime
 @onready var wind: AudioStreamPlayer = $Ambience
+@onready var hag: NPC = %Hag
+@onready var god_rays: ColorRect = $GodRays
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var end_zone_shape: CollisionPolygon2D = %EndZoneShape
 @onready var default_darkness := darkness.color
-
-
-#func _process(delta: float) -> void:
-	#if player.running:
-		#wind.pitch_scale = lerpf(wind.pitch_scale, remap(player.velocity.length(),
-				#player.speed, player.run_speed, 1.0, 2.0), delta * 2.0)
-	#else:
-		#wind.pitch_scale = lerpf(wind.pitch_scale, 1.0, delta)
 
 
 func _on_hag_interaction_finished() -> void:
@@ -57,12 +53,13 @@ func _on_candle_pickup_interaction_finished() -> void:
 func _on_close_zone_body_entered(body: Player) -> void:
 	if father_time.active:
 		return
-	print("blah")
 	gates_collision.set_deferred(&"disabled", false)
 	father_time.start(body)
 
 
 func _on_father_time_died() -> void:
+	god_rays.show()
+	end_zone_shape.set_deferred(&"disabled", false)
 	father_time_gates.queue_free()
 	for creep_spawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.queue_free()
@@ -91,3 +88,12 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 func _on_player_died() -> void:
 	gates_collision.set_deferred(&"disabled", true)
 	father_time.reset()
+
+
+func _on_end_zone_body_entered(body: Player) -> void:
+	body.frozen = true
+	body.animation_tree.set(&"parameters/Idle/blend_position", Vector2.UP)
+	body.playback.travel(&"Idle")
+	animation_player.play(&"end")
+	await animation_player.animation_finished
+	get_tree().change_scene_to_file("res://ui/credits/credits.tscn")
