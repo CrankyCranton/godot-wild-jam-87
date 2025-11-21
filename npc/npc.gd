@@ -46,8 +46,8 @@ func interact() -> void:
 		label.show()
 	player.frozen = false
 	interacting = false
-	interaction_finished.emit()
 	player.hit_box.immune = false
+	interaction_finished.emit()
 
 
 func set_creep_spawn_timers_paused(paused: bool) -> void:

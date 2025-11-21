@@ -44,6 +44,7 @@ max_circle_angle = 90.0
 circle_start_distance = 128
 lunge_duration = 0.5
 max_warn_delay = 0.0
+health_drop_chance = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1, 0, 0, 1)

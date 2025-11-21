@@ -41,6 +41,8 @@ func _on_hit_box_max_health_changed(max_health: int) -> void:
 
 func die() -> void:
 	active = false
+	spawn_timer.stop()
+	playback.travel(&"Die")
 	super()
 
 
