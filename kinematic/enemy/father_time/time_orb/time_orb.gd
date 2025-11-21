@@ -8,6 +8,8 @@ class_name TimeOrb extends Area2D
 var direction := Vector2()
 var player: Player
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta
@@ -16,7 +18,7 @@ func _physics_process(delta: float) -> void:
 func delete() -> void:
 	#if player:
 		#reset_slowing()
-	queue_free()
+	animation_player.play(&"delete")
 
 
 func reset_slowing() -> void:

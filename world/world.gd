@@ -12,6 +12,7 @@ class_name World extends Node2D
 @onready var gates_collision: CollisionShape2D = %GatesCollision
 @onready var father_time_gates: StaticBody2D = $FatherTimeGates
 @onready var close_zone: Area2D = %CloseZone
+@onready var close_shape: CollisionShape2D = close_zone.get_node(^"CollisionShape2D")
 @onready var lumberjack_region: Node2D = %LumberjackRegion
 @onready var father_time: FatherTime = %FatherTime
 @onready var wind: AudioStreamPlayer = $Ambience
@@ -49,18 +50,13 @@ func _on_candle_pickup_interaction_finished() -> void:
 	cave_enterance_dialogue.queue_free()
 
 
-# TODO Move closing gates to it's own scene and script.
-func _on_close_zone_body_entered(body: Player) -> void:
-	if father_time.active:
-		return
-	gates_collision.set_deferred(&"disabled", false)
-	father_time.start(body)
-
-
 func _on_father_time_died() -> void:
 	god_rays.show()
 	end_zone_shape.set_deferred(&"disabled", false)
 	father_time_gates.queue_free()
+	hag.queue_free()
+	if mother_and_child:
+		mother_and_child.queue_free()
 	for creep_spawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.queue_free()
 	player.shake_cam()
@@ -88,6 +84,7 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 
 func _on_player_died() -> void:
 	gates_collision.set_deferred(&"disabled", true)
+	close_shape.set_deferred(&"disabled", false)
 	father_time.reset()
 
 
@@ -98,3 +95,11 @@ func _on_end_zone_body_entered(body: Player) -> void:
 	animation_player.play(&"end")
 	await animation_player.animation_finished
 	get_tree().change_scene_to_file("res://ui/credits/credits.tscn")
+
+
+func _on_close_zone_interaction_finished() -> void:
+	if father_time.active:
+		return
+	gates_collision.set_deferred(&"disabled", false)
+	close_shape.set_deferred(&"disabled", true)
+	father_time.start(player)
