@@ -16,8 +16,8 @@ radius = 4.0
 height = 12.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbfj0"]
-radius = 2.0
-height = 8.0
+radius = 3.0
+height = 6.0
 
 [sub_resource type="Animation" id="Animation_hphhd"]
 length = 0.001
@@ -426,7 +426,7 @@ libraries = {
 deterministic = false
 tree_root = SubResource("AnimationNodeStateMachine_lvcj4")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Attack/blend_position = Vector2(-0.31925678, -0.7253219)
+parameters/Attack/blend_position = Vector2(-0.0055248737, -0.012875557)
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)

@@ -5,6 +5,7 @@ const TREE_LAYER := 7
 
 @export var run_speed := 2.0
 
+var outdoors := true
 var has_axe := false
 var has_candle := false
 var attacking := false
@@ -32,11 +33,14 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	if running and not (stunned or frozen) and velocity != Vector2():
-		wind.volume_linear = lerpf(wind.volume_linear, remap(clampf(velocity.length(), speed, speed * run_speed),
-				speed, speed * run_speed, 0.0, 1.5), delta * 2.0)
+	if outdoors:
+		if running and not (stunned or frozen) and velocity != Vector2():
+			wind.volume_linear = lerpf(wind.volume_linear, remap(clampf(velocity.length(), speed, speed * run_speed),
+					speed, speed * run_speed, 0.0, 1.5), delta * 2.0)
+		else:
+			wind.volume_linear = lerpf(wind.volume_linear, 0.0, delta)
 	else:
-		wind.volume_linear = lerpf(wind.volume_linear, 0.0, delta)
+		wind.volume_linear = 0.0
 
 
 func physics_process(_delta: float) -> void:
@@ -74,6 +78,29 @@ func die() -> void:
 	dead = false
 	hit_box.immune = false
 	frozen = false
+
+
+func set_anim_time_scale(time_scale: float) -> void:
+	var state_machine: AnimationNodeStateMachine = animation_tree.tree_root
+	var anim_list := scan_anim_node(state_machine)
+	for anim_node in anim_list:
+		anim_node.use_custom_timeline = true
+		anim_node.stretch_time_scale = time_scale != 1.0
+		anim_node.timeline_length = animation_tree.get_animation(anim_node.animation
+				).length * time_scale
+
+
+func scan_anim_node(anim_node: AnimationRootNode) -> Array[AnimationNodeAnimation]:
+	var result: Array[AnimationNodeAnimation] = []
+	if anim_node is AnimationNodeAnimation:
+		result.append(anim_node)
+	elif anim_node is AnimationNodeBlendSpace2D:
+		for i in anim_node.get_blend_point_count():
+			result.append_array(scan_anim_node(anim_node.get_blend_point_node(i)))
+	elif anim_node is AnimationNodeStateMachine:
+		for anim in anim_node.get_node_list():
+			result.append_array(scan_anim_node(anim_node.get_node(anim)))
+	return result
 
 
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:

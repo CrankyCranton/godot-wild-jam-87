@@ -12,7 +12,6 @@ class_name World extends Node2D
 @onready var gates_collision: CollisionShape2D = %GatesCollision
 @onready var father_time_gates: StaticBody2D = $FatherTimeGates
 @onready var close_zone: Area2D = %CloseZone
-@onready var close_zone_collision: CollisionShape2D = %CloseZoneCollision
 @onready var lumberjack_region: Node2D = %LumberjackRegion
 @onready var father_time: FatherTime = %FatherTime
 @onready var wind: AudioStreamPlayer = $Ambience
@@ -56,9 +55,10 @@ func _on_candle_pickup_interaction_finished() -> void:
 
 # TODO Move closing gates to it's own scene and script.
 func _on_close_zone_body_entered(body: Player) -> void:
-	print(body)
+	if father_time.active:
+		return
+	print("blah")
 	gates_collision.set_deferred(&"disabled", false)
-	close_zone_collision.set_deferred(&"disabled", true)
 	father_time.start(body)
 
 
@@ -70,10 +70,12 @@ func _on_father_time_died() -> void:
 
 func _on_muffle_zone_body_entered(_body: Node2D) -> void:
 	ambience.bus = &"Muffled"
+	player.outdoors = false
 
 
 func _on_muffle_zone_body_exited(_body: Node2D) -> void:
 	ambience.bus = &"Master"
+	player.outdoors = true
 
 
 func _on_cave_zone_body_entered(body: Player) -> void:
@@ -87,6 +89,5 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 
 
 func _on_player_died() -> void:
-	await get_tree().physics_frame
 	gates_collision.set_deferred(&"disabled", true)
-	close_zone_collision.set_deferred(&"disabled", false)
+	father_time.reset()

@@ -1,7 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4vnct1ou07lg"]
+[gd_scene load_steps=9 format=3 uid="uid://c4vnct1ou07lg"]
 
-[ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="2_ls3a2"]
 [ext_resource type="Script" uid="uid://vnxexuacwqat" path="res://kinematic/enemy/father_time/time_orb/time_orb.gd" id="2_rdhi4"]
+[ext_resource type="Shader" uid="uid://ddd7asmladfmk" path="res://kinematic/enemy/father_time/time_orb/mana_resource_orb.gdshader" id="3_6jc44"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rdhi4"]
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ls3a2"]
+noise = SubResource("FastNoiseLite_rdhi4")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbm8e"]
+shader = ExtResource("3_6jc44")
+shader_parameter/current_mana = 0.75
+shader_parameter/max_mana = 1.0
+shader_parameter/rank_advance_mana = 1.0
+shader_parameter/inset = 0.8
+shader_parameter/groove_opacity = 0.0
+shader_parameter/groove_speed = 0.0
+shader_parameter/groove_width = 0.0
+shader_parameter/groove_distance = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_ls3a2")
+shader_parameter/border_color = Color(0.8, 0.8, 0.6666667, 0.2509804)
+shader_parameter/border_width = 0.1
+shader_parameter/border_speed = 0.03
+shader_parameter/glow_strength = 0.5
+shader_parameter/mana_color = Color(0.8, 0.8, 0.6666667, 0.5019608)
+
+[sub_resource type="Gradient" id="Gradient_rdhi4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ls3a2"]
+gradient = SubResource("Gradient_rdhi4")
+width = 48
+height = 48
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3u2b7"]
 radius = 16.0
@@ -11,18 +44,16 @@ top_level = true
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("2_rdhi4")
-slowing = 6.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.2509804)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_ls3a2")
+material = SubResource("ShaderMaterial_kbm8e")
+texture = SubResource("GradientTexture2D_ls3a2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3u2b7")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-16, -16, 32, 32)
+rect = Rect2(-24, -24, 48, 48)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

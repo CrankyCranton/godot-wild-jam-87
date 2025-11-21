@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
 radius = 8.0
-height = 24.0
+height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5mja"]
 resource_local_to_scene = true
@@ -178,6 +178,7 @@ bg_color = Color(1, 0, 0, 1)
 bg_color = Color(0, 1, 0, 1)
 
 [node name="FatherTime" instance=ExtResource("1_odpli")]
+collision_mask = 1
 script = ExtResource("2_m5mja")
 soft_collider_strength = 0.0
 max_warn_delay = 0.0
@@ -185,7 +186,7 @@ health_drop_chance = 0.0
 speed = 32.0
 bounce_force = 0.0
 bounce_duration = 0.1
-metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength"]
+metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength", &"max_warn_delay", &"health_drop_chance"]
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.25, 0.25)
@@ -243,27 +244,27 @@ visible = false
 [node name="WolfSpawnPoints" type="Node2D" parent="." index="13"]
 
 [node name="Marker2D" type="Marker2D" parent="WolfSpawnPoints" index="0"]
-position = Vector2(0, 24)
+position = Vector2(0, 8)
 
 [node name="Marker2D2" type="Marker2D" parent="WolfSpawnPoints" index="1"]
-position = Vector2(-24, -16)
+position = Vector2(-16, -8)
 
 [node name="Marker2D3" type="Marker2D" parent="WolfSpawnPoints" index="2"]
-position = Vector2(24, -16)
+position = Vector2(16, -8)
 
 [node name="BatSpawnPoints" type="Node2D" parent="." index="14"]
 
 [node name="Marker2D" type="Marker2D" parent="BatSpawnPoints" index="0"]
-position = Vector2(-24, 0)
+position = Vector2(-16, -8)
 
 [node name="Marker2D2" type="Marker2D" parent="BatSpawnPoints" index="1"]
-position = Vector2(24, 0)
+position = Vector2(16, -8)
 
 [node name="Marker2D3" type="Marker2D" parent="BatSpawnPoints" index="2"]
-position = Vector2(0, -24)
+position = Vector2(-16, 8)
 
 [node name="Marker2D4" type="Marker2D" parent="BatSpawnPoints" index="3"]
-position = Vector2(0, 24)
+position = Vector2(16, 8)
 
 [node name="OrbSpawnPoint" type="Marker2D" parent="." index="15"]
 
