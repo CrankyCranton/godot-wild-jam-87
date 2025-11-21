@@ -50,6 +50,7 @@ func die() -> void:
 			enemy.hit_box.health = 0.0
 			enemy._on_hit_box_died()
 	super()
+	died.emit()
 
 
 @warning_ignore("shadowed_variable_base_class")

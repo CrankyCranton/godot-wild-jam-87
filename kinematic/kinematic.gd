@@ -43,7 +43,7 @@ func bounce(force: Vector2, duration := bounce_duration) -> void:
 
 
 func die() -> void:
-	pass
+	died.emit()
 
 
 func _on_hit_box_died() -> void:
@@ -59,5 +59,4 @@ func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 
 
 func _on_death_sound_finished() -> void:
-	died.emit()
 	queue_free()

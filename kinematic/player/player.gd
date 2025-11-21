@@ -16,13 +16,13 @@ var running := false
 		&"parameters/playback")
 @onready var attack_sound: AudioStreamPlayer2D = %AttackSound
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var camera: Camera2D = $Camera2D
 @onready var near_sight: PointLight2D = $NearSight
 @onready var heal_sound: AudioStreamPlayer = $HealSound
 @onready var health_bar: TextureRect = %HealthBar
 @onready var death_sound: AudioStreamPlayer = $DeathSound
 @onready var hurt_sound: AudioStreamPlayer = $HurtSound
 @onready var wind: AudioStreamPlayer = $Wind
+@onready var camera: ScreenShakeCamera = $ScreenShakeCamera
 @onready var checkpoint := global_position
 
 
@@ -78,6 +78,10 @@ func die() -> void:
 	dead = false
 	hit_box.immune = false
 	frozen = false
+
+
+func shake_cam() -> void:
+	camera.shake(100, 0.03, Vector2(4.0, 4.0))
 
 
 func set_anim_time_scale(time_scale: float) -> void:

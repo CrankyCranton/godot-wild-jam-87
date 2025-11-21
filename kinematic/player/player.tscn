@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bb7ajiyeci45q"]
+[gd_scene load_steps=68 format=3 uid="uid://bb7ajiyeci45q"]
 
 [ext_resource type="Script" uid="uid://c61u11lrlmyap" path="res://kinematic/player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_rkbax"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b764lhdsn2r8l" path="res://assets/glow.png" id="6_5g3bl"]
 [ext_resource type="AudioStream" uid="uid://x6moqskscvty" path="res://assets/sfx/player/magic-charge-mana-2-186628.mp3" id="7_tdhos"]
 [ext_resource type="AudioStream" uid="uid://dh5hbssp2k3g" path="res://assets/sfx/ambience/wind-artificial-18750.mp3" id="10_7mg16"]
+[ext_resource type="PackedScene" uid="uid://bcypn85fpeujl" path="res://kinematic/player/screen_shake_camera/screen_shake_camera.tscn" id="11_eibin"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_686od"]
 radius = 4.0
@@ -399,11 +400,7 @@ offset = Vector2(0, -64)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_686od")
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-position_smoothing_enabled = true
-position_smoothing_speed = 4.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
+[node name="ScreenShakeCamera" parent="." index="2" instance=ExtResource("11_eibin")]
 
 [node name="HitBox" parent="." index="3" groups=["player_hit_boxes"]]
 collision_layer = 16

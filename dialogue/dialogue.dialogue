@@ -76,3 +76,14 @@ set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
 ~ cave_enterance_dialogue
 [i]It's too dark in there...[/i]
 => END
+
+~ father_time
+Father Time: So, traveler, you have come.
+Father Time: Do you seek to save this world from its fate? Let me give you some words of advice, O young one; Time defeats all.\
+Traveler: ...
+Father Time: But as it seems you will not back down from this hopeless battle, I shall have to oblige.\nEn garde!
+=> END
+
+~ villager
+
+=> END

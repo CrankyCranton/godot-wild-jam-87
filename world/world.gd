@@ -63,6 +63,7 @@ func _on_father_time_died() -> void:
 	father_time_gates.queue_free()
 	for creep_spawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.queue_free()
+	player.shake_cam()
 
 
 func _on_muffle_zone_body_entered(_body: Node2D) -> void:
