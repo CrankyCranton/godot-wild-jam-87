@@ -2,7 +2,7 @@ class_name FatherTime extends Enemy
 
 
 const HEALTH_DRAIN := 0.1
-const RAMPAGE_HP := 30
+const RAMPAGE_HP := 10
 
 var active := false
 
@@ -54,6 +54,7 @@ func start(player: Player) -> void:
 
 
 func reset() -> void:
+	player = null
 	active = false
 	boss_health_bar.hide()
 	spawn_timer.stop()

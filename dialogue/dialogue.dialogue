@@ -70,7 +70,7 @@ set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
 => END
 
 ~ max_health_pickup
-[b]Found elixer of strength![/b]\n[i]Max health increased by 3.[/i]
+[b]Found elixir of strength![/b]\n[i]Max health increased by 3.[/i]
 => END
 
 ~ cave_enterance_dialogue

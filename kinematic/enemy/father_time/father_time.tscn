@@ -208,7 +208,7 @@ disabled = true
 
 [node name="HitBox" parent="." index="4"]
 collision_layer = 160
-max_health = 50.0
+max_health = 30.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
@@ -236,7 +236,7 @@ parameters/Die/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
 
 [node name="SpawnTimer" type="Timer" parent="." index="10"]
-wait_time = 10.0
+wait_time = 5.0
 
 [node name="HealthBar" parent="." index="12"]
 visible = false

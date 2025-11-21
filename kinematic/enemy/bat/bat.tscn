@@ -16,7 +16,7 @@ height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsob8"]
 radius = 4.0
-height = 16.0
+height = 12.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_prvmr"]
 random_pitch = 1.25
