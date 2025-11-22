@@ -1,0 +1,31 @@
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bh5ih487hg5c1"]
+
+[ext_resource type="Texture2D" uid="uid://byc4kccxpxn4e" path="res://assets/mana seed seasonal forest sample (winter)/seasonal sample (winter).png" id="1_8cg43"]
+[ext_resource type="Texture2D" uid="uid://m6dik2sw1wvi" path="res://assets/TopDownFantasy-Forest/Decorations/tree_repalettalized.png" id="1_f046n"]
+[ext_resource type="PackedScene" uid="uid://d20hr8xt16ukd" path="res://world/tree/tree.tscn" id="3_latj2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_latj2"]
+texture = ExtResource("1_f046n")
+texture_region_size = Vector2i(64, 64)
+0:0/size_in_atlas = Vector2i(2, 3)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -32, -16, -32, 16, 0, 32, 32, 16, 32, -16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o1net"]
+texture = ExtResource("1_8cg43")
+11:0/size_in_atlas = Vector2i(5, 7)
+11:0/0 = 0
+11:0/0/y_sort_origin = 40
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -16, -32, 0, -16, 48, -12.992746, 49.503628, 0, 56, 16, 48, 32, 0)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pqltg"]
+scenes/1/scene = ExtResource("3_latj2")
+
+[resource]
+tile_shape = 3
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
+sources/1 = SubResource("TileSetAtlasSource_o1net")
+sources/0 = SubResource("TileSetAtlasSource_latj2")
+sources/2 = SubResource("TileSetScenesCollectionSource_pqltg")

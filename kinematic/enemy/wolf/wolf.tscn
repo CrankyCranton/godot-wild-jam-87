@@ -39,10 +39,10 @@ stream_0/stream = ExtResource("6_uinjt")
 [node name="Wolf" instance=ExtResource("1_pmxxn")]
 collision_mask = 1
 script = ExtResource("2_oi4bs")
-lunge_speed = 256.0
+lunge_speed = 320.0
 max_circle_angle = 90.0
 circle_start_distance = 256
-lunge_duration = 0.4
+lunge_duration = 0.3
 max_warn_delay = 0.0
 health_drop_chance = 0.5
 bounce_duration = 0.1

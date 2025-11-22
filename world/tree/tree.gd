@@ -1,10 +1,11 @@
-# DEPRECATED
-extends Node2D
+@tool extends StaticBody2D
+
+
+@export var distance_curve: Curve
+
+@onready var sprite: Sprite2D = $Sprite
 
 
 func _ready() -> void:
-	rotation_degrees = -90.0
-	#var tree_index := randi() % get_child_count()
-	for child: Node2D in get_children():
-		#child.visible = child.get_index() == tree_index
-		child.rotation_degrees += 90.0
+	sprite.flip_h = bool(randi() % 2)
+	sprite.position = Vector2(distance_curve.sample(randf()), 0.0).rotated(randf() * TAU)
