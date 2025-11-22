@@ -29,9 +29,9 @@ script = ExtResource("2_0s3q5")
 player_priority = 0.5
 max_warn_delay = 1.0
 health_drop_chance = 0.3
-speed = 192.0
+speed = 512.0
 traction = 2.5
-bounce_force = 512.0
+bounce_force = 1024.0
 reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance", &"max_warn_delay"]
 

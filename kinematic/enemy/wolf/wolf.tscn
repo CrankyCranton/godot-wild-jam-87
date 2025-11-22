@@ -25,11 +25,11 @@ streams_count = 1
 stream_0/stream = ExtResource("4_uinjt")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oi4bs"]
-radius = 3.0
-height = 10.0
+radius = 6.0
+height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1awob"]
-radius = 32.0
+radius = 64.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uinjt"]
 random_pitch = 1.2
@@ -39,12 +39,15 @@ stream_0/stream = ExtResource("6_uinjt")
 [node name="Wolf" instance=ExtResource("1_pmxxn")]
 collision_mask = 1
 script = ExtResource("2_oi4bs")
-lunge_speed = 128.0
+lunge_speed = 256.0
 max_circle_angle = 90.0
-circle_start_distance = 128
-lunge_duration = 0.5
+circle_start_distance = 256
+lunge_duration = 0.4
 max_warn_delay = 0.0
 health_drop_chance = 0.5
+bounce_duration = 0.1
+reset_velocity_after_bounce = true
+metadata/_edit_pinned_properties_ = [&"max_warn_delay", &"health_drop_chance"]
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1, 0, 0, 1)
@@ -73,7 +76,6 @@ monitorable = false
 
 [node name="LungeCollisionShape" type="CollisionShape2D" parent="LungeArea" index="0"]
 unique_name_in_owner = true
-visible = false
 shape = SubResource("CircleShape2D_1awob")
 
 [node name="WarningSound" parent="." index="7"]

@@ -7,20 +7,20 @@
 [ext_resource type="AudioStream" uid="uid://ba4eeoievn7ux" path="res://assets/sfx/father_time/male-exertion-grunts-02-352731.mp3" id="5_io65o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
-radius = 8.0
-height = 32.0
+radius = 16.0
+height = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5mja"]
 resource_local_to_scene = true
-radius = 16.0
+radius = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ahud"]
-radius = 12.0
-height = 48.0
+radius = 24.0
+height = 84.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lqnbh"]
-radius = 4.0
-height = 16.0
+radius = 8.0
+height = 32.0
 
 [sub_resource type="Animation" id="Animation_m6mhi"]
 length = 0.001
@@ -197,16 +197,16 @@ bg_color = Color(0, 1, 0, 1)
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 collision_mask = 1
 script = ExtResource("2_m5mja")
-soft_collider_strength = 0.0
+soft_collider_strength = 64.0
 max_warn_delay = 0.0
 health_drop_chance = 0.0
-speed = 32.0
+speed = 64.0
 bounce_force = 0.0
 bounce_duration = 0.1
 metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength", &"max_warn_delay", &"health_drop_chance"]
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_odpli")
@@ -220,7 +220,6 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2D" parent="Vision" index="0"]
-visible = true
 disabled = true
 
 [node name="HitBox" parent="." index="4"]

@@ -10,7 +10,7 @@ class_name World extends Node2D
 @onready var darkness: CanvasModulate = $Darkness
 @onready var player: Player = %Player
 @onready var gates_collision: CollisionShape2D = %GatesCollision
-@onready var father_time_gates: StaticBody2D = $FatherTimeGates
+@onready var father_time_gates: StaticBody2D = %FatherTimeGates
 @onready var close_zone: Area2D = %CloseZone
 @onready var close_shape: CollisionShape2D = close_zone.get_node(^"CollisionShape2D")
 @onready var lumberjack_region: Node2D = %LumberjackRegion
@@ -103,3 +103,16 @@ func _on_close_zone_interaction_finished() -> void:
 	gates_collision.set_deferred(&"disabled", false)
 	close_shape.set_deferred(&"disabled", true)
 	father_time.start(player)
+
+
+func _on_organist_interaction_started() -> void:
+	for node in organist.get_children():
+		if node is AudioStreamPlayer2D:
+			node.stream_paused = true
+
+
+func _on_organist_interaction_finished() -> void:
+	#await get_tree().create_timer(0.5).timeout
+	for node in organist.get_children():
+		if node is AudioStreamPlayer2D:
+			node.stream_paused = false

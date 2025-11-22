@@ -1,7 +1,7 @@
 class_name Enemy extends Kinematic
 
 
-@export var soft_collider_strength := 32.0
+@export var soft_collider_strength := 64.0
 @export var max_warn_delay := 1.0
 @export var health_drop_chance := 0.4
 

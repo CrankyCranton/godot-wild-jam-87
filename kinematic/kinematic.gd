@@ -3,10 +3,10 @@ class_name Kinematic extends CharacterBody2D
 
 signal died
 
-@export var speed := 64.0
+@export var speed := 128.0
 @export var traction := 14.0
 @export_group("bounce")
-@export var bounce_force := 256.0
+@export var bounce_force := 512.0
 @export var bounce_duration := 0.1
 @export var reset_velocity_after_bounce := false
 

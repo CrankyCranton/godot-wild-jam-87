@@ -5,8 +5,8 @@ News post: [i]Man Gone Missing![/i]\nAt 2 AM this morning, a man was reported mi
 ~ mother_and_child
 Child: Mama, where did papa go?
 Mother: Papa is... away, dear.
-Child: Is papa dead?
-Mother: No... Papa is... gone.
+#Child: Is papa dead?
+#Mother: No... Papa is... gone.
 set DialogueGlobals.spoke_to_mother_and_child = true
 => END
 
@@ -34,6 +34,7 @@ match DialogueGlobals.tree_state
 if DialogueGlobals.spoke_to_organist
 	Organist: Have you spoken to the hag of the Westwoods? No? A wise decision. That woman gives me the chills!
 else
+	[i]The organist looks up from squinting at his sheet music in the flickering candlelight.[/i]
 	Organist: Welcome! Have you come to listen to my beautiful performance?
 	=> organist_option
 => END
@@ -41,10 +42,11 @@ else
 ~ organist_option
 - Yes
 	Organist: I'm flattered! My playing is quite magnificent, if I do say so myself!
-	Traveler: ...
-	Organist: A way to turn back time? My dear sir, such things exist only in fairytales; This world is doomed.
-	Organist: But if you wish to pursue such lunacies, you should go see the hag of the Westwoods.
-	set DialogueGlobals.spoke_to_organist = true
+	if DialogueGlobals.spoke_to_villager
+		Traveler: ...
+		Organist: A way to turn back time? My dear sir, such things exist only in fairytales; This world is doomed.
+		Organist: But if you wish to pursue such lunacies, you should go see the hag of the Westwoods.
+		set DialogueGlobals.spoke_to_organist = true
 - No
 	Organist: I beg your pardon?
 	=> organist_option
@@ -66,7 +68,7 @@ set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
 => END
 
 ~ candle
-[i]You take the candle. Its flame burns brightly in darkness.[/i]
+[i]You take the candle. Its flame's feeble glow radiates a faint warmth in the darkness.[/i]
 => END
 
 ~ max_health_pickup
@@ -85,5 +87,15 @@ Father Time: But as it seems you will not back down from this hopeless battle, I
 => END
 
 ~ villager
+Villager: Hello traveler, fare thee well?
+Villager: I'm glad to hear. I can't say the same for myself.
+Villager: I never imagined that I would live to see the end times. People are slowly fading away, one by one. I can't help but think I'll be next. Eventually, this world as we know it will cease to exist.
+Traveler: ...
+Villager: A way to stop the end of the world? Well... if I had to say, the only way would be to reset time itself. But as to how such a feat could be done, is beyond me.
+Villager: Ah, there I go again, rambling idle fancies. But let me not take up more of your time. May we meet again, alive and well.
+set DialogueGlobals.spoke_to_villager = true
+=> END
 
+~ lantern
+[i]The lantern brightly illuminates the woods.[/i]
 => END

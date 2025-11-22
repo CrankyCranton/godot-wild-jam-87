@@ -7,23 +7,23 @@
 [ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="5_xyspp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xyspp"]
-radius = 4.0
-height = 12.0
+radius = 8.0
+height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xyspp"]
 resource_local_to_scene = true
-radius = 8.0
+radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jqkxg"]
-radius = 256.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vec2w"]
+radius = 1024.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vec2w"]
-radius = 4.0
-height = 16.0
+radius = 8.0
+height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y43nc"]
-radius = 2.0
-height = 8.0
+radius = 4.0
+height = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xyspp"]
 bg_color = Color(1, 0, 0, 1)
@@ -35,13 +35,13 @@ bg_color = Color(0, 1, 0, 1)
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("2_vqldv")
-soft_collider_strength = 32.0
+soft_collider_strength = 64.0
 max_warn_delay = 1.0
 health_drop_chance = 0.4
 bounce_duration = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_5w0hr")
 offset = Vector2(0, -64)
 
@@ -52,7 +52,6 @@ shape = SubResource("CapsuleShape2D_xyspp")
 [node name="SoftCollider" parent="." index="2" instance=ExtResource("4_jqkxg")]
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_xyspp")
 
 [node name="Vision" type="Area2D" parent="." index="3"]
@@ -61,8 +60,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
-visible = false
-shape = SubResource("CircleShape2D_jqkxg")
+shape = SubResource("CircleShape2D_vec2w")
 
 [node name="HitBox" parent="." index="4" groups=["enemy_hit_boxes"]]
 collision_layer = 32
@@ -87,10 +85,10 @@ wait_time = 10.0
 one_shot = true
 
 [node name="HealthBar" type="ProgressBar" parent="." index="8"]
-offset_left = -8.0
-offset_top = -20.0
-offset_right = 8.0
-offset_bottom = -18.0
+offset_left = -16.0
+offset_top = -37.0
+offset_right = 16.0
+offset_bottom = -35.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xyspp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vec2w")
 value = 75.0
