@@ -36,7 +36,7 @@ volume_db = 10.0
 shape = SubResource("CircleShape2D_q4dtm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1.353256, 1.353256, 1.353256, 1)
+modulate = Color(1.2742168, 1.2742168, 1.2742168, 1)
 texture = ExtResource("5_q4dtm")
 offset = Vector2(0, -44)
 region_enabled = true

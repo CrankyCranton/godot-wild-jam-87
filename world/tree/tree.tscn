@@ -18,8 +18,10 @@ distance_curve = SubResource("Curve_83eww")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 show_behind_parent = true
+position = Vector2(-13.211102, -4.1927834)
 texture = ExtResource("1_83eww")
 offset = Vector2(0, -44)
+flip_h = true
 region_enabled = true
 region_rect = Rect2(176, 0, 80, 112)
 

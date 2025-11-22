@@ -24,6 +24,9 @@ match DialogueGlobals.tree_state
 		Lumberjack: Hello, what would you like? A hand-crafted rocking chair? Or perhaps a deluxe night stand? Ask for anything - I specialize in custom orders!
 		- Ask for his axe [if DialogueGlobals.tree_state == DialogueGlobals.TreeStates.SAW_TREE]
 			Lumberjack: You want my AXE!? You can't be serious! This here rod is more precious than my very life!
+#			- Nevermind
+#				Lumberjack: Good! Now scram before I really get mad!
+#			- Persist
 			Lumberjack: ... Well, if you need it so badly, I suppose I could let you borrow it...\nBut don't forget to bring it back, hear me!?
 			set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.HAS_AXE
 		- Nevermind
@@ -98,4 +101,12 @@ set DialogueGlobals.spoke_to_villager = true
 
 ~ lantern
 [i]The lantern brightly illuminates the woods.[/i]
+=> END
+
+~ door
+Locked.
+=> END
+
+~ shed
+Lumberjack: keep your paws off my stuff!
 => END

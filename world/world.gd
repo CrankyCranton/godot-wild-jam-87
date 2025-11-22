@@ -20,6 +20,7 @@ class_name World extends Node2D
 @onready var god_rays: ColorRect = $GodRays
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var end_zone_shape: CollisionPolygon2D = %EndZoneShape
+@onready var map_edge: TileMapLayer = %MapEdge
 @onready var default_darkness := darkness.color
 
 
@@ -35,6 +36,7 @@ func _on_lumberjacks_tree_chopped() -> void:
 
 func _on_west_tree_chopped() -> void:
 	lumberjack_region.queue_free()
+	map_edge.enabled = true
 
 
 func _on_lumberjack_gave_axe() -> void:
