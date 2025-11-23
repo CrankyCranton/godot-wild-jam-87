@@ -4,18 +4,27 @@ class_name Wolf extends Enemy
 @export var lunge_speed := 128.0
 @export var max_circle_angle := 90.0
 @export var circle_start_distance := 128
-@export var lunge_duration := 1.0
 
 var circle_direcion := randi() % 2 * 2 - 1 # Either -1 or 1
 
 @onready var lunge_collision_shape: CollisionShape2D = %LungeCollisionShape
 @onready var lunge_sound: AudioStreamPlayer2D = $LungeSound
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get(
+		"parameters/playback")
 
 
 func _ready() -> void:
 	super()
 	warning_sound = $NewWarningSound
 	max_circle_angle = deg_to_rad(max_circle_angle)
+
+
+func physics_process(delta: float) -> void:
+	super(delta)
+	animation_tree.set(&"parameters/Lunge/blend_position", target_velocity.normalized().x)
+	animation_tree.set(&"parameters/Run/blend_position", target_velocity.normalized().x)
+	animation_tree.set(&"parameters/Die/blend_position", target_velocity.normalized().x)
 
 
 func get_move_vector(target: Vector2) -> Vector2:
@@ -29,6 +38,7 @@ func get_move_vector(target: Vector2) -> Vector2:
 
 func die() -> void:
 	super()
+	playback.travel(&"Die")
 	lunge_collision_shape.set_deferred(&"disabled", true)
 
 
@@ -36,7 +46,13 @@ func _on_lunge_area_body_entered(body: Node2D) -> void:
 	if not stunned:
 		lunge_sound.play()
 		lunge_collision_shape.set_deferred(&"disabled", true)
-		await bounce(global_position.direction_to(body.global_position) * lunge_speed,
-				lunge_duration)
-		if not dead:
-			lunge_collision_shape.set_deferred(&"disabled", false)
+		velocity = global_position.direction_to(body.global_position) * lunge_speed
+		stunned = true
+		playback.travel(&"Lunge")
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name.contains("lunge") and not dead:
+		lunge_collision_shape.set_deferred(&"disabled", false)
+		stunned = false
+		playback.travel(&"Run")

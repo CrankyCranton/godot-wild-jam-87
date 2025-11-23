@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="5_xyspp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xyspp"]
-radius = 8.0
+radius = 5.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xyspp"]
@@ -17,8 +17,8 @@ radius = 16.0
 radius = 1024.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vec2w"]
-radius = 8.0
-height = 32.0
+radius = 12.0
+height = 46.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y43nc"]
 radius = 4.0
