@@ -49,9 +49,6 @@ bounce_duration = 0.1
 reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"max_warn_delay", &"health_drop_chance"]
 
-[node name="Sprite2D" parent="." index="0"]
-modulate = Color(1, 0, 0, 1)
-
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_oi4bs")
 
@@ -69,6 +66,11 @@ volume_db = 20.0
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CapsuleShape2D_oi4bs")
 
+[node name="WarningSound" parent="." index="5"]
+stream = ExtResource("3_1awob")
+volume_db = 10.0
+attenuation = 0.1
+
 [node name="LungeArea" type="Area2D" parent="." index="6"]
 collision_layer = 0
 collision_mask = 2
@@ -78,16 +80,11 @@ monitorable = false
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_1awob")
 
-[node name="WarningSound" parent="." index="7"]
-stream = ExtResource("3_1awob")
-volume_db = 10.0
-attenuation = 0.1
-
-[node name="LungeSound" type="AudioStreamPlayer2D" parent="." index="10"]
+[node name="LungeSound" type="AudioStreamPlayer2D" parent="." index="9"]
 stream = SubResource("AudioStreamRandomizer_uinjt")
 volume_db = -5.0
 
-[node name="NewWarningSound" type="AudioStreamPlayer" parent="." index="11"]
+[node name="NewWarningSound" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource("3_1awob")
 
 [connection signal="body_entered" from="LungeArea" to="." method="_on_lunge_area_body_entered"]

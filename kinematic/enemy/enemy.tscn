@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5vj4teu3fvlo"]
+[gd_scene load_steps=12 format=3 uid="uid://b5vj4teu3fvlo"]
 
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_es5ms"]
-[ext_resource type="Texture2D" uid="uid://ccvd4ishfk72j" path="res://icon.svg" id="2_5w0hr"]
 [ext_resource type="Script" uid="uid://bgae1fgnkvo8c" path="res://kinematic/enemy/enemy.gd" id="2_vqldv"]
 [ext_resource type="PackedScene" uid="uid://cago0a3f2aa63" path="res://collision/soft_collider/soft_collider.tscn" id="4_jqkxg"]
 [ext_resource type="PackedScene" uid="uid://r2gbukoylhu0" path="res://collision/boxes/hurt_box/hurt_box.tscn" id="5_xyspp"]
@@ -40,21 +39,16 @@ max_warn_delay = 1.0
 health_drop_chance = 0.4
 bounce_duration = 0.2
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_5w0hr")
-offset = Vector2(0, -64)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_xyspp")
 
-[node name="SoftCollider" parent="." index="2" instance=ExtResource("4_jqkxg")]
+[node name="SoftCollider" parent="." index="1" instance=ExtResource("4_jqkxg")]
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_xyspp")
 
-[node name="Vision" type="Area2D" parent="." index="3"]
+[node name="Vision" type="Area2D" parent="." index="2"]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
@@ -62,14 +56,14 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision" index="0"]
 shape = SubResource("CircleShape2D_vec2w")
 
-[node name="HitBox" parent="." index="4" groups=["enemy_hit_boxes"]]
+[node name="HitBox" parent="." index="3" groups=["enemy_hit_boxes"]]
 collision_layer = 32
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_vec2w")
 
-[node name="HurtBox" parent="." index="5" instance=ExtResource("5_xyspp")]
+[node name="HurtBox" parent="." index="4" instance=ExtResource("5_xyspp")]
 collision_mask = 16
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -77,13 +71,13 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_y43nc")
 disabled = true
 
-[node name="WarningSound" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="WarningSound" type="AudioStreamPlayer2D" parent="." index="5"]
 
-[node name="WarningSoundCooldown" type="Timer" parent="." index="7"]
+[node name="WarningSoundCooldown" type="Timer" parent="." index="6"]
 wait_time = 10.0
 one_shot = true
 
-[node name="HealthBar" type="ProgressBar" parent="." index="8"]
+[node name="HealthBar" type="ProgressBar" parent="." index="7"]
 offset_left = -16.0
 offset_top = -37.0
 offset_right = 16.0

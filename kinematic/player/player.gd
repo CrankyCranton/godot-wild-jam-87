@@ -23,13 +23,16 @@ var running := false
 @onready var hurt_sound: AudioStreamPlayer = $HurtSound
 @onready var wind: AudioStreamPlayer = $Wind
 @onready var camera: ScreenShakeCamera = $ScreenShakeCamera
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var checkpoint := global_position
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"attack") and not frozen:
 		playback.travel(&"Attack")
+		velocity = Vector2()
 		attacking = true
+		stunned = true
 
 
 func _process(delta: float) -> void:
@@ -107,6 +110,10 @@ func scan_anim_node(anim_node: AnimationRootNode) -> Array[AnimationNodeAnimatio
 	return result
 
 
+func random_attack(direction: String) -> void:
+	sprite.play(&"attack%s_%s" % [randi() % 2 + 1, direction])
+
+
 func _on_hit_box_hurt(damage: int, source: HurtBox) -> void:
 	if hit_box.health > 0:
 		hurt_sound.play()
@@ -134,6 +141,7 @@ func increase_max_health(bonus: int) -> void:
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack"):
 		attacking = false
+		stunned = false
 
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
