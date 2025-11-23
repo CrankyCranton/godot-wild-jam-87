@@ -799,7 +799,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n8ta5")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle_down",
 "speed": 12.0
 }, {
@@ -828,7 +828,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rcg30")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle_left",
 "speed": 12.0
 }, {
@@ -857,7 +857,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6vr0p")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle_right",
 "speed": 12.0
 }, {
@@ -886,7 +886,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oopsc")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle_up",
 "speed": 12.0
 }, {
@@ -915,7 +915,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4c1tg")
 }],
-"loop": false,
+"loop": true,
 "name": &"run_down",
 "speed": 12.0
 }, {
@@ -944,7 +944,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5dp6i")
 }],
-"loop": false,
+"loop": true,
 "name": &"run_left",
 "speed": 12.0
 }, {
@@ -973,7 +973,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57b5k")
 }],
-"loop": false,
+"loop": true,
 "name": &"run_right",
 "speed": 12.0
 }, {
@@ -1002,7 +1002,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6mf7i")
 }],
-"loop": false,
+"loop": true,
 "name": &"run_up",
 "speed": 12.0
 }]
@@ -1805,7 +1805,7 @@ metadata/_edit_pinned_properties_ = [&"speed"]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_03pd6")
-animation = &"attack1_up"
+animation = &"idle_down"
 offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
