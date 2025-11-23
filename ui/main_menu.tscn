@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8jc51808he10"]
+[gd_scene load_steps=5 format=3 uid="uid://c8jc51808he10"]
 
 [ext_resource type="Script" uid="uid://i0yd5847x4rp" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="FontFile" uid="uid://b04nea38ijl6i" path="res://assets/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Regular.ttf" id="2_0dkrt"]
+[ext_resource type="Texture2D" uid="uid://dj2rtwtwi2m6" path="res://assets/pixel_poster_2.png" id="2_wk0pr"]
+[ext_resource type="AudioStream" uid="uid://kyg4y4ydt3jc" path="res://assets/music/Game Main Menu Music ( 5th Album )  copyright free music [SyJiBEXU1jo].ogg" id="4_rmr83"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,21 +14,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t7e0r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -41.83783
+offset_bottom = 73.83783
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.6, 0.6, 0.6, 1)
+texture = ExtResource("2_wk0pr")
+expand_mode = 5
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 179.0
-offset_bottom = 47.0
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -306.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = 84.0
+grow_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5019608)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
@@ -37,13 +47,16 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -50.5
-offset_right = 179.0
-offset_bottom = 50.5
+offset_left = -179.0
+offset_top = 1.0
+offset_right = -24.0
+offset_bottom = 111.0
+grow_horizontal = 0
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer2"]
@@ -59,6 +72,10 @@ text = "Credits"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rmr83")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/CreditsButton" to="." method="_on_credits_button_pressed"]

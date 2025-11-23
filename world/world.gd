@@ -54,10 +54,14 @@ func _on_candle_pickup_interaction_finished() -> void:
 
 
 func _on_father_time_died() -> void:
+	$BossFightMusic.stop()
 	god_rays.show()
 	end_zone_shape.set_deferred(&"disabled", false)
 	father_time_gates.queue_free()
 	hag.queue_free()
+	var villager: Villager = %Villager
+	if villager:
+		villager.queue_free()
 	if mother_and_child:
 		mother_and_child.queue_free()
 	for creep_spawner in get_tree().get_nodes_in_group(&"creep_spawners"):
@@ -105,6 +109,7 @@ func _on_close_zone_interaction_finished() -> void:
 	close_shape.set_deferred(&"disabled", true)
 	blockade_sprite.show()
 	father_time.start(player)
+	$BossFightMusic.play()
 
 
 func _on_organist_interaction_started() -> void:
@@ -125,6 +130,7 @@ func _on_respawn_button_pressed() -> void:
 	close_shape.set_deferred(&"disabled", false)
 	blockade_sprite.hide()
 	father_time.reset()
+	$BossFightMusic.stop()
 	$DeathScreen/Control/RespawnButton.release_focus()
 	$DeathScreen/Control.modulate = Color.TRANSPARENT
 	player.respawn()

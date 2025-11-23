@@ -9,21 +9,49 @@
 [ext_resource type="Texture2D" uid="uid://fko7h474jw0f" path="res://assets/fatherb.png" id="7_muwjy"]
 [ext_resource type="Texture2D" uid="uid://d0uolkt1n7l1k" path="res://assets/father_side.png" id="8_8l1fh"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tm6g"]
+atlas = ExtResource("6_k0w2c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muwjy"]
+atlas = ExtResource("6_k0w2c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8l1fh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tm6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muwjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_muwjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8l1fh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
-radius = 16.0
-height = 64.0
+radius = 8.0
+height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5mja"]
 resource_local_to_scene = true
 radius = 32.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ahud"]
-radius = 24.0
-height = 84.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_muwjy"]
+radius = 16.0
+height = 48.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lqnbh"]
-radius = 8.0
-height = 32.0
+radius = 4.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_m6mhi"]
 length = 0.001
@@ -305,34 +333,6 @@ bg_color = Color(1, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01tis"]
 bg_color = Color(0, 1, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tm6g"]
-atlas = ExtResource("6_k0w2c")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_muwjy"]
-atlas = ExtResource("6_k0w2c")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8l1fh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5tm6g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_muwjy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_muwjy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_8l1fh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 collision_mask = 1
 script = ExtResource("2_m5mja")
@@ -344,13 +344,19 @@ bounce_force = 0.0
 bounce_duration = 0.1
 metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength", &"max_warn_delay", &"health_drop_chance"]
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8l1fh")
+frame = 1
+offset = Vector2(0, -16)
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_odpli")
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_m5mja")
 
-[node name="Vision" parent="." index="2"]
+[node name="Vision" parent="." index="3"]
 visible = false
 collision_mask = 0
 monitoring = false
@@ -358,13 +364,15 @@ monitoring = false
 [node name="CollisionShape2D" parent="Vision" index="0"]
 disabled = true
 
-[node name="HitBox" parent="." index="3"]
+[node name="HitBox" parent="." index="4"]
 collision_layer = 160
 max_health = 40.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-shape = SubResource("CapsuleShape2D_0ahud")
+position = Vector2(0, -16)
+rotation = 0.0
+shape = SubResource("CapsuleShape2D_muwjy")
 
 [node name="HitSound" parent="HitBox" index="1"]
 stream = ExtResource("3_01tis")
@@ -378,16 +386,18 @@ bus = &"Echoes"
 area_mask = 0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -15)
+rotation = 0.0
 shape = SubResource("CapsuleShape2D_lqnbh")
 
-[node name="Enemies" type="Node" parent="." index="7"]
+[node name="Enemies" type="Node" parent="." index="8"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 &"": SubResource("AnimationLibrary_jjn41")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
 active = false
 deterministic = false
 tree_root = SubResource("AnimationNodeStateMachine_m5mja")
@@ -395,40 +405,40 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Die/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
 
-[node name="SpawnTimer" type="Timer" parent="." index="10"]
+[node name="SpawnTimer" type="Timer" parent="." index="11"]
 wait_time = 7.5
 
-[node name="HealthBar" parent="." index="11"]
+[node name="HealthBar" parent="." index="12"]
 visible = false
 
-[node name="WolfSpawnPoints" type="Node2D" parent="." index="12"]
+[node name="WolfSpawnPoints" type="Node2D" parent="." index="13"]
 
 [node name="Marker2D" type="Marker2D" parent="WolfSpawnPoints" index="0"]
-position = Vector2(0, 8)
+position = Vector2(0, 7)
 
 [node name="Marker2D2" type="Marker2D" parent="WolfSpawnPoints" index="1"]
-position = Vector2(-16, -8)
+position = Vector2(-13, -5)
 
 [node name="Marker2D3" type="Marker2D" parent="WolfSpawnPoints" index="2"]
-position = Vector2(16, -8)
+position = Vector2(13, -5)
 
-[node name="BatSpawnPoints" type="Node2D" parent="." index="13"]
+[node name="BatSpawnPoints" type="Node2D" parent="." index="14"]
 
 [node name="Marker2D" type="Marker2D" parent="BatSpawnPoints" index="0"]
-position = Vector2(-16, -8)
+position = Vector2(-13, -5)
 
 [node name="Marker2D2" type="Marker2D" parent="BatSpawnPoints" index="1"]
-position = Vector2(16, -8)
+position = Vector2(13, -5)
 
 [node name="Marker2D3" type="Marker2D" parent="BatSpawnPoints" index="2"]
-position = Vector2(-16, 8)
+position = Vector2(-13, 5)
 
 [node name="Marker2D4" type="Marker2D" parent="BatSpawnPoints" index="3"]
-position = Vector2(16, 8)
+position = Vector2(13, 5)
 
-[node name="OrbSpawnPoint" type="Marker2D" parent="." index="14"]
+[node name="OrbSpawnPoint" type="Marker2D" parent="." index="15"]
 
-[node name="HUD" type="CanvasLayer" parent="." index="15"]
+[node name="HUD" type="CanvasLayer" parent="." index="16"]
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD" index="0"]
 anchors_preset = 12
@@ -454,17 +464,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_lqnbh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01tis")
 show_percentage = false
 
-[node name="SpawnWarn" type="AudioStreamPlayer2D" parent="." index="16"]
+[node name="SpawnWarn" type="AudioStreamPlayer2D" parent="." index="17"]
 stream = ExtResource("5_io65o")
 pitch_scale = 0.75
 bus = &"Echoes"
 area_mask = 0
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." index="17"]
-sprite_frames = SubResource("SpriteFrames_8l1fh")
-frame = 1
-offset = Vector2(0, -16)
-flip_h = true
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kyg4y4ydt3jc"
+path="res://.godot/imported/Game Main Menu Music ( 5th Album )  copyright free music [SyJiBEXU1jo].ogg-80b0bd7c69cf9c3e81e907c19d71b40a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Game Main Menu Music ( 5th Album )  copyright free music [SyJiBEXU1jo].ogg"
+dest_files=["res://.godot/imported/Game Main Menu Music ( 5th Album )  copyright free music [SyJiBEXU1jo].ogg-80b0bd7c69cf9c3e81e907c19d71b40a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

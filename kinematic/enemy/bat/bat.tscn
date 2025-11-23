@@ -68,8 +68,8 @@ collision_mask = 1
 script = ExtResource("2_0s3q5")
 player_priority = 0.5
 max_warn_delay = 1.0
-health_drop_chance = 0.3
-speed = 384.0
+health_drop_chance = 0.4
+speed = 256.0
 traction = 2.5
 bounce_force = 1024.0
 reset_velocity_after_bounce = true
@@ -79,7 +79,7 @@ metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance
 sprite_frames = SubResource("SpriteFrames_m3vcm")
 animation = &"fly"
 autoplay = "fly"
-frame_progress = 0.5646049
+frame_progress = 0.9093314
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_nsob8")
