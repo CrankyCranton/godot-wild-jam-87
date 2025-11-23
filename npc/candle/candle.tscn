@@ -1,12 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://ojtskk3b26w4"]
+[gd_scene load_steps=8 format=3 uid="uid://ojtskk3b26w4"]
 
 [ext_resource type="PackedScene" uid="uid://b86sra2vtitjd" path="res://npc/npc.tscn" id="1_o5cxc"]
 [ext_resource type="Script" uid="uid://d4jhrx4g5si3t" path="res://npc/candle/candle.gd" id="2_ewqvf"]
 [ext_resource type="PackedScene" uid="uid://ma6yj16gb3n0" path="res://npc/candle/candle_light.tscn" id="3_uvopu"]
+[ext_resource type="Texture2D" uid="uid://c0qmgrgm77wss" path="res://assets/Candle.png" id="4_1j0a0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0a0a"]
+atlas = ExtResource("4_1j0a0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rwdl"]
+atlas = ExtResource("4_1j0a0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62x6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0a0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rwdl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="CandlePickup" instance=ExtResource("1_o5cxc")]
 script = ExtResource("2_ewqvf")
 
 [node name="CandleLight" parent="." index="2" instance=ExtResource("3_uvopu")]
+position = Vector2(0, -26)
+color = Color(1, 0.66486824, 0.24313724, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_62x6f")
+autoplay = "default"
+frame_progress = 0.72280824
 
 [connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]

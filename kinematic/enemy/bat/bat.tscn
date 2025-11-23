@@ -1,10 +1,47 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnel1aqrtpr2f"]
+[gd_scene load_steps=20 format=3 uid="uid://bnel1aqrtpr2f"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_gk2ae"]
 [ext_resource type="Script" uid="uid://cvuxvpvd8yy61" path="res://kinematic/enemy/bat/bat.gd" id="2_0s3q5"]
 [ext_resource type="AudioStream" uid="uid://dj8r0hrwjc8ky" path="res://assets/sfx/bat/bat-chirping-type-2-355965.mp3" id="2_prvmr"]
 [ext_resource type="AudioStream" uid="uid://cugl6gp4xoh80" path="res://assets/sfx/bat/punch-and-hits-310521_edited.wav" id="3_0s3q5"]
+[ext_resource type="Texture2D" uid="uid://wlv8kb23876h" path="res://assets/Enemy01/fly01.png" id="3_mcc1k"]
 [ext_resource type="AudioStream" uid="uid://chj1r5o61s1ap" path="res://assets/sfx/bat/poof-80161.wav" id="3_prvmr"]
+[ext_resource type="Texture2D" uid="uid://d0bonxp888o0w" path="res://assets/Enemy01/fly02.png" id="4_tw0g1"]
+[ext_resource type="Texture2D" uid="uid://d4f12cu7rxoip" path="res://assets/Enemy01/fly03.png" id="5_ql8qj"]
+[ext_resource type="Texture2D" uid="uid://citevpo84xrm" path="res://assets/Enemy01/fly04.png" id="6_ss37y"]
+[ext_resource type="Texture2D" uid="uid://ryafmb2vnqdm" path="res://assets/Enemy01/fly05.png" id="7_mm37n"]
+[ext_resource type="Texture2D" uid="uid://cgb2uu5edt7ii" path="res://assets/Enemy01/fly06.png" id="8_mjepy"]
+[ext_resource type="Texture2D" uid="uid://dep6b2ei527dg" path="res://assets/Enemy01/fly07.png" id="9_jcnuq"]
+[ext_resource type="AudioStream" uid="uid://csgsr26htu51i" path="res://assets/sfx/bat/light-wing-flap-6143_edited.wav" id="13_tw0g1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m3vcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mcc1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tw0g1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ql8qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ss37y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mm37n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mjepy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jcnuq")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 16.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nsob8"]
 resource_local_to_scene = true
@@ -38,6 +75,12 @@ bounce_force = 1024.0
 reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance", &"max_warn_delay"]
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_m3vcm")
+animation = &"fly"
+autoplay = "fly"
+frame_progress = 0.5646049
+
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_nsob8")
 
@@ -66,6 +109,10 @@ stream = SubResource("AudioStreamRandomizer_prvmr")
 
 [node name="DirectionChangeTimer" type="Timer" parent="." index="9"]
 wait_time = 0.35
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="10"]
+stream = ExtResource("13_tw0g1")
+volume_db = 15.0
 
 [connection signal="timeout" from="DirectionChangeTimer" to="." method="_on_direction_change_timer_timeout"]
 

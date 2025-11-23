@@ -1,4 +1,4 @@
-[gd_scene load_steps=213 format=3 uid="uid://bb7ajiyeci45q"]
+[gd_scene load_steps=214 format=3 uid="uid://bb7ajiyeci45q"]
 
 [ext_resource type="Script" uid="uid://c61u11lrlmyap" path="res://kinematic/player/player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://dwrg8mixvr10l" path="res://kinematic/kinematic.tscn" id="1_rkbax"]
@@ -26,7 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://cumaspqf0oe4p" path="res://assets/FREE_Adventurer 2D Pixel Art/Sprites/RUN/run_up.png" id="10_03pd6"]
 [ext_resource type="AudioStream" uid="uid://dh5hbssp2k3g" path="res://assets/sfx/ambience/wind-artificial-18750.mp3" id="10_7mg16"]
 [ext_resource type="PackedScene" uid="uid://bcypn85fpeujl" path="res://kinematic/player/screen_shake_camera/screen_shake_camera.tscn" id="11_eibin"]
-[ext_resource type="Texture2D" uid="uid://gltk0njcd53y" path="res://assets/hearts.png" id="23_n8ta5"]
+[ext_resource type="Texture2D" uid="uid://c7ovi7komc4bv" path="res://assets/heart.png" id="23_6s06d"]
+[ext_resource type="Texture2D" uid="uid://c73cs4afx6yb3" path="res://assets/heart_bg.png" id="24_byq8l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsj4a"]
 atlas = ExtResource("3_4nm3t")
@@ -1799,7 +1800,7 @@ stream_0/stream = ExtResource("4_np7mq")
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oul6g")
-run_speed = 2.0
+run_speed = 3.0
 speed = 128.0
 metadata/_edit_pinned_properties_ = [&"speed"]
 
@@ -1859,13 +1860,23 @@ energy = 0.2
 texture = ExtResource("6_5g3bl")
 
 [node name="HUD" type="CanvasLayer" parent="." index="8"]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="HealthBar" type="TextureRect" parent="HUD" index="0"]
+[node name="MaxHealthBar" type="TextureRect" parent="HUD" index="0"]
 unique_name_in_owner = true
-visible = false
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("23_n8ta5")
+offset_right = 19.0
+offset_bottom = 19.0
+texture = ExtResource("24_byq8l")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HealthBar" type="TextureRect" parent="HUD" index="1"]
+unique_name_in_owner = true
+offset_right = 19.0
+offset_bottom = 19.0
+texture = ExtResource("23_6s06d")
+expand_mode = 1
 stretch_mode = 1
 
 [node name="HealSound" type="AudioStreamPlayer" parent="." index="9"]

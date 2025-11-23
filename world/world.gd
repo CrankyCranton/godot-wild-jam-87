@@ -77,7 +77,7 @@ func _on_muffle_zone_body_exited(_body: Node2D) -> void:
 
 func _on_cave_zone_body_entered(body: Player) -> void:
 	body.set_near_sight_active(true)
-	darkness.color = Color(0.15, 0.075, 0.0, 1.0) if body.has_candle else Color.BLACK
+	darkness.color = Color(0.337, 0.226, 0.115, 1.0) if body.has_candle else Color.BLACK
 
 
 func _on_cave_zone_body_exited(body: Player) -> void:
@@ -86,10 +86,7 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 
 
 func _on_player_died() -> void:
-	gates_collision.set_deferred(&"disabled", true)
-	close_shape.set_deferred(&"disabled", false)
-	blockade_sprite.hide()
-	father_time.reset()
+	$DeathScreen/AnimationPlayer.play(&"show_death_screen")
 
 
 func _on_end_zone_body_entered(body: Player) -> void:
@@ -121,3 +118,13 @@ func _on_organist_interaction_finished() -> void:
 	for node in organist.get_children():
 		if node is AudioStreamPlayer2D:
 			node.stream_paused = false
+
+
+func _on_respawn_button_pressed() -> void:
+	gates_collision.set_deferred(&"disabled", true)
+	close_shape.set_deferred(&"disabled", false)
+	blockade_sprite.hide()
+	father_time.reset()
+	$DeathScreen/Control/RespawnButton.release_focus()
+	$DeathScreen/Control.modulate = Color.TRANSPARENT
+	player.respawn()

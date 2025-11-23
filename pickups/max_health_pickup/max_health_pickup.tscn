@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh8pvsqm2ccfx"]
+[gd_scene load_steps=5 format=3 uid="uid://bh8pvsqm2ccfx"]
 
 [ext_resource type="PackedScene" uid="uid://b86sra2vtitjd" path="res://npc/npc.tscn" id="1_ofiqp"]
 [ext_resource type="Script" uid="uid://2imq1y0gyo04" path="res://pickups/max_health_pickup/max_health_pickup.gd" id="2_wiwna"]
+[ext_resource type="Texture2D" uid="uid://dom22ppkk3h7c" path="res://assets/Pixel Potion Pack - FINISHED/ALL Potions - First Frame/Round Potion - GREEN - 0000.png" id="3_0vkoq"]
+[ext_resource type="AudioStream" uid="uid://x6moqskscvty" path="res://assets/sfx/player/magic-charge-mana-2-186628.mp3" id="3_akhth"]
 
 [node name="MaxHealthPickup" instance=ExtResource("1_ofiqp")]
 script = ExtResource("2_wiwna")
@@ -9,6 +11,13 @@ bonus = 3
 dialogue = &"max_health_pickup"
 force_interaction = true
 input_enabled = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_akhth")
+
+[node name="RoundPotionGreen0000" type="Sprite2D" parent="." index="3"]
+position = Vector2(0, -10)
+texture = ExtResource("3_0vkoq")
 
 [connection signal="interaction_finished" from="." to="." method="_on_interaction_finished"]
 [connection signal="interaction_started" from="." to="." method="_on_interaction_started"]

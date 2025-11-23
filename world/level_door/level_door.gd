@@ -18,6 +18,7 @@ func enter(player: Player) -> void:
 
 
 func _on_body_entered(body: Player) -> void:
+	body.playback.travel(&"Idle")
 	body.hit_box.set_immune()
 	body.frozen = true
 	body.velocity = Vector2()

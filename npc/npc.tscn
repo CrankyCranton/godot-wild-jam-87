@@ -18,6 +18,7 @@ offset_left = -47.0
 offset_top = -43.0
 offset_right = 47.0
 offset_bottom = -20.0
+theme_override_constants/outline_size = 3
 text = "E to interact"
 horizontal_alignment = 1
 

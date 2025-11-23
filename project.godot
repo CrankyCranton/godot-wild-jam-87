@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Godot Wild Jam #87"
+config/name="Timebound"
 run/main_scene="uid://c8jc51808he10"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -33,6 +33,10 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[gui]
+
+theme/custom_font="uid://d4n07iqri06d7"
 
 [input]
 

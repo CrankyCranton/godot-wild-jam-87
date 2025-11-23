@@ -8,11 +8,12 @@ signal gave_axe
 
 
 func _on_interaction_finished() -> void:
-	if DialogueGlobals.tree_state == DialogueGlobals.TreeStates.HAS_AXE and not player.has_axe:
-		player.give_axe()
-		gave_axe.emit()
-	else:
-		sprite.play(&"chop")
+	if not player.has_axe:
+		if DialogueGlobals.tree_state == DialogueGlobals.TreeStates.HAS_AXE:
+			player.give_axe()
+			gave_axe.emit()
+		else:
+			sprite.play(&"chop")
 
 
 func _on_interaction_started() -> void:

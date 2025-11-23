@@ -62,22 +62,28 @@ func physics_process(_delta: float) -> void:
 
 
 func die() -> void:
+	playback.travel(&"Idle")
+
+
+	$CollisionShape2D.set_deferred(&"disabled", true)
+	velocity = Vector2()
+	death_sound.play()
+	died.emit()
+
+
+func respawn() -> void:
 	for enemy in get_tree().get_nodes_in_group(&"enemies"):
 		if not enemy is FatherTime:
 			enemy.queue_free()
 	for creep_spawner: CreepSpawner in get_tree().get_nodes_in_group(&"creep_spawners"):
 		creep_spawner.reset()
-
-	velocity = Vector2()
 	hit_box.health = hit_box.max_health
-	death_sound.play()
-	died.emit()
-
 	set_camera_smoothed(false)
 	global_position = checkpoint
 	await RenderingServer.frame_post_draw
 	set_camera_smoothed(true)
 
+	$CollisionShape2D.set_deferred(&"disabled", false)
 	dead = false
 	hit_box.immune = false
 	frozen = false
@@ -166,5 +172,7 @@ func _on_hit_box_health_changed(health: float) -> void:
 	health_bar.size.x = health_bar.texture.get_width() * health
 
 
-func _on_hit_box_max_health_changed(_max_health: int) -> void:
-	pass # Replace with function body.
+func _on_hit_box_max_health_changed(max_health: int) -> void:
+	if not is_node_ready():
+		await ready
+	%MaxHealthBar.size.x = %MaxHealthBar.texture.get_width() * max_health

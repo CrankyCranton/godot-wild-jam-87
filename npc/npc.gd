@@ -26,6 +26,7 @@ func _input(event: InputEvent) -> void:
 
 
 func interact() -> void:
+	player.playback.travel(&"Idle")
 	player.hit_box.set_immune()
 	interacting = true
 	if checkpoint:

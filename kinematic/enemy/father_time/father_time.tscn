@@ -1,10 +1,13 @@
-[gd_scene load_steps=44 format=3 uid="uid://so1klwc5erkl"]
+[gd_scene load_steps=50 format=3 uid="uid://so1klwc5erkl"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_odpli"]
 [ext_resource type="Script" uid="uid://cboym4226vrwo" path="res://kinematic/enemy/father_time/father_time.gd" id="2_m5mja"]
 [ext_resource type="AudioStream" uid="uid://du13c6gd7yglc" path="res://assets/sfx/wolf/punch-03-352040_edited.wav" id="3_01tis"]
 [ext_resource type="AudioStream" uid="uid://cdv6c4edt4kh8" path="res://assets/sfx/father_time/scream-85294.mp3" id="4_01tis"]
 [ext_resource type="AudioStream" uid="uid://ba4eeoievn7ux" path="res://assets/sfx/father_time/male-exertion-grunts-02-352731.mp3" id="5_io65o"]
+[ext_resource type="Texture2D" uid="uid://c0pccx0tj1rw1" path="res://assets/Father_Time_front__attack.png" id="6_k0w2c"]
+[ext_resource type="Texture2D" uid="uid://fko7h474jw0f" path="res://assets/fatherb.png" id="7_muwjy"]
+[ext_resource type="Texture2D" uid="uid://d0uolkt1n7l1k" path="res://assets/father_side.png" id="8_8l1fh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpli"]
 radius = 16.0
@@ -24,6 +27,30 @@ height = 32.0
 
 [sub_resource type="Animation" id="Animation_m6mhi"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_r584t"]
 resource_name = "die_down"
@@ -68,6 +95,18 @@ tracks/1/keys = {
 "method": &"play"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_m5mja"]
 resource_name = "start"
@@ -75,18 +114,90 @@ resource_name = "start"
 [sub_resource type="Animation" id="Animation_omase"]
 resource_name = "walk_down"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_0ahud"]
 resource_name = "walk_left"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qfala"]
 resource_name = "walk_right"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ce8sj"]
 resource_name = "walk_up"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jjn41"]
 _data = {
@@ -194,6 +305,34 @@ bg_color = Color(1, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01tis"]
 bg_color = Color(0, 1, 0, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tm6g"]
+atlas = ExtResource("6_k0w2c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muwjy"]
+atlas = ExtResource("6_k0w2c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8l1fh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tm6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muwjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_muwjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8l1fh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 collision_mask = 1
 script = ExtResource("2_m5mja")
@@ -205,16 +344,13 @@ bounce_force = 0.0
 bounce_duration = 0.1
 metadata/_edit_pinned_properties_ = [&"bounce_duration", &"bounce_force", &"speed", &"soft_collider_strength", &"max_warn_delay", &"health_drop_chance"]
 
-[node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.5, 0.5)
-
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CapsuleShape2D_odpli")
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_m5mja")
 
-[node name="Vision" parent="." index="3"]
+[node name="Vision" parent="." index="2"]
 visible = false
 collision_mask = 0
 monitoring = false
@@ -222,7 +358,7 @@ monitoring = false
 [node name="CollisionShape2D" parent="Vision" index="0"]
 disabled = true
 
-[node name="HitBox" parent="." index="4"]
+[node name="HitBox" parent="." index="3"]
 collision_layer = 160
 max_health = 40.0
 metadata/_edit_pinned_properties_ = [&"max_health"]
@@ -262,10 +398,10 @@ parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
 [node name="SpawnTimer" type="Timer" parent="." index="10"]
 wait_time = 7.5
 
-[node name="HealthBar" parent="." index="12"]
+[node name="HealthBar" parent="." index="11"]
 visible = false
 
-[node name="WolfSpawnPoints" type="Node2D" parent="." index="13"]
+[node name="WolfSpawnPoints" type="Node2D" parent="." index="12"]
 
 [node name="Marker2D" type="Marker2D" parent="WolfSpawnPoints" index="0"]
 position = Vector2(0, 8)
@@ -276,7 +412,7 @@ position = Vector2(-16, -8)
 [node name="Marker2D3" type="Marker2D" parent="WolfSpawnPoints" index="2"]
 position = Vector2(16, -8)
 
-[node name="BatSpawnPoints" type="Node2D" parent="." index="14"]
+[node name="BatSpawnPoints" type="Node2D" parent="." index="13"]
 
 [node name="Marker2D" type="Marker2D" parent="BatSpawnPoints" index="0"]
 position = Vector2(-16, -8)
@@ -290,9 +426,9 @@ position = Vector2(-16, 8)
 [node name="Marker2D4" type="Marker2D" parent="BatSpawnPoints" index="3"]
 position = Vector2(16, 8)
 
-[node name="OrbSpawnPoint" type="Marker2D" parent="." index="15"]
+[node name="OrbSpawnPoint" type="Marker2D" parent="." index="14"]
 
-[node name="HUD" type="CanvasLayer" parent="." index="16"]
+[node name="HUD" type="CanvasLayer" parent="." index="15"]
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD" index="0"]
 anchors_preset = 12
@@ -318,11 +454,17 @@ theme_override_styles/background = SubResource("StyleBoxFlat_lqnbh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01tis")
 show_percentage = false
 
-[node name="SpawnWarn" type="AudioStreamPlayer2D" parent="." index="17"]
+[node name="SpawnWarn" type="AudioStreamPlayer2D" parent="." index="16"]
 stream = ExtResource("5_io65o")
 pitch_scale = 0.75
 bus = &"Echoes"
 area_mask = 0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." index="17"]
+sprite_frames = SubResource("SpriteFrames_8l1fh")
+frame = 1
+offset = Vector2(0, -16)
+flip_h = true
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
