@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d8k734q4jrtr"]
+[gd_scene load_steps=9 format=3 uid="uid://d8k734q4jrtr"]
 
 [ext_resource type="Script" uid="uid://c2o07aoct6nl6" path="res://ui/credits/credits.gd" id="1_2n5wy"]
 [ext_resource type="AudioStream" uid="uid://08jruo1f2n62" path="res://assets/music/bach-toccata-and-fugue-in-d-minor-bwv-565-250589.mp3" id="1_ydyd3"]
@@ -12,9 +12,39 @@ events = [SubResource("InputEventAction_2n5wy")]
 
 [sub_resource type="Animation" id="Animation_2n5wy"]
 resource_name = "credits_roll"
+length = 45.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 360.5), Vector2(0, -991.5)]
+}
+
+[sub_resource type="Animation" id="Animation_nnsry"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 360.5)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nnsry"]
 _data = {
+&"RESET": SubResource("Animation_nnsry"),
 &"credits_roll": SubResource("Animation_2n5wy")
 }
 
@@ -46,8 +76,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 360.0
-offset_bottom = 360.0
+offset_top = 360.5
+offset_bottom = 1351.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -103,14 +133,11 @@ text = "[center]
 [b][url=https://xzany.itch.io/]Mattz Art[/url][/b]
 [url=https://xzany.itch.io/top-down-adventurer-character]Adventurer 2D Top-Down[/url]
 
-[b][url=][/url][/b]
+[b][url=https://pixabay.com/users/universfield-28281460/]Universfield[/url][/b]
+[url=https://pixabay.com/sound-effects/male-exertion-grunts-02-352731/]Male Exertion Grunts 02[/url]
 
-
-[b][url=][/url][/b]
-[url=][/url]
-
-[b][url=][/url][/b]
-[url=][/url]
+There is more, but my computer is running out of battery. None of the assets used not listed here require credit.
+I will update it as soon as I can.
 [/center]"
 fit_content = true
 scroll_active = false
