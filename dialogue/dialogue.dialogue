@@ -84,15 +84,15 @@ set DialogueGlobals.tree_state = DialogueGlobals.TreeStates.SAW_TREE
 
 ~ father_time
 Father Time: So, traveler, you have come.
-Father Time: Do you seek to save this world from its fate? Let me give you some words of advice, O young one; Time defeats all.
+Father Time: Do you seek to save this world from its fate? Let me give you some words of advice, O young one; Time prevails over all.
 Traveler: ...
 Father Time: But as it seems you will not back down from this hopeless battle, I shall have to oblige.\nEn garde!
 => END
 
 ~ villager
 Villager: Hello traveler, fare thee well?
-Villager: I'm glad to hear. I can't say the same for myself.
-Villager: I never imagined that I would live to see the end times. People are slowly fading away, one by one. I can't help but think I'll be next. Eventually, this world as we know it will cease to exist.
+Villager: I'm glad to hear. I can't say the same for myself. I never would have imagined that I would live to see the end times.
+Villager: People are slowly fading away, one by one. I can't help but think I'll be next. Eventually, this world as we know it will cease to exist.
 Traveler: ...
 Villager: A way to stop the end of the world? Well... if I had to say, the only way would be to reset time itself. But as to how such a feat could be done, is beyond me.
 Villager: Ah, there I go again, rambling idle fancies. But let me not take up more of your time. May we meet again, alive and well.

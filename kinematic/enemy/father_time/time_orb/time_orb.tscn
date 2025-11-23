@@ -33,11 +33,50 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ls3a2"]
 gradient = SubResource("Gradient_rdhi4")
-width = 48
-height = 48
+width = 96
+height = 96
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3u2b7"]
-radius = 16.0
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_ls3a2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8, 0.8, 0.6666667, 0.2509804)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/mana_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.8, 0.8, 0.6666667, 0.5019608)]
+}
 
 [sub_resource type="Animation" id="Animation_rdhi4"]
 resource_name = "delete"
@@ -92,45 +131,6 @@ tracks/3/keys = {
 "values": [Color(0.8, 0.8, 0.6666667, 0.5019608), Color(0.8, 0.8, 0.664, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ls3a2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/border_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.8, 0.8, 0.6666667, 0.2509804)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:material:shader_parameter/mana_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.8, 0.8, 0.6666667, 0.5019608)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6jc44"]
 _data = {
 &"RESET": SubResource("Animation_ls3a2"),
@@ -151,7 +151,7 @@ texture = SubResource("GradientTexture2D_ls3a2")
 shape = SubResource("CircleShape2D_3u2b7")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-24, -24, 48, 48)
+rect = Rect2(-48, -48, 96, 96)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,7 +1,7 @@
 class_name TimeOrb extends Area2D
 
 
-@export var speed := 32.0
+@export var speed := 64.0
 @export var slowing := 4.0
 @export var enemy_speeding := 1.5
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnel1aqrtpr2f"]
+[gd_scene load_steps=11 format=3 uid="uid://bnel1aqrtpr2f"]
 
 [ext_resource type="PackedScene" uid="uid://b5vj4teu3fvlo" path="res://kinematic/enemy/enemy.tscn" id="1_gk2ae"]
 [ext_resource type="Script" uid="uid://cvuxvpvd8yy61" path="res://kinematic/enemy/bat/bat.gd" id="2_0s3q5"]
@@ -10,8 +10,11 @@
 resource_local_to_scene = true
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0s3q5"]
+radius = 640.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8npj"]
-radius = 6.0
+radius = 8.0
 height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsob8"]
@@ -29,7 +32,7 @@ script = ExtResource("2_0s3q5")
 player_priority = 0.5
 max_warn_delay = 1.0
 health_drop_chance = 0.3
-speed = 512.0
+speed = 384.0
 traction = 2.5
 bounce_force = 1024.0
 reset_velocity_after_bounce = true
@@ -37,6 +40,9 @@ metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance
 
 [node name="CollisionShape2D" parent="SoftCollider" index="0"]
 shape = SubResource("CircleShape2D_nsob8")
+
+[node name="CollisionShape2D" parent="Vision" index="0"]
+shape = SubResource("CircleShape2D_0s3q5")
 
 [node name="HitBox" parent="." index="4"]
 collision_layer = 544

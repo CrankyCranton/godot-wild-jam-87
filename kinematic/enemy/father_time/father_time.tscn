@@ -197,7 +197,7 @@ bg_color = Color(0, 1, 0, 1)
 [node name="FatherTime" instance=ExtResource("1_odpli")]
 collision_mask = 1
 script = ExtResource("2_m5mja")
-soft_collider_strength = 64.0
+soft_collider_strength = 0.0
 max_warn_delay = 0.0
 health_drop_chance = 0.0
 speed = 64.0
@@ -260,7 +260,7 @@ parameters/Die/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(-0.022999108, -0.516129)
 
 [node name="SpawnTimer" type="Timer" parent="." index="10"]
-wait_time = 5.0
+wait_time = 7.5
 
 [node name="HealthBar" parent="." index="12"]
 visible = false

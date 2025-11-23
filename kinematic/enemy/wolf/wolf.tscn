@@ -12,7 +12,7 @@ resource_local_to_scene = true
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s43e"]
-radius = 256.0
+radius = 640.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ft4el"]
 random_pitch = 1.25
@@ -80,10 +80,15 @@ shape = SubResource("CircleShape2D_1awob")
 
 [node name="WarningSound" parent="." index="7"]
 stream = ExtResource("3_1awob")
+volume_db = 10.0
+attenuation = 0.1
 
 [node name="LungeSound" type="AudioStreamPlayer2D" parent="." index="10"]
 stream = SubResource("AudioStreamRandomizer_uinjt")
 volume_db = -5.0
+
+[node name="NewWarningSound" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("3_1awob")
 
 [connection signal="body_entered" from="LungeArea" to="." method="_on_lunge_area_body_entered"]
 

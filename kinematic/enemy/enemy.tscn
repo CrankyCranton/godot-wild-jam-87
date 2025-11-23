@@ -78,7 +78,6 @@ shape = SubResource("CapsuleShape2D_y43nc")
 disabled = true
 
 [node name="WarningSound" type="AudioStreamPlayer2D" parent="." index="6"]
-max_distance = 512.0
 
 [node name="WarningSoundCooldown" type="Timer" parent="." index="7"]
 wait_time = 10.0

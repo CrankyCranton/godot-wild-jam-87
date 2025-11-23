@@ -10,7 +10,7 @@ var can_warn := true
 
 @onready var warning_sound_cooldown: Timer = $WarningSoundCooldown
 @onready var soft_collider: SoftCollider = $SoftCollider
-@onready var warning_sound: AudioStreamPlayer2D = $WarningSound
+@onready var warning_sound: Node = $WarningSound
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var hurt_box_shape: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
