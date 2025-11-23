@@ -21,6 +21,7 @@ class_name World extends Node2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var end_zone_shape: CollisionPolygon2D = %EndZoneShape
 @onready var map_edge: TileMapLayer = %MapEdge
+@onready var blockade_sprite: Sprite2D = %BlockadeSprite
 @onready var default_darkness := darkness.color
 
 
@@ -87,6 +88,7 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 func _on_player_died() -> void:
 	gates_collision.set_deferred(&"disabled", true)
 	close_shape.set_deferred(&"disabled", false)
+	blockade_sprite.hide()
 	father_time.reset()
 
 
@@ -104,6 +106,7 @@ func _on_close_zone_interaction_finished() -> void:
 		return
 	gates_collision.set_deferred(&"disabled", false)
 	close_shape.set_deferred(&"disabled", true)
+	blockade_sprite.show()
 	father_time.start(player)
 
 
