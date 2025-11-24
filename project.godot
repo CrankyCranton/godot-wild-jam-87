@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DialogueGlobals="*res://dialogue/dialogue_globals.gd"
+GrowlSound="*res://kinematic/enemy/wolf/growl_sound.tscn"
 
 [dialogue_manager]
 

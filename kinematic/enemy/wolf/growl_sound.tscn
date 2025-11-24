@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://buqpnfr0awh8f"]
+
+[ext_resource type="AudioStream" uid="uid://qva0huruqy8s" path="res://assets/sfx/wolf/scary-wolf-growling-224086_edited.wav" id="1_tnum1"]
+
+[node name="GrowlSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_tnum1")
+volume_db = 5.0

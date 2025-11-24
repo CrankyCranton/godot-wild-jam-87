@@ -16,7 +16,7 @@ var circle_direcion := randi() % 2 * 2 - 1 # Either -1 or 1
 
 func _ready() -> void:
 	super()
-	warning_sound = $NewWarningSound
+	warning_sound = GrowlSound
 	max_circle_angle = deg_to_rad(max_circle_angle)
 
 

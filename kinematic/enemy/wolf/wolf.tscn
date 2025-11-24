@@ -526,15 +526,12 @@ offset_bottom = -27.0
 stream = SubResource("AudioStreamRandomizer_uinjt")
 volume_db = -5.0
 
-[node name="NewWarningSound" type="AudioStreamPlayer" parent="." index="11"]
-stream = ExtResource("3_1awob")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
 libraries = {
 &"": SubResource("AnimationLibrary_arpcv")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="13"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="12"]
 tree_root = SubResource("AnimationNodeStateMachine_tkwfu")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Die/blend_position = 0.0
