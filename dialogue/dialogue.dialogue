@@ -34,10 +34,10 @@ match DialogueGlobals.tree_state
 => END
 
 ~ organist
+[i]The organist looks up from squinting at his sheet music in the small flame of the candlelight.[/i]
 if DialogueGlobals.spoke_to_organist
 	Organist: Have you spoken to the hag of the Westwoods? No? A wise decision. That woman gives me the chills!
 else
-	[i]The organist looks up from squinting at his sheet music in the flickering candlelight.[/i]
 	Organist: Welcome! Have you come to listen to my beautiful performance?
 	=> organist_option
 => END
@@ -57,7 +57,7 @@ else
 
 ~ hag
 if DialogueGlobals.spoke_to_hag
-	The Hag of the Westwoods: Have you chickened out already? The cave north of here, remember that! Ka ka ka!
+	The Hag of the Westwoods: Have you chickened out already? Even the smallest of flames will pierce through the darkness.
 else
 	The Hag of the Westwoods: My my, what have we here? I don't often get visitors, my pretty.
 	The Hag of the Westwoods: Ke ke ke! You want to stop time, do you? Go to the cave north of here. There you will find old Father Time, whom you must defeat.

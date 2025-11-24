@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d8k734q4jrtr"]
+[gd_scene load_steps=6 format=3 uid="uid://d8k734q4jrtr"]
 
 [ext_resource type="Script" uid="uid://c2o07aoct6nl6" path="res://ui/credits/credits.gd" id="1_2n5wy"]
 [ext_resource type="AudioStream" uid="uid://08jruo1f2n62" path="res://assets/music/bach-toccata-and-fugue-in-d-minor-bwv-565-250589.mp3" id="1_ydyd3"]
@@ -9,44 +9,6 @@ action = &"ui_cancel"
 
 [sub_resource type="Shortcut" id="Shortcut_nnsry"]
 events = [SubResource("InputEventAction_2n5wy")]
-
-[sub_resource type="Animation" id="Animation_2n5wy"]
-resource_name = "credits_roll"
-length = 45.0
-step = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 45),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 360.5), Vector2(0, -991.5)]
-}
-
-[sub_resource type="Animation" id="Animation_nnsry"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 360.5)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nnsry"]
-_data = {
-&"RESET": SubResource("Animation_nnsry"),
-&"credits_roll": SubResource("Animation_2n5wy")
-}
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -71,24 +33,24 @@ stream = ExtResource("1_ydyd3")
 volume_db = -5.0
 autoplay = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CreditsRoll" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 360.5
-offset_bottom = 1351.5
+offset_bottom = 2677.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="CreditsRoll"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nnsry")
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Text" type="RichTextLabel" parent="CreditsRoll"]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -136,22 +98,70 @@ text = "[center]
 [b][url=https://pixabay.com/users/universfield-28281460/]Universfield[/url][/b]
 [url=https://pixabay.com/sound-effects/male-exertion-grunts-02-352731/]Male Exertion Grunts 02[/url]
 
-There is more, but my computer is running out of battery. None of the assets used not listed here require credit.
-I will update it as soon as I can.
+[b][url=https://fonts.google.com/?query=Astigmatic]Astigmatic[/url][/b]
+[url=https://fonts.google.com/specimen/Quintessential]Quintessential[/url]
+
+[b][url=https://fonts.google.com/?query=j.+%27mach%27+wust]j. 'mach' wust[/url][/b]
+[url=https://fonts.google.com/specimen/UnifrakturMaguntia]UnifrakturMaguntia[/url]
+
+[b][url=https://pixabay.com/users/king_of_the_christmas-6030238/]King_of_The_Christmas[/url][/b]
+[url=https://pixabay.com/sound-effects/fireplace-loop-original-noise-178209/]Fireplace Loop Original Noise[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]Fabrizio84 (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/wind-artificial-18750/]Wind (Artificial)[/url]
+
+[b][url=https://pixabay.com/users/dragon-studio-38165424/]DRAGON-STUDIO[/url][/b]
+[url=https://pixabay.com/sound-effects/windstorm-ambience-372486/]Windstorm Ambience[/url]
+
+[b][url=https://pixabay.com/users/the-vampires-monster-49503589/]The-Vampires-Monster[/url][/b]
+[url=https://pixabay.com/sound-effects/bat-chirping-type-2-355965/]Bat Chirping Type 2[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]ryansitz (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/poof-80161/]Poof[/url]
+
+[b][url=https://pixabay.com/users/storegraphic-49061086/]storegraphic[/url][/b]
+[url=https://pixabay.com/sound-effects/punch-and-hits-310521/]Punch and Hits[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]FocusBay (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/main-door-opening-closing-38280/]Main Door Opening-Closing[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]vmgraw (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/scream-85294/]SCREAM[/url]
+
+[b][url=https://pixabay.com/users/musicholder-40448081/]MUSICHOLDER[/url][/b]
+[url=https://pixabay.com/sound-effects/sword-sound-260274/]sword-sound[/url]
+
+[b][url=https://pixabay.com/users/vinodadora-30315691/]Vinodadora[/url][/b]
+[url=https://pixabay.com/sound-effects/male-death-sound-128357/]male-death-sound[/url]
+
+[b][url=https://pixabay.com/users/fxprosound-41783058/]FxProSound[/url][/b]
+[url=https://pixabay.com/sound-effects/magic-charge-mana-2-186628/]Magic charge mana 2[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]mattgarkusha (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/grunts-33249/]grunts[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]matt_beer (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/timber-tree-falling-1-40384/]timber tree falling 1[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]TRP (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/axe-chop-sequence-v1-mixed-54629/]Axe chop sequence v1 MIXED[/url]
+
+[b][url=https://pixabay.com/users/alice_soundz-44907632/]Alice_soundz[/url][/b]
+[url=https://pixabay.com/sound-effects/scary-wolf-growling-224086/]SCARY WOLF GROWLING[/url]
+
+[b][url=https://pixabay.com/users/freesound_community-46691455/]belen_abo (Freesound)[/url][/b]
+[url=https://pixabay.com/sound-effects/puppy-crying-60401/]Puppy crying[/url]
+
+[b][url=https://pixabay.com/users/universfield-28281460/]Universfield[/url][/b]
+[url=https://pixabay.com/sound-effects/punch-03-352040/]Punch 03[/url]
 [/center]"
-fit_content = true
 scroll_active = false
 
-[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="CreditsRoll"]
 layout_mode = 2
 shortcut = SubResource("Shortcut_nnsry")
 shortcut_in_tooltip = false
 text = "Main Menu"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_nnsry")
-}
-
-[connection signal="meta_clicked" from="VBoxContainer/Text" to="." method="_on_text_meta_clicked"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="meta_clicked" from="CreditsRoll/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="pressed" from="CreditsRoll/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

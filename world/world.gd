@@ -95,6 +95,7 @@ func _on_player_died() -> void:
 
 func _on_end_zone_body_entered(body: Player) -> void:
 	body.frozen = true
+	body.hud.hide()
 	body.animation_tree.set(&"parameters/Idle/blend_position", Vector2.UP)
 	body.playback.travel(&"Idle")
 	animation_player.play(&"end")

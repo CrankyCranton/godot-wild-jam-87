@@ -51,12 +51,12 @@ radius = 16.0
 radius = 640.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8npj"]
-radius = 8.0
-height = 24.0
+radius = 13.0
+height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsob8"]
-radius = 4.0
-height = 12.0
+radius = 3.0
+height = 8.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_prvmr"]
 random_pitch = 1.25
@@ -76,6 +76,7 @@ reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"traction", &"speed", &"health_drop_chance", &"max_warn_delay"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_m3vcm")
 animation = &"fly"
 autoplay = "fly"
@@ -92,6 +93,8 @@ collision_layer = 544
 max_health = 2.0
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, -16)
+rotation = 0.0
 shape = SubResource("CapsuleShape2D_u8npj")
 
 [node name="HitSound" parent="HitBox" index="1"]
@@ -102,6 +105,8 @@ stream = ExtResource("3_prvmr")
 volume_db = 5.0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -16)
+rotation = 0.0
 shape = SubResource("CapsuleShape2D_nsob8")
 
 [node name="WarningSound" parent="." index="6"]

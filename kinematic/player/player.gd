@@ -24,6 +24,8 @@ var running := false
 @onready var wind: AudioStreamPlayer = $Wind
 @onready var camera: ScreenShakeCamera = $ScreenShakeCamera
 @onready var sprite: AnimatedSprite2D = $Sprite
+@onready var max_health_bar: TextureRect = %MaxHealthBar
+@onready var hud: CanvasLayer = $HUD
 @onready var checkpoint := global_position
 
 
@@ -87,6 +89,7 @@ func respawn() -> void:
 	dead = false
 	hit_box.immune = false
 	frozen = false
+	stunned = false
 
 
 func shake_cam() -> void:
@@ -175,4 +178,4 @@ func _on_hit_box_health_changed(health: float) -> void:
 func _on_hit_box_max_health_changed(max_health: int) -> void:
 	if not is_node_ready():
 		await ready
-	%MaxHealthBar.size.x = %MaxHealthBar.texture.get_width() * max_health
+	max_health_bar.size.x = max_health_bar.texture.get_width() * max_health

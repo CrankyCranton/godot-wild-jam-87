@@ -472,7 +472,7 @@ lunge_speed = 256.0
 max_circle_angle = 90.0
 circle_start_distance = 256
 max_warn_delay = 0.0
-health_drop_chance = 0.65
+health_drop_chance = 0.75
 bounce_duration = 0.1
 reset_velocity_after_bounce = true
 metadata/_edit_pinned_properties_ = [&"max_warn_delay", &"health_drop_chance"]
@@ -505,7 +505,7 @@ shape = SubResource("CapsuleShape2D_oi4bs")
 
 [node name="WarningSound" parent="." index="6"]
 stream = ExtResource("3_1awob")
-volume_db = 10.0
+volume_db = 5.0
 attenuation = 0.1
 
 [node name="LungeArea" type="Area2D" parent="." index="7"]

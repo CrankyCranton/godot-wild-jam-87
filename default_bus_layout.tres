@@ -30,6 +30,7 @@ resource_name = "Amplify"
 volume_db = -5.0
 
 [resource]
+bus/0/volume_db = -5.045384
 bus/0/effect/0/effect = SubResource("AudioEffectPitchShift_j3pel")
 bus/0/effect/0/enabled = false
 bus/1/name = &"Muffled"

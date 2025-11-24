@@ -2,8 +2,8 @@ class_name CreepSpawner extends Area2D
 
 
 @export var CREEP: PackedScene
-@export var min_cooldown := 30.0
-@export var max_cooldown := 60.0
+@export var min_cooldown := 120.0
+@export var max_cooldown := 240.0
 
 var is_timed_out := false
 
