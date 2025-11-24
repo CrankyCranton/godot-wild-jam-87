@@ -37,7 +37,7 @@ func die() -> void:
 	collision_shape.set_deferred(&"disabled", true)
 	hurt_box_shape.set_deferred(&"disabled", true)
 	if randf() < health_drop_chance:
-		var health_pickup: HealthPickup = preload(
+		var health_pickup: HealthPickup = load(
 				"res://pickups/health_pickup/health_pickup.tscn").instantiate()
 		health_pickup.position = position
 		call_deferred(&"add_sibling", health_pickup)

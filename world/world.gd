@@ -22,6 +22,8 @@ class_name World extends Node2D
 @onready var end_zone_shape: CollisionPolygon2D = %EndZoneShape
 @onready var map_edge: TileMapLayer = %MapEdge
 @onready var blockade_sprite: Sprite2D = %BlockadeSprite
+@onready var respawn_button: Button = %RespawnButton
+@onready var villager: Villager = %Villager
 @onready var default_darkness := darkness.color
 
 
@@ -59,7 +61,6 @@ func _on_father_time_died() -> void:
 	end_zone_shape.set_deferred(&"disabled", false)
 	father_time_gates.queue_free()
 	hag.queue_free()
-	var villager: Villager = %Villager
 	if villager:
 		villager.queue_free()
 	if mother_and_child:
@@ -90,6 +91,7 @@ func _on_cave_zone_body_exited(body: Player) -> void:
 
 
 func _on_player_died() -> void:
+	respawn_button.disabled = false
 	$DeathScreen/AnimationPlayer.play(&"show_death_screen")
 
 
@@ -127,11 +129,33 @@ func _on_organist_interaction_finished() -> void:
 
 
 func _on_respawn_button_pressed() -> void:
+	if not player.dead:
+		return
+	respawn_button.disabled = true
 	gates_collision.set_deferred(&"disabled", true)
 	close_shape.set_deferred(&"disabled", false)
 	blockade_sprite.hide()
 	father_time.reset()
 	$BossFightMusic.stop()
+	$DeathScreen/AnimationPlayer.stop()
 	$DeathScreen/Control/RespawnButton.release_focus()
 	$DeathScreen/Control.modulate = Color.TRANSPARENT
 	player.respawn()
+
+
+func _on_father_time_die_animation_finished() -> void:
+	DialogueManager.show_dialogue_balloon_scene(preload("res://dialogue/balloon.tscn"),
+			preload("res://dialogue/dialogue.dialogue"), "win")
+	player.playback.travel(&"Idle")
+	player.frozen = true
+	player.velocity = Vector2()
+	await DialogueManager.dialogue_ended
+	var player_pos := player.global_position.y
+	player.frozen = false
+	for i in player.hit_box.max_health:
+		var health_pickup: HealthPickup = load(
+				"res://pickups/health_pickup/health_pickup.tscn").instantiate()
+		health_pickup.position = Vector2($HealthPos.position.x,
+				player_pos + 64.0 + (64.0 * i))
+		add_child(health_pickup)
+		await get_tree().create_timer(0.5, false).timeout

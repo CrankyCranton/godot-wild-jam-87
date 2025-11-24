@@ -467,6 +467,7 @@ graph_offset = Vector2(-22, -38)
 
 [node name="Wolf" instance=ExtResource("1_pmxxn")]
 collision_mask = 1
+wall_min_slide_angle = 0.5235988
 script = ExtResource("2_oi4bs")
 lunge_speed = 256.0
 max_circle_angle = 90.0

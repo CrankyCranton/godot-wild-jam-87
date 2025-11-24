@@ -99,10 +99,11 @@ shape = SubResource("CapsuleShape2D_u8npj")
 
 [node name="HitSound" parent="HitBox" index="1"]
 stream = ExtResource("3_0s3q5")
+volume_db = 5.0
 
 [node name="DeathSound" parent="HitBox" index="2"]
 stream = ExtResource("3_prvmr")
-volume_db = 5.0
+volume_db = 10.0
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, -16)

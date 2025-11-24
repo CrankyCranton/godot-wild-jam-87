@@ -1,6 +1,8 @@
 class_name FatherTime extends Enemy
 
 
+signal die_animation_finished
+
 const HEALTH_DRAIN := 0.1
 const RAMPAGE_HP := 14
 
@@ -49,8 +51,14 @@ func die() -> void:
 		if enemy is Enemy:
 			enemy.hit_box.health = 0.0
 			enemy._on_hit_box_died()
+			enemy.hurt_box_shape.set_deferred(&"disabled", true)
 	super()
 	died.emit()
+
+
+func _on_death_sound_finished() -> void:
+	die_animation_finished.emit()
+	super()
 
 
 @warning_ignore("shadowed_variable_base_class")
